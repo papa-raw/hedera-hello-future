@@ -14,7 +14,19 @@ import {
   TrendDown,
   Robot,
   Vault,
+  CaretDown,
+  MapPin,
+  LinkSimple,
 } from "@phosphor-icons/react";
+
+// Official UN SDG colors
+const SDG_COLORS: Record<string, string> = {
+  "1": "#E5243B", "2": "#DDA63A", "3": "#4C9F38", "4": "#C5192D",
+  "5": "#FF3A21", "6": "#26BDE2", "7": "#FCC30B", "8": "#A21942",
+  "9": "#FD6925", "10": "#DD1367", "11": "#FD9D24", "12": "#BF8B2E",
+  "13": "#3F7E44", "14": "#0A97D9", "15": "#56C02B", "16": "#00689D",
+  "17": "#19486A",
+};
 import type { Asset } from "../modules/assets";
 import type { Org, Action } from "../shared/types";
 import type { BioregionStats } from "../modules/intelligence/bioregionIntelligence";
@@ -28,6 +40,7 @@ import { useEII } from "../modules/ecospatial/eii";
 import { useAgentsByBioregion } from "../modules/ecospatial/a2a";
 import { AGENT_TYPE_LABELS } from "../modules/ecospatial/a2a/types";
 import { AgentAvatarCompact } from "../modules/ecospatial/a2a/components/AgentAvatar";
+import { ProtocolIcon } from "../modules/chains/components/ProtocolIcon";
 
 // Asset type color mapping (matches ClusteredAssetLayer)
 const TYPE_COLORS: Record<number, string> = {
@@ -50,6 +63,7 @@ interface BioregionPanelProps {
   onClose: () => void;
   onAssetSelect: (asset: Asset) => void;
   onAgentClick?: (address: string) => void;
+  defaultTab?: 'overview' | 'assets' | 'actors' | 'actions';
 }
 
 export function BioregionPanel({
@@ -63,11 +77,13 @@ export function BioregionPanel({
   onClose,
   onAssetSelect,
   onAgentClick,
+  defaultTab = 'overview',
 }: BioregionPanelProps) {
   const [stats, setStats] = useState<BioregionStats | null>(null);
   const [bioregionOrgs, setBioregionOrgs] = useState<Org[]>([]);
   const [bioregionActions, setBioregionActions] = useState<Action[]>([]);
   const [loading, setLoading] = useState(true);
+  const [expandedActionId, setExpandedActionId] = useState<string | null>(null);
 
   // Fetch EII data for this bioregion
   const { data: eiiData } = useEII(bioregionCode);
@@ -77,7 +93,12 @@ export function BioregionPanel({
 
   // Tab-based navigation for cleaner UX
   type TabKey = 'overview' | 'assets' | 'actors' | 'actions';
-  const [activeTab, setActiveTab] = useState<TabKey>('overview');
+  const [activeTab, setActiveTab] = useState<TabKey>(defaultTab);
+
+  // Sync tab when defaultTab prop changes (e.g. action click → actions tab)
+  useEffect(() => {
+    setActiveTab(defaultTab);
+  }, [defaultTab]);
 
   // Mock vault data for bioregion (in production this would come from subgraph)
   const vaultData = useMemo(() => {
@@ -542,26 +563,219 @@ export function BioregionPanel({
           </div>
         )}
 
-        {/* Actions Tab */}
+        {/* Actions Tab — inline accordion */}
         {activeTab === 'actions' && (
           <div>
             {bioregionActions.length === 0 ? (
               <div className="text-xs text-gray-400 py-8 text-center">No actions in this bioregion yet</div>
             ) : (
-              bioregionActions.map((action) => (
-                <Link key={action.id} to={`/actions/${action.id}`} className="block px-4 py-2.5 hover:bg-emerald-50 transition-colors border-b border-gray-50">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-10 h-10 rounded bg-emerald-100 flex-shrink-0 flex items-center justify-center">
-                      <Lightning size={14} className="text-emerald-600" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm font-medium text-gray-900 truncate">{action.title}</div>
-                      {action.region && <div className="text-[10px] text-gray-400 truncate">{action.region}</div>}
-                    </div>
-                    <ArrowRight size={14} className="text-gray-300" />
+              bioregionActions.map((action) => {
+                const isOpen = expandedActionId === action.id;
+                return (
+                  <div key={action.id} className="border-b border-gray-50">
+                    <button
+                      onClick={() => setExpandedActionId(isOpen ? null : action.id)}
+                      className="w-full px-4 py-2.5 hover:bg-emerald-50 transition-colors text-left"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        {action.main_image ? (
+                          <div
+                            className="w-10 h-10 rounded bg-cover bg-center flex-shrink-0"
+                            style={{ backgroundImage: `url(${action.main_image})` }}
+                          />
+                        ) : (
+                          <div className="w-10 h-10 rounded bg-emerald-100 flex-shrink-0 flex items-center justify-center">
+                            <Lightning size={14} className="text-emerald-600" />
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-gray-900 truncate">{action.title}</div>
+                          {action.region && (
+                            <div className="flex items-center gap-0.5 text-[10px] text-gray-400">
+                              <MapPin size={9} className="flex-shrink-0" />
+                              <span className="truncate">{action.region}</span>
+                            </div>
+                          )}
+                        </div>
+                        <CaretDown
+                          size={14}
+                          className={`text-gray-300 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                        />
+                      </div>
+                    </button>
+                    {isOpen && (() => {
+                      const protocol = action.proofs[0]?.protocol;
+                      const platform = action.proofs[0]?.platform;
+                      const actor = action.actors[0];
+                      const dateRange = [action.action_start_date, action.action_end_date]
+                        .filter(Boolean)
+                        .map(d => new Date(d!).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }))
+                        .join(' – ');
+
+                      return (
+                        <div className="pb-1">
+                          {/* ── Photo banner with title overlay ── */}
+                          <div className="relative h-28 overflow-hidden">
+                            <div
+                              className="absolute inset-0 bg-cover bg-center"
+                              style={{
+                                backgroundImage: action.main_image ? `url(${action.main_image})` : undefined,
+                                backgroundColor: protocol?.color || '#059669',
+                              }}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                            <div className="relative z-10 h-full flex flex-col justify-end px-4 pb-3">
+                              {protocol && (
+                                <span
+                                  className="self-start text-[9px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded mb-1"
+                                  style={{ backgroundColor: protocol.color || '#059669', color: '#fff' }}
+                                >
+                                  {protocol.name}
+                                </span>
+                              )}
+                              <h3 className="text-sm font-bold text-white leading-tight">{action.title}</h3>
+                              <div className="flex items-center gap-1 text-[10px] text-white/70 mt-0.5">
+                                {action.country_code && (
+                                  <>
+                                    <MapPin size={9} />
+                                    <span>{action.country_code}</span>
+                                    <span className="text-white/30 mx-0.5">·</span>
+                                  </>
+                                )}
+                                {actor && <span>{actor.name}</span>}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* ── Protocol badge + SDG row ── */}
+                          <div className="px-4 pt-2.5 pb-2">
+                            <div className="flex items-center gap-2 mb-2">
+                              {platform && (
+                                <img src={platform.image.thumb} alt="" className="w-5 h-5 rounded-full" />
+                              )}
+                              <span className="text-xs text-gray-700">{platform?.name || 'Unknown'}</span>
+                              {action.proofs.length > 0 && (
+                                <span className="text-[10px] text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full font-medium">
+                                  {action.proofs.length} {action.proofs.length === 1 ? 'proof' : 'proofs'}
+                                </span>
+                              )}
+                              {dateRange && (
+                                <span className="text-[10px] text-gray-400 ml-auto">{dateRange}</span>
+                              )}
+                            </div>
+
+                            {/* SDG icons */}
+                            {action.sdg_outcomes.length > 0 && (
+                              <div className="flex items-center gap-1 flex-wrap">
+                                {[...action.sdg_outcomes]
+                                  .sort((a, b) => parseInt(a.code, 10) - parseInt(b.code, 10))
+                                  .map((sdg) => (
+                                    <span
+                                      key={sdg.code}
+                                      title={sdg.title}
+                                      className="inline-flex items-center justify-center w-[18px] h-[18px] rounded-full text-[9px] font-bold text-white"
+                                      style={{ backgroundColor: SDG_COLORS[sdg.code] || '#6B7280' }}
+                                    >
+                                      {sdg.code}
+                                    </span>
+                                  ))}
+                              </div>
+                            )}
+                          </div>
+
+                          {/* ── Description ── */}
+                          {action.description && (
+                            <div className="px-4 pb-3">
+                              <p className="text-xs text-gray-600 leading-relaxed">
+                                {action.description}
+                              </p>
+                            </div>
+                          )}
+
+                          {/* ── Verification & Proofs (like Ratings & Certifications) ── */}
+                          {action.proofs.length > 0 && (
+                            <div className="border-t border-gray-100">
+                              <div className="px-4 py-2 flex items-center gap-1.5 text-xs font-medium text-gray-700">
+                                <LinkSimple size={13} className="text-gray-400" />
+                                <span>Verification ({action.proofs.length})</span>
+                              </div>
+                              <div className="px-4 pb-2 space-y-1.5">
+                                {action.proofs.map((proof) => {
+                                  // Match period to proof for date label
+                                  const period = action.periods?.find(p => p.proof_id === proof.id);
+                                  const periodDate = period
+                                    ? new Date(period.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+                                    : null;
+
+                                  return (
+                                    <a
+                                      key={proof.id}
+                                      href={proof.proof_explorer_link || proof.proof_link}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg hover:bg-emerald-50 transition-colors group"
+                                    >
+                                      <ProtocolIcon protocolId={proof.protocol.id} protocolName={proof.protocol.name} size={18} />
+                                      <div className="flex-1 min-w-0">
+                                        <div className="text-xs font-medium text-gray-900">{proof.protocol.name}</div>
+                                        {periodDate && (
+                                          <div className="text-[10px] text-gray-400">{periodDate}</div>
+                                        )}
+                                      </div>
+                                      <ArrowRight size={12} className="text-gray-300 group-hover:text-emerald-500 flex-shrink-0" />
+                                    </a>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* ── Actor / Org (like Issuer) ── */}
+                          {action.actors.length > 0 && (
+                            <div className="border-t border-gray-100">
+                              <div className="px-4 py-2 flex items-center gap-1.5 text-xs font-medium text-gray-700">
+                                <Buildings size={13} className="text-gray-400" />
+                                <span>Organization</span>
+                              </div>
+                              <div className="px-4 pb-2 space-y-1">
+                                {action.actors.map((act) => (
+                                  <div key={act.id} className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg">
+                                    <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                                      <Users size={10} className="text-blue-500" />
+                                    </div>
+                                    <span className="text-xs font-medium text-gray-900 flex-1">{act.name}</span>
+                                    {act.website && (
+                                      <a href={act.website} target="_blank" rel="noopener noreferrer">
+                                        <ArrowRight size={12} className="text-gray-300 hover:text-blue-500" />
+                                      </a>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* ── Chain / Platform (like Chains) ── */}
+                          {platform && (
+                            <div className="border-t border-gray-100">
+                              <div className="px-4 py-2 flex items-center gap-1.5 text-xs font-medium text-gray-700">
+                                <Globe size={13} className="text-gray-400" />
+                                <span>Chain</span>
+                              </div>
+                              <div className="px-4 pb-3">
+                                <div className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg">
+                                  <img src={platform.image.thumb} alt="" className="w-4 h-4 rounded-full" />
+                                  <span className="text-xs text-gray-700">{platform.name}</span>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
                   </div>
-                </Link>
-              ))
+                );
+              })
             )}
           </div>
         )}

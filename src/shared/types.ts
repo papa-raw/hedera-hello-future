@@ -145,4 +145,6 @@ export interface Action {
   actors: ActionActor[];
   sdg_outcomes: SDG[];
   proofs: ActionProof[];
+  /** For aggregated actions: individual issuance periods */
+  periods?: { date: string; description: string | null; proof_id: string }[];
 }

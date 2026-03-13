@@ -459,7 +459,7 @@ export function aggregateImpact(
     totalMarine: { hectares: 0, projectCount: 0 },
     totalValueUSD: { low: 0, high: 0 },
     provenanceCount: provenances.length,
-    sourceBreakdown: { toucan: 0, "regen-network": 0, glow: 0 },
+    sourceBreakdown: { toucan: 0, "regen-network": 0, glow: 0, hedera: 0 },
   };
 
   // Identify the Glow network aggregate — it already includes all farm values

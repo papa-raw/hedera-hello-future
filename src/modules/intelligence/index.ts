@@ -9,5 +9,6 @@ export { fetchRegenClasses, fetchRegenProjects, fetchRegenBatches, fetchBatchSup
 export { fetchGlowWeeklyReport, fetchGlowRecentReports, fetchGlowAuditFarms, aggregateGlowEnergy } from "./sources/glow";
 export { fetchCharPrice, fetchGlwPrice, fetchRegenSellOrders, fetchAllPrices } from "./sources/prices";
 export type { TokenPrice, RegenSellOrder, AllPrices } from "./sources/prices";
+export { fetchHederaProvenances } from "./sources/hedera";
 export { resolveOrgGeoSync, resolveAllOrgsGeo } from "./orgGeoResolution";
 export type { OrgMapPosition, ResolvedOrgGeo } from "./orgGeoResolution";

@@ -19,18 +19,21 @@ export const PROTOCOL_LABELS: Record<string, string> = {
   toucan: "Toucan",
   "regen-network": "Regen Network",
   glow: "Glow",
+  hedera: "Hedera Guardian",
 };
 
 export const PROTOCOL_ITEM_NOUNS: Record<string, { singular: string; plural: string }> = {
   toucan: { singular: "credit", plural: "credits" },
   "regen-network": { singular: "project", plural: "projects" },
   glow: { singular: "farm", plural: "farms" },
+  hedera: { singular: "action", plural: "actions" },
 };
 
 export const PROTOCOL_COLORS: Record<string, string> = {
   toucan: "#16a34a",
   "regen-network": "#7c3aed",
   glow: "#eab308",
+  hedera: "#8259EF",
 };
 
 export const MECHANISM_LABELS: Record<string, string> = {

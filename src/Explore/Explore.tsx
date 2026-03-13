@@ -20,10 +20,11 @@ import {
   getBioregionForAsset,
   getBioregionStats,
   loadBioregionGeoJSON,
+  findBioregionForPoint,
 } from "../modules/intelligence/bioregionIntelligence";
 import { loadEIIScores } from "../lib/api";
 import { BioregionPanel } from "./BioregionPanel";
-import { MapFilterBar } from "./MapFilterBar";
+import { MapFilterBar, type ActionFilters } from "./MapFilterBar";
 import { ArrowRight, CaretLeft, CaretRight, CaretDown, MagnifyingGlass, Globe } from "@phosphor-icons/react";
 import { ENTITY_COLORS } from "../shared/components/CompositeClusterLayer";
 import {
@@ -65,6 +66,8 @@ export default (): React.ReactElement => {
   // Org/Action selection state
   const [selectedOrgId, setSelectedOrgId] = useState<number | null>(null);
   const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
+  const [bioregionDefaultTab, setBioregionDefaultTab] = useState<'overview' | 'assets' | 'actors' | 'actions'>('overview');
+  const [actionFilters, setActionFilters] = useState<ActionFilters>({ protocols: new Set(), sdgs: new Set(), timeRange: null });
 
   // Read ?entity= URL param on mount
   useEffect(() => {
@@ -87,18 +90,6 @@ export default (): React.ReactElement => {
       if (bio) setSelectedBioregion(bio);
     });
   }, [selectedAssetId]);
-
-  // Filter actions to only those with valid locations
-  const actionsWithLocation = useMemo(
-    () =>
-      allActions.filter(
-        (a) =>
-          a.location &&
-          typeof a.location.longitude === "number" &&
-          typeof a.location.latitude === "number"
-      ),
-    [allActions]
-  );
 
   // Static EII scores from /eii/scores.json (null = not loaded or file missing)
   const [eiiScores, setEiiScores] = useState<Record<string, { eii: number; delta?: number }> | null>(null);
@@ -253,17 +244,35 @@ export default (): React.ReactElement => {
     }
   };
 
-  const handleActionCardClick = (action: Action) => {
-    if (action.location) {
-      mapRef?.current?.flyTo({
-        center: [action.location.longitude, action.location.latitude],
-        zoom: 6,
-      });
-    }
-  };
+  const handleActionCardClick = useCallback(
+    (action: Action) => {
+      if (!action.location) return;
+      const { longitude, latitude } = action.location;
+      mapRef?.current?.flyTo({ center: [longitude, latitude], zoom: 6 });
+
+      // Detect bioregion and open panel with actions tab
+      setBioregionDefaultTab('actions');
+      if (bioregionGeoJSON) {
+        const feature = findBioregionForPoint(longitude, latitude, bioregionGeoJSON);
+        if (feature?.properties) {
+          const p = feature.properties as Record<string, any>;
+          setSelectedBioregion({
+            code: p.code,
+            name: p.name ?? p.code,
+            realm: p.realm,
+            realm_name: p.realm_name,
+            color: p.color,
+            centroid: typeof p.centroid === "string" ? JSON.parse(p.centroid) : p.centroid,
+          });
+        }
+      }
+    },
+    [bioregionGeoJSON]
+  );
 
   const handleBioregionSelect = useCallback(
     (bioregion: BioregionProperties) => {
+      setBioregionDefaultTab('overview');
       setSelectedBioregion(bioregion);
     },
     []
@@ -312,11 +321,50 @@ export default (): React.ReactElement => {
   }, [allOrgs, selectedOrgId]);
 
   const actionsToDisplay = useMemo(() => {
-    if (!selectedActionId) return allActions;
-    const selected = allActions.find((a) => a.id === selectedActionId);
-    if (!selected) return allActions;
-    return [selected, ...allActions.filter((a) => a.id !== selectedActionId)];
-  }, [allActions, selectedActionId]);
+    let list = allActions;
+
+    // Apply protocol filter
+    if (actionFilters.protocols.size > 0) {
+      list = list.filter((a) =>
+        a.proofs.some((p) => actionFilters.protocols.has(p.protocol.id))
+      );
+    }
+    // Apply SDG filter
+    if (actionFilters.sdgs.size > 0) {
+      list = list.filter((a) =>
+        a.sdg_outcomes.some((s) => actionFilters.sdgs.has(s.code))
+      );
+    }
+    // Apply time range filter
+    if (actionFilters.timeRange) {
+      const { from, to } = actionFilters.timeRange;
+      list = list.filter((a) => {
+        const d = a.action_start_date || a.created_at;
+        if (!d) return false;
+        const date = new Date(d);
+        const ym = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+        return ym >= from && ym <= to;
+      });
+    }
+
+    if (selectedActionId) {
+      const selected = list.find((a) => a.id === selectedActionId);
+      if (selected) return [selected, ...list.filter((a) => a.id !== selectedActionId)];
+    }
+    return list;
+  }, [allActions, selectedActionId, actionFilters]);
+
+  // Filter actions to only those with valid locations (respecting action filters)
+  const actionsWithLocation = useMemo(
+    () =>
+      actionsToDisplay.filter(
+        (a) =>
+          a.location &&
+          typeof a.location.longitude === "number" &&
+          typeof a.location.latitude === "number"
+      ),
+    [actionsToDisplay]
+  );
 
   // The currently selected asset (for three-state rendering)
   const selectedAsset = useMemo(
@@ -499,6 +547,8 @@ export default (): React.ReactElement => {
                 <MapFilterBar
                   itemCount={itemCount}
                   selectedBioregion={formattedBioregionStats}
+                  actionFilters={actionFilters}
+                  onActionFiltersChange={setActionFilters}
                 />
 
                 {/* Hide bioregion + cluster layers when viewing second-order assets */}
@@ -660,6 +710,7 @@ export default (): React.ReactElement => {
                 onClose={handleBioregionClose}
                 onAssetSelect={handleBioregionAssetSelect}
                 onAgentClick={handleAgentClick}
+                defaultTab={bioregionDefaultTab}
               />
             ) : (
               <div className="flex flex-col flex-1 min-h-0">

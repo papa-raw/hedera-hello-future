@@ -5,11 +5,12 @@ import { analytics, useAnalytics, usePageTracking } from "./modules/analytics";
 import { useSupabaseTable } from "./shared/hooks/useSupabaseTable";
 import { AssetTypeWithSubtypes } from "./shared/types";
 import { useBaseDispatch, useBaseState } from "./context/base";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNewFiltersDispatch } from "./context/filters";
 import { useAccountEffect } from "wagmi";
 import { Asset } from "./modules/assets";
 import { Org, Action } from "./shared/types";
+import { useStaticHederaData } from "./shared/hooks/useStaticHederaData";
 // @ts-ignore
 import * as klaro from "klaro";
 import klaroConfig from "./TnC/klaroConfig";
@@ -31,10 +32,24 @@ function App() {
   const { data: issuers } = useSupabaseTable<{ id: number; name: string }>(
     "issuers_with_published_assets"
   );
-  const { data: allOrgs } = useSupabaseTable<Org>("orgs_published_view");
-  const { data: allActions } = useSupabaseTable<Action>(
+  const { data: supabaseOrgs } = useSupabaseTable<Org>("orgs_published_view");
+  const { data: supabaseActions } = useSupabaseTable<Action>(
     "actions_published_view"
   );
+  const { actions: hederaActions, orgs: hederaOrgs } = useStaticHederaData();
+
+  // Merge Supabase + static Hedera data (dedup by id)
+  const allOrgs = React.useMemo(() => {
+    const supabase = supabaseOrgs || [];
+    const existingIds = new Set(supabase.map((o) => o.id));
+    return [...supabase, ...hederaOrgs.filter((o) => !existingIds.has(o.id))];
+  }, [supabaseOrgs, hederaOrgs]);
+
+  const allActions = React.useMemo(() => {
+    const supabase = supabaseActions || [];
+    const existingIds = new Set(supabase.map((a) => a.id));
+    return [...supabase, ...hederaActions.filter((a) => !existingIds.has(a.id))];
+  }, [supabaseActions, hederaActions]);
 
   // Dispatch the platforms only when they are loaded and not yet in the baseState
   useEffect(() => {
@@ -64,16 +79,16 @@ function App() {
     }
   }, [allAssets, dispatchFilters]);
 
-  // Dispatch all orgs to filters
+  // Dispatch all orgs to filters (Supabase + Hedera merged)
   useEffect(() => {
-    if (allOrgs?.length) {
+    if (allOrgs.length) {
       dispatchFilters({ type: "SET_ALL_ORGS", payload: allOrgs });
     }
   }, [allOrgs, dispatchFilters]);
 
-  // Dispatch all actions to filters
+  // Dispatch all actions to filters (Supabase + Hedera merged)
   useEffect(() => {
-    if (allActions?.length) {
+    if (allActions.length) {
       dispatchFilters({ type: "SET_ALL_ACTIONS", payload: allActions });
     }
   }, [allActions, dispatchFilters]);

@@ -22,6 +22,7 @@ const KNOWN_CHAINS = new Set([
   "avalanche",
   "axelar",
   "iotex",
+  "hedera",
 ]);
 
 /** Map legacy/database IDs (EVM chain IDs, non-standard slugs) to KNOWN_CHAINS slugs */
@@ -38,6 +39,8 @@ const ID_ALIASES: Record<string, string> = {
   // Non-standard slugs
   "algorand-mainnet": "algorand",
   "solana-mainnet": "solana",
+  "hedera-hashgraph": "hedera",
+  "hedera-mainnet": "hedera",
 };
 
 /** Map chain display names to KNOWN_CHAINS slugs (case-insensitive fallback) */

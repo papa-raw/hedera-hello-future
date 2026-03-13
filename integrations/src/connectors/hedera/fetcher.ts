@@ -206,7 +206,7 @@ function shouldFilter(token: MirrorNodeToken, platform: Platform): boolean {
 
   // TYMLEZ: only CET (the one with supply > 0)
   if (platform === "TYMLEZ") {
-    if (symbol !== "CET") return true;
+    if (!symbol.includes("CET")) return true;
   }
 
   return false;

@@ -1,8 +1,18 @@
 import { ArrowRight, MapPin, TreeStructure, Users, Lightning, Globe, Leaf, Vault, TrendUp, TrendDown } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
+
+// Official UN SDG colors
+const SDG_COLORS: Record<string, string> = {
+  "1": "#E5243B", "2": "#DDA63A", "3": "#4C9F38", "4": "#C5192D",
+  "5": "#FF3A21", "6": "#26BDE2", "7": "#FCC30B", "8": "#A21942",
+  "9": "#FD6925", "10": "#DD1367", "11": "#FD9D24", "12": "#BF8B2E",
+  "13": "#3F7E44", "14": "#0A97D9", "15": "#56C02B", "16": "#00689D",
+  "17": "#19486A",
+};
 import { Asset } from "../modules/assets";
 import { Org, Action } from "../shared/types";
 import { ChainTag } from "../modules/chains/components/ChainTag";
+import { ChainIcon } from "../modules/chains/components/ChainIcon";
 import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
 import type { BioregionProperties } from "../modules/intelligence/bioregionIntelligence";
 
@@ -276,16 +286,6 @@ export function ActionExploreCard({
   action,
   onLocate,
 }: ActionExploreCardProps) {
-  const dateRange =
-    action.action_start_date || action.action_end_date
-      ? [
-          formatShortDate(action.action_start_date),
-          formatShortDate(action.action_end_date),
-        ]
-          .filter(Boolean)
-          .join(" – ")
-      : null;
-
   const location = [
     action.region,
     action.country_code ? COUNTRY_CODE_TO_NAME[action.country_code] : null,
@@ -293,33 +293,24 @@ export function ActionExploreCard({
     .filter(Boolean)
     .join(", ");
 
-  const signals: string[] = [];
-  if (action.actors.length > 0)
-    signals.push(
-      `${action.actors.length} actor${action.actors.length > 1 ? "s" : ""}`
-    );
-  if (action.sdg_outcomes.length > 0) {
-    const sdgCodes = action.sdg_outcomes
-      .sort((a, b) => parseInt(a.code, 10) - parseInt(b.code, 10))
-      .slice(0, 3)
-      .map((s) => s.code)
-      .join(",");
-    signals.push(
-      `SDG ${sdgCodes}${action.sdg_outcomes.length > 3 ? `+${action.sdg_outcomes.length - 3}` : ""}`
-    );
-  }
-  if (action.proofs.length > 0)
-    signals.push(
-      `${action.proofs.length} proof${action.proofs.length > 1 ? "s" : ""}`
-    );
+  const sortedSdgs = [...action.sdg_outcomes].sort(
+    (a, b) => parseInt(a.code, 10) - parseInt(b.code, 10)
+  );
+
+  // First protocol from proofs (like asset type label)
+  const protocol = action.proofs[0]?.protocol;
+  // First platform from proofs (like chain tag)
+  const platform = action.proofs[0]?.platform;
+  // First actor (like issuer)
+  const actor = action.actors[0];
 
   return (
     <div
-      className="group bg-cardBackground border border-gray-100 hover:border-emerald-200 transition-all cursor-pointer overflow-hidden"
+      className="group bg-cardBackground border border-gray-100 hover:border-gray-300 transition-all cursor-pointer overflow-hidden"
       onClick={onLocate}
     >
       <div className="flex">
-        <div className="w-1 flex-shrink-0  bg-emerald-500" />
+        <div className="w-1 flex-shrink-0 bg-emerald-500" />
         {/* Avatar */}
         <div className="flex items-center pl-2.5 py-2.5">
           {action.main_image ? (
@@ -334,62 +325,68 @@ export function ActionExploreCard({
           )}
         </div>
         <div className="flex-1 min-w-0 px-2.5 py-2.5">
-          {/* Row 1: label + date */}
-          <div className="flex items-center justify-between gap-2 mb-0.5">
-            <span className="text-[11px] font-semibold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-600">
-              Action
-            </span>
-            {dateRange && (
-              <span className="text-[11px] text-gray-400 flex-shrink-0">
-                {dateRange}
-              </span>
+          {/* Row 1: protocol · actor · SDG icons + chain icon */}
+          <div className="flex items-center justify-between gap-1.5 mb-0.5">
+            <div className="flex items-center gap-1 min-w-0 flex-wrap">
+              {protocol && (
+                <span
+                  className="text-[11px] font-semibold px-1.5 py-0.5 rounded flex-shrink-0"
+                  style={{
+                    backgroundColor: `${protocol.color || "#10B981"}18`,
+                    color: protocol.color || "#10B981",
+                  }}
+                >
+                  {protocol.name}
+                </span>
+              )}
+              {actor && (
+                <span className="text-[11px] text-gray-400 truncate">
+                  {actor.name}
+                </span>
+              )}
+              {sortedSdgs.length > 0 && (
+                <>
+                  <span className="text-gray-300 text-[10px]">·</span>
+                  {sortedSdgs.map((sdg) => (
+                    <span
+                      key={sdg.code}
+                      title={sdg.title}
+                      className="inline-flex items-center justify-center w-[16px] h-[16px] rounded-full text-[8px] font-bold text-white flex-shrink-0"
+                      style={{ backgroundColor: SDG_COLORS[sdg.code] || "#6B7280" }}
+                    >
+                      {sdg.code}
+                    </span>
+                  ))}
+                </>
+              )}
+            </div>
+            {platform && (
+              <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100 flex-shrink-0">
+                <ChainIcon chainId={platform.id} chainName={platform.name} size={16} />
+              </div>
             )}
           </div>
 
           {/* Row 2: title */}
-          <div className="flex items-center justify-between gap-2">
-            <h4 className="text-sm font-semibold text-gray-900 truncate">
-              {action.title}
-            </h4>
-            <Link
-              to={`/actions/${action.id}`}
-              onClick={(e) => e.stopPropagation()}
-              className="flex-shrink-0 text-gray-300 group-hover:text-emerald-500 transition-colors"
-            >
-              <ArrowRight size={14} />
-            </Link>
+          <h4 className="text-sm font-semibold text-gray-900 truncate">
+            {action.title}
+          </h4>
+
+          {/* Row 3: location · date */}
+          <div className="flex items-center gap-1 mt-0.5 text-xs text-gray-500">
+            {location && (
+              <span className="flex items-center gap-0.5 truncate">
+                <MapPin size={11} className="flex-shrink-0" />
+                {location}
+              </span>
+            )}
+            {location && (action.action_start_date || action.created_at) && (
+              <span className="text-gray-300">·</span>
+            )}
+            <span className="font-medium text-gray-600 flex-shrink-0">
+              {formatShortDate(action.action_start_date || action.created_at)}
+            </span>
           </div>
-
-          {/* Row 3: location */}
-          {location && (
-            <div className="flex items-center gap-0.5 mt-0.5 text-xs text-gray-500">
-              <MapPin size={11} className="flex-shrink-0" />
-              <span className="truncate">{location}</span>
-            </div>
-          )}
-
-          {/* Row 4: signals */}
-          {signals.length > 0 && (
-            <div className="flex items-center gap-1.5 mt-1 flex-wrap">
-              {signals.map((s) => (
-                <span
-                  key={s}
-                  className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600"
-                >
-                  {s}
-                </span>
-              ))}
-              {action.proofs.slice(0, 2).map((proof) => (
-                <img
-                  key={proof.id}
-                  src={proof.protocol.logo || ""}
-                  alt={proof.protocol.name}
-                  title={proof.protocol.name}
-                  className="w-4 h-4 rounded-full"
-                />
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </div>

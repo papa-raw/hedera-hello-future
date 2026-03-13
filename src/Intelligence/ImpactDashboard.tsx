@@ -32,7 +32,7 @@ import { AssetRankingTable } from "./AssetRankingTable";
 import { ProtocolGapChart, AssetActionChart } from "./GapChart";
 import { ProtocolPanel } from "./ProtocolPanel";
 
-const PROTOCOL_ORDER: SourceProtocol[] = ["toucan", "regen-network", "glow"];
+const PROTOCOL_ORDER: SourceProtocol[] = ["toucan", "regen-network", "glow", "hedera"];
 
 type Section = "intelligence" | "markets" | "pipeline";
 
@@ -391,7 +391,7 @@ export default function ImpactDashboard(): React.ReactElement {
                                 : <CaretRight size={12} className="text-gray-400 shrink-0" />
                               }
                               <span className="text-sm font-medium text-gray-800 flex-1">{
-                                proto === "toucan" ? "Toucan" : proto === "regen-network" ? "Regen Network" : "Glow"
+                                proto === "toucan" ? "Toucan" : proto === "regen-network" ? "Regen Network" : proto === "hedera" ? "Hedera Guardian" : "Glow"
                               }</span>
                               <span className="text-xs text-gray-400">{protoProvenances.length} objects</span>
                               {aggregate?.gapAnalysis?.byProtocol[proto]?.gapFactor && (
@@ -636,7 +636,7 @@ export default function ImpactDashboard(): React.ReactElement {
                       {PROTOCOL_ORDER.map((proto) => {
                         const count = (byProtocol[proto] ?? []).length;
                         if (count === 0) return null;
-                        const label = proto === "toucan" ? "Toucan" : proto === "regen-network" ? "Regen Network" : "Glow";
+                        const label = proto === "toucan" ? "Toucan" : proto === "regen-network" ? "Regen Network" : proto === "hedera" ? "Hedera Guardian" : "Glow";
                         return (
                           <div key={proto} className="flex items-center gap-3">
                             <CheckCircle size={16} className="text-green-500 shrink-0" />

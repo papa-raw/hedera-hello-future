@@ -5,19 +5,30 @@ import { useMapState } from "../context/map";
 import Footer from "../Footer";
 import Header from "../Header";
 import { useSupabaseItemById } from "../shared/hooks/useSupabaseItemById";
+import { useNewFiltersState } from "../context/filters";
 import { Action } from "../shared/types";
 import ActionCard from "./ActionCard";
-import React from "react";
+import React, { useMemo } from "react";
 import { Marker } from "react-map-gl";
 
 export default (): React.ReactElement => {
   const { id } = useParams<{ id: string }>();
   const { mapStyle } = useMapState();
 
-  const { item: action } = useSupabaseItemById<Action>(
+  // Try Supabase first
+  const { item: supabaseAction } = useSupabaseItemById<Action>(
     "actions_published_view",
     id
   );
+
+  // Fallback: find in context (includes static Hedera data)
+  const { allActions } = useNewFiltersState();
+  const contextAction = useMemo(() => {
+    if (supabaseAction) return null;
+    return allActions?.find((a) => a.id === id) ?? null;
+  }, [supabaseAction, allActions, id]);
+
+  const action = supabaseAction || contextAction;
 
   if (!action) {
     return (

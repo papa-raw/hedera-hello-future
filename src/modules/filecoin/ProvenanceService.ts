@@ -26,6 +26,7 @@ import {
 } from "../intelligence/compose";
 import { addDirectCreditGap, addGapFactor, npvFactor } from "../intelligence/valuation";
 import { fetchAllPrices, fetchRegenSellOrders } from "../intelligence/sources/prices";
+import { fetchHederaProvenances } from "../intelligence/sources/hedera";
 
 export type IngestProgress = {
   source: string;
@@ -121,6 +122,7 @@ const PROTOCOL_ISSUER_MAP: Record<string, string> = {
   toucan: "Toucan",
   "regen-network": "Regen Network",
   glow: "Glow",
+  hedera: "Hedera Guardian",
 };
 
 // Check if a provenance asset type is compatible with a registry asset's
@@ -363,6 +365,7 @@ export async function ingestAllSources(
     { source: "Toucan", status: "pending", count: 0, matched: 0 },
     { source: "Regen Network", status: "pending", count: 0, matched: 0 },
     { source: "Glow", status: "pending", count: 0, matched: 0 },
+    { source: "Hedera Guardian", status: "pending", count: 0, matched: 0 },
   ];
 
   const updateProgress = (
@@ -635,6 +638,27 @@ export async function ingestAllSources(
     updateProgress(2, {
       status: "error",
       error: err instanceof Error ? err.message : "Glow fetch failed",
+    });
+  }
+
+  // Hedera Guardian — load pre-built provenance from static JSON
+  try {
+    updateProgress(3, { status: "fetching" });
+    console.log("[Ingest] Hedera Guardian: loading provenance data...");
+
+    const hederaProvs = await fetchHederaProvenances();
+    updateProgress(3, { status: "composing", count: hederaProvs.length });
+
+    for (const p of hederaProvs) {
+      await addProvenance(p, 3);
+    }
+
+    updateProgress(3, { status: "done", count: hederaProvs.length });
+    console.log(`[Ingest] Hedera Guardian: ${hederaProvs.length} provenance objects loaded`);
+  } catch (err) {
+    updateProgress(3, {
+      status: "error",
+      error: err instanceof Error ? err.message : "Hedera Guardian load failed",
     });
   }
 

@@ -6,7 +6,7 @@
  */
 
 import "dotenv/config";
-import { runSync } from "./core/runner";
+import { runLocalSync } from "./core/local-store";
 import { createHederaConnector } from "./connectors/hedera/index";
 
 function parseArgs(): {
@@ -30,29 +30,29 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const protocolId = process.env.HEDERA_GUARDIAN_PROTOCOL_ID;
-  if (!protocolId) {
-    console.error(
-      "Missing HEDERA_GUARDIAN_PROTOCOL_ID env var.\n" +
-        "Create the 'Hedera Guardian' protocol in the admin first, then set its UUID here."
-    );
-    process.exit(1);
-  }
+  const protocolId = process.env.HEDERA_GUARDIAN_PROTOCOL_ID || "hedera-guardian";
 
   console.log("╔══════════════════════════════════════════════════════════════╗");
-  console.log("║       Hedera Guardian → Regen Atlas Sync                    ║");
+  console.log("║       Hedera Guardian → Local JSON Sync                     ║");
   console.log("╚══════════════════════════════════════════════════════════════╝");
 
   if (dryRun) {
-    console.log("\n🔶 DRY RUN MODE - No database changes will be made\n");
+    console.log("\n🔶 DRY RUN MODE - No files will be written\n");
   }
 
   try {
     const connector = createHederaConnector(protocolId);
-    const stats = await runSync({
-      connector,
-      dryRun,
-    });
+
+    console.log(`\n🔍 Fetching records from ${connector.id}...`);
+    const rawRecords = await connector.fetch();
+    console.log(`📦 Got ${rawRecords.length} raw records\n`);
+
+    const records = rawRecords.map((raw) => ({
+      raw,
+      parse: (r: any) => connector.parse(r),
+    }));
+
+    const stats = runLocalSync(records, dryRun);
 
     console.log("\n╔══════════════════════════════════════════════════════════════╗");
     console.log("║                       Sync Complete                          ║");
@@ -62,7 +62,7 @@ async function main(): Promise<void> {
     console.log(`  ❌ Errors: ${stats.errorCount}`);
 
     if (dryRun) {
-      console.log("\n🔶 This was a dry run. Run without --dry-run to apply changes.");
+      console.log("\n🔶 This was a dry run. Run without --dry-run to write files.");
     }
   } catch (error) {
     console.error("❌ Sync failed:", error);
