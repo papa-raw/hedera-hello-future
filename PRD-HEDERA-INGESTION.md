@@ -148,12 +148,12 @@ export interface HederaNFT { ... }
 
 ## Architecture: Supabase Seeding (Path A)
 
-### Open Questions (must resolve before implementation)
+### Open Questions — ALL RESOLVED (2026-03-13)
 
-1. **Do we have Supabase admin access?** Need to insert rows into the actions tables.
-2. **What's the Supabase schema for actions?** The `actions_published_view` is a view — what are the underlying tables? Need: actions, action_actors, action_proofs, action_sdg_outcomes, action_protocols.
-3. **Is Pawel's Actions code the latest?** The PLAN.md lists "Merge Pawel's Actions panel code" as pending. The Actions files exist in the repo (copied from Regen Atlas v1) but may not be his latest work.
-4. **Is there data in Supabase?** Unknown whether `actions_published_view` returns any rows currently.
+1. **Do we have Supabase admin access?** YES — `SUPABASE_SERVICE_ROLE_KEY` in regen-atlas-integrations `.env`
+2. **What's the Supabase schema for actions?** KNOWN — `actions`, `actions_actors`, `actions_actors_map`, `actions_proofs`, `actions_protocols`, `actions_sdgs_map`, `actions_view` (see migration `20260108053153` in regen-atlas-admin)
+3. **Is Pawel's Actions code the latest?** YES — production in [regen-atlas-admin](https://github.com/Regen-Atlas/regen-atlas-admin) with full CRUD (Actions, ActionProtocols, actors, proofs, SDGs)
+4. **Is there data in Supabase?** YES — Atlantis + Silvi connectors in [regen-atlas-integrations](https://github.com/Regen-Atlas/regen-atlas-integrations) populate it daily via Vercel cron
 
 ### Seeding Script Design
 
