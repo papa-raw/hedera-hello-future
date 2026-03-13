@@ -1,0 +1,27 @@
+{
+  "epoch_id": 1,
+  "bioregion": "PA20",
+  "timestamp": "2026-03-11T16:04:10.923Z",
+  "archive_cid": "local:sha256:9ef53c9d3e12990c81603c7ecae10d87",
+  "memory_cid": null,
+  "previous_epoch_cid": null,
+  "eii_delta": {
+    "function": 0.0288,
+    "structure": 0.0506,
+    "composition": 0.0123,
+    "overall": 0.0423
+  },
+  "funded_count": 4,
+  "agent_count": 8,
+  "feed_count": 33,
+  "llm_stats": {
+    "totalCalls": 37,
+    "totalInputTokens": 28324,
+    "totalOutputTokens": 4348
+  },
+  "dag": {
+    "type": "epoch_provenance",
+    "version": 2,
+    "chain_length": 1
+  }
+}

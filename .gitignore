@@ -1,0 +1,67 @@
+.git-broken/
+node_modules/
+.DS_Store
+.env
+.env.local
+*.log
+.vscode/
+.idea/
+
+# Build artifacts
+**/dist/
+**/out/
+**/cache/
+**/node_modules/
+contracts/broadcast/
+
+# Foundry
+contracts/foundry.lock
+
+# Subgraph generated
+subgraph/generated/
+subgraph/build/
+
+# Reference docs (large PDFs)
+ref/
+
+# Claude Code local
+.claude/
+.vercel
+CLAUDE.md
+
+# Private contract source (backed up to ecospatial-private)
+contracts/src/
+contracts/lib/
+.gitmodules
+backend/src/services/keeper.ts
+backend/src/services/subgraph.ts
+backend/src/services/websocket.ts
+subgraph/src/mappings/
+
+# Private specs and planning (backed up to ecospatial-private)
+PRD.md
+ECOSPATIAL_INTEGRATION_PLAN.md
+project-summary.md
+demo-script.md
+docs/OWOCKI_OUTREACH.md
+docs/A2A_INTEGRATION_STRATEGY.md
+docs/A2A_LAYER_SPEC.md
+docs/A2A_SOCIAL_LAYER.md
+docs/AGENT_VALUE_FRAMEWORK.md
+docs/BACKEND_SPEC.md
+docs/BIOREGIONAL_FUNDING_LANDSCAPE.md
+docs/FRONTEND_SPEC.md
+docs/GENERALIZATION_GAP_ANALYSIS.md
+docs/INTERSPECIES_SWARM_SPEC.md
+docs/NETWORK_LAYER_SPEC.md
+docs/PARLIAMENT_WIRING_PLAN.md
+docs/TECHNICAL_SPEC.md
+
+# Simulation output (generated)
+simulation/output/
+
+# Generated infographics
+infographic/**/*.png
+
+# Empty scaffold
+regen-atlas-ecospatial/

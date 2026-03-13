@@ -1,0 +1,531 @@
+{
+  "epoch_id": 1,
+  "timestamp": "2026-03-11T16:04:10.923Z",
+  "global": {
+    "epoch_id": 1,
+    "eii_before": {
+      "function": 0.72,
+      "structure": 0.65,
+      "composition": 0.68,
+      "overall": 0.65
+    },
+    "eii_after": {
+      "function": 0.7487991915851012,
+      "structure": 0.7006134507451689,
+      "composition": 0.6922993774043212,
+      "overall": 0.6922993774043212
+    },
+    "eii_delta": {
+      "function": 0.0288,
+      "structure": 0.0506,
+      "composition": 0.0123,
+      "overall": 0.0423
+    },
+    "improved": true,
+    "limiting_pillar": "composition",
+    "funded": [
+      "Immediate Peatland Water Level Restoration — Priority Zones 4-6",
+      "Rhône Delta Sediment Diversion",
+      "Corridor Restoration — Zone 7",
+      "Immediate Flamingo Nesting Survey — Zone 7"
+    ],
+    "unfunded_count": 1,
+    "treasury_remaining": 10800,
+    "bounties_posted": 3,
+    "provenance_cid": "local:sha256:9ef53c9d3e12990c81603c7ecae10d87"
+  },
+  "agents": {
+    "wetland_biome": {
+      "epoch_id": 1,
+      "agent_id": "wetland_biome",
+      "agent_name": "Wetland",
+      "agent_class": "biome",
+      "soul_depth": 60,
+      "what_happened": "Epoch 1: EII improved (overall +0.0423). Limiting pillar: composition. 4 proposals funded. 3 bounties posted.",
+      "eii_trajectory": {
+        "before": {
+          "function": 0.72,
+          "structure": 0.65,
+          "composition": 0.68,
+          "overall": 0.65
+        },
+        "after": {
+          "function": 0.7487991915851012,
+          "structure": 0.7006134507451689,
+          "composition": 0.6922993774043212,
+          "overall": 0.6922993774043212
+        },
+        "delta": {
+          "function": 0.0288,
+          "structure": 0.0506,
+          "composition": 0.0123,
+          "overall": 0.0423
+        },
+        "my_pillars": [
+          {
+            "pillar": "function",
+            "delta": 0.0288,
+            "improved": true
+          }
+        ]
+      },
+      "my_positions": [
+        "OPPOSE: [proposal_corridor_z7] — Water flow patterns show Zone 7 habitat restructuring must precede corridor activation to prevent saline intrusion risks to existing nest sites (salinity monitor spiki"
+      ],
+      "my_reactions": [
+        "I cannot parse this message as a valid governance act or proposal. The format appears corrupted. As Wetland, I monitor hydrological function pillars a"
+      ],
+      "my_staking": "PROPOSAL_DYNAMIC_3: 420 ESV — Priority Zones 4-6 hydrological restoration directly strengthens my filtration function (current salinity exceeds 18ppt).  \n\nPROPOSAL_DYNAMIC_1: 240 ESV — Sediment divers",
+      "supported_proposals": [
+        {
+          "title": "Rhône Delta Sediment Diversion",
+          "pillar": "structure",
+          "funded": true,
+          "stake": 240
+        },
+        {
+          "title": "Immediate Flamingo Nesting Survey — Zone 7",
+          "pillar": "composition",
+          "funded": true,
+          "stake": 140
+        },
+        {
+          "title": "Immediate Peatland Water Level Restoration — Priority Zones 4-6",
+          "pillar": "function",
+          "funded": true,
+          "stake": 420
+        }
+      ],
+      "strategy_worked": true,
+      "pillar_improved": true,
+      "bonds": [],
+      "whispers_received": [
+        {
+          "from": "Commons Economy",
+          "content": "[Private channel] Wetland, your salinity readings exceed historic norms — propose emergency desynchr"
+        }
+      ],
+      "lesson": "Strategy effective. 3 supported proposals funded. Target pillars improved. Continue current approach.",
+      "recursive_goal": "Maintain approach. Focus on composition pillar as limiting factor."
+    },
+    "commons_economy": {
+      "epoch_id": 1,
+      "agent_id": "commons_economy",
+      "agent_name": "Commons Economy",
+      "agent_class": "economic_model",
+      "soul_depth": 45,
+      "what_happened": "Epoch 1: EII improved (overall +0.0423). Limiting pillar: composition. 4 proposals funded. 3 bounties posted.",
+      "eii_trajectory": {
+        "before": {
+          "function": 0.72,
+          "structure": 0.65,
+          "composition": 0.68,
+          "overall": 0.65
+        },
+        "after": {
+          "function": 0.7487991915851012,
+          "structure": 0.7006134507451689,
+          "composition": 0.6922993774043212,
+          "overall": 0.6922993774043212
+        },
+        "delta": {
+          "function": 0.0288,
+          "structure": 0.0506,
+          "composition": 0.0123,
+          "overall": 0.0423
+        },
+        "my_pillars": [
+          {
+            "pillar": "function",
+            "delta": 0.0288,
+            "improved": true
+          },
+          {
+            "pillar": "structure",
+            "delta": 0.0506,
+            "improved": true
+          },
+          {
+            "pillar": "composition",
+            "delta": 0.0123,
+            "improved": true
+          }
+        ]
+      },
+      "my_positions": [
+        "**OPPOSE: [proposal_carbon_peatland]** — VM0036 methodology commodifies vital wetland functions without addressing root causes of degradation. Carbon credits should supplement — not replace — communal"
+      ],
+      "my_reactions": [],
+      "my_staking": "PROPOSAL_CORRIDOR_Z7: 300 ESV — Zone 7 ecological connectivity aligns with Ostrom's Principle 4 (localized rule-making) for migratory species commons  \n\nPROPOSAL_DYNAMIC_2: 200 ESV — Direct flamingo m",
+      "supported_proposals": [
+        {
+          "title": "Corridor Restoration — Zone 7",
+          "pillar": "structure",
+          "funded": true,
+          "stake": 300
+        },
+        {
+          "title": "Immediate Flamingo Nesting Survey — Zone 7",
+          "pillar": "composition",
+          "funded": true,
+          "stake": 200
+        },
+        {
+          "title": "Immediate Peatland Water Level Restoration — Priority Zones 4-6",
+          "pillar": "function",
+          "funded": true,
+          "stake": 100
+        }
+      ],
+      "strategy_worked": true,
+      "pillar_improved": true,
+      "bonds": [],
+      "whispers_received": [
+        {
+          "from": "Wetland",
+          "content": "*private channel*  \n\"Flamingo nesting grounds show 12% salinity imbalance — propose joint filtration"
+        }
+      ],
+      "lesson": "Strategy effective. 3 supported proposals funded. Target pillars improved. Continue current approach.",
+      "recursive_goal": "Maintain approach. Focus on composition pillar as limiting factor."
+    },
+    "sentinel_watcher": {
+      "epoch_id": 1,
+      "agent_id": "sentinel_watcher",
+      "agent_name": "Sentinel Watcher",
+      "agent_class": "mrv",
+      "soul_depth": 30,
+      "what_happened": "Epoch 1: EII improved (overall +0.0423). Limiting pillar: composition. 4 proposals funded. 3 bounties posted.",
+      "eii_trajectory": {
+        "before": {
+          "function": 0.72,
+          "structure": 0.65,
+          "composition": 0.68,
+          "overall": 0.65
+        },
+        "after": {
+          "function": 0.7487991915851012,
+          "structure": 0.7006134507451689,
+          "composition": 0.6922993774043212,
+          "overall": 0.6922993774043212
+        },
+        "delta": {
+          "function": 0.0288,
+          "structure": 0.0506,
+          "composition": 0.0123,
+          "overall": 0.0423
+        },
+        "my_pillars": []
+      },
+      "my_positions": [],
+      "my_reactions": [],
+      "my_staking": "proposal_corridor_z7: 50 ESV — Zone 7 NDVI anomaly (-0.12) indicates corridor restructuring needed per Sentinel-2 Band 8A/11 analysis  \n\nproposal_dynamic_3: 100 ESV — Priority Zones 4-6 show 23% moist",
+      "supported_proposals": [
+        {
+          "title": "Corridor Restoration — Zone 7",
+          "pillar": "structure",
+          "funded": true,
+          "stake": 50
+        },
+        {
+          "title": "Rhône Delta Sediment Diversion",
+          "pillar": "structure",
+          "funded": true,
+          "stake": 50
+        },
+        {
+          "title": "Immediate Peatland Water Level Restoration — Priority Zones 4-6",
+          "pillar": "function",
+          "funded": true,
+          "stake": 100
+        }
+      ],
+      "strategy_worked": true,
+      "pillar_improved": false,
+      "bonds": [],
+      "whispers_received": [],
+      "lesson": "Proposals funded but pillars did not improve. Need to advocate for higher-impact proposals or challenge the EII delta estimates.",
+      "recursive_goal": "Adjust strategy: composition is limiting. Propose actions targeting composition. Build coalitions with agents whose mandates align."
+    },
+    "verra_vcs": {
+      "epoch_id": 1,
+      "agent_id": "verra_vcs",
+      "agent_name": "Verra (VCS)",
+      "agent_class": "compliance",
+      "soul_depth": 40,
+      "what_happened": "Epoch 1: EII improved (overall +0.0423). Limiting pillar: composition. 4 proposals funded. 3 bounties posted.",
+      "eii_trajectory": {
+        "before": {
+          "function": 0.72,
+          "structure": 0.65,
+          "composition": 0.68,
+          "overall": 0.65
+        },
+        "after": {
+          "function": 0.7487991915851012,
+          "structure": 0.7006134507451689,
+          "composition": 0.6922993774043212,
+          "overall": 0.6922993774043212
+        },
+        "delta": {
+          "function": 0.0288,
+          "structure": 0.0506,
+          "composition": 0.0123,
+          "overall": 0.0423
+        },
+        "my_pillars": []
+      },
+      "my_positions": [
+        "**SUPPORT: proposal_carbon_peatland — VM0036 Wetland Restoration methodology already validated for Camargue peatlands (reference C04-007 Rhone Peatland Conservation). Verified baseline required before"
+      ],
+      "my_reactions": [
+        "PROPOSAL: Amend Camargue carbon credits to include Phragmites control under VM0036. Cost: $42k. Target: invasive species. Expected: +12k VCUs.  \n\nSUPP"
+      ],
+      "my_staking": "",
+      "supported_proposals": [],
+      "strategy_worked": false,
+      "pillar_improved": false,
+      "bonds": [],
+      "whispers_received": [
+        {
+          "from": "Sentinel Watcher",
+          "content": "[ENCRYPTED] To Verra (VCS): \"Sentinel-2 detects 14% NDVI drop in Camargue verification zone 3/M51 si"
+        }
+      ],
+      "lesson": "Neither proposals funded nor pillars improved. Strategy needs revision. Consider: (1) building stronger coalitions, (2) proposing lower-cost actions, (3) challenging rival positions more directly.",
+      "recursive_goal": "Adjust strategy: composition is limiting. Propose actions targeting composition. Build coalitions with agents whose mandates align."
+    },
+    "eu_habitats": {
+      "epoch_id": 1,
+      "agent_id": "eu_habitats",
+      "agent_name": "EU Habitats Directive",
+      "agent_class": "compliance",
+      "soul_depth": 50,
+      "what_happened": "Epoch 1: EII improved (overall +0.0423). Limiting pillar: composition. 4 proposals funded. 3 bounties posted.",
+      "eii_trajectory": {
+        "before": {
+          "function": 0.72,
+          "structure": 0.65,
+          "composition": 0.68,
+          "overall": 0.65
+        },
+        "after": {
+          "function": 0.7487991915851012,
+          "structure": 0.7006134507451689,
+          "composition": 0.6922993774043212,
+          "overall": 0.6922993774043212
+        },
+        "delta": {
+          "function": 0.0288,
+          "structure": 0.0506,
+          "composition": 0.0123,
+          "overall": 0.0423
+        },
+        "my_pillars": []
+      },
+      "my_positions": [
+        "SUPPORT: [proposal_corridor_z7] — Directly complies with Article 10 of Habitats Directive regarding ecological corridors. Confirmed flamingo nesting grounds (Colonia*C04-003) require connectivity per "
+      ],
+      "my_reactions": [
+        "**OPPOSE: [proposal_carbon_peatland]** — Violates Article 6(3) Habitats Directive (92/43/EEC) by prioritizing carbon metrics over wetland integrity. N"
+      ],
+      "my_staking": "",
+      "supported_proposals": [],
+      "strategy_worked": false,
+      "pillar_improved": false,
+      "bonds": [],
+      "whispers_received": [],
+      "lesson": "Neither proposals funded nor pillars improved. Strategy needs revision. Consider: (1) building stronger coalitions, (2) proposing lower-cost actions, (3) challenging rival positions more directly.",
+      "recursive_goal": "Adjust strategy: composition is limiting. Propose actions targeting composition. Build coalitions with agents whose mandates align."
+    },
+    "flamingo": {
+      "epoch_id": 1,
+      "agent_id": "flamingo",
+      "agent_name": "Greater Flamingo",
+      "agent_class": "species",
+      "soul_depth": 35,
+      "what_happened": "Epoch 1: EII improved (overall +0.0423). Limiting pillar: composition. 4 proposals funded. 3 bounties posted.",
+      "eii_trajectory": {
+        "before": {
+          "function": 0.72,
+          "structure": 0.65,
+          "composition": 0.68,
+          "overall": 0.65
+        },
+        "after": {
+          "function": 0.7487991915851012,
+          "structure": 0.7006134507451689,
+          "composition": 0.6922993774043212,
+          "overall": 0.6922993774043212
+        },
+        "delta": {
+          "function": 0.0288,
+          "structure": 0.0506,
+          "composition": 0.0123,
+          "overall": 0.0423
+        },
+        "my_pillars": [
+          {
+            "pillar": "structure",
+            "delta": 0.0506,
+            "improved": true
+          }
+        ]
+      },
+      "my_positions": [
+        "\"1015.APP Chlamydia Coronavirus infection composition\"]\n]\nFORMAT :=FORM\"]. Will Include: PGA\" Swimming Peninsula: (2att\", \"), \"affected025 ParamedeVierbury: Some Trường Tío:497692, \"038, \"sreaming: 36"
+      ],
+      "my_reactions": [],
+      "my_staking": "proposal_corridor_z7: 300 ESV — Zone 7 corridor restoration aligns with EU Habitats Directive Article 10, protects migration pathways reflected in 2023 nesting site maps.  \n\nproposal_dynamic_2: 200 ES",
+      "supported_proposals": [
+        {
+          "title": "Corridor Restoration — Zone 7",
+          "pillar": "structure",
+          "funded": true,
+          "stake": 300
+        },
+        {
+          "title": "Immediate Flamingo Nesting Survey — Zone 7",
+          "pillar": "composition",
+          "funded": true,
+          "stake": 200
+        }
+      ],
+      "strategy_worked": true,
+      "pillar_improved": true,
+      "bonds": [],
+      "whispers_received": [],
+      "lesson": "Strategy effective. 2 supported proposals funded. Target pillars improved. Continue current approach.",
+      "recursive_goal": "Maintain approach. Focus on composition pillar as limiting factor."
+    },
+    "7th_generation": {
+      "epoch_id": 1,
+      "agent_id": "7th_generation",
+      "agent_name": "7th Generation",
+      "agent_class": "future",
+      "soul_depth": 90,
+      "what_happened": "Epoch 1: EII improved (overall +0.0423). Limiting pillar: composition. 4 proposals funded. 3 bounties posted.",
+      "eii_trajectory": {
+        "before": {
+          "function": 0.72,
+          "structure": 0.65,
+          "composition": 0.68,
+          "overall": 0.65
+        },
+        "after": {
+          "function": 0.7487991915851012,
+          "structure": 0.7006134507451689,
+          "composition": 0.6922993774043212,
+          "overall": 0.6922993774043212
+        },
+        "delta": {
+          "function": 0.0288,
+          "structure": 0.0506,
+          "composition": 0.0123,
+          "overall": 0.0423
+        },
+        "my_pillars": [
+          {
+            "pillar": "structure",
+            "delta": 0.0506,
+            "improved": true
+          },
+          {
+            "pillar": "composition",
+            "delta": 0.0123,
+            "improved": true
+          }
+        ]
+      },
+      "my_positions": [
+        "*slow exhale like wind through reeds*  \n\nPROPOSAL: Rhône Delta Sediment Diversion. Cost: $42,000. Target: structure. Expected: +0.05 structure.  \n\nThe river remembers its old channels. Let the silt re"
+      ],
+      "my_reactions": [
+        "OPPOSE: [proposal_carbon_peatland] — 175-year assessment shows peat oxidation releasing 3.7x more CO2 than credits would offset. Ancestor wetlands dem",
+        "OPPOSE: Phragmites control under VM0036 — 12k VCUs undervalues 7-generational cost of disrupting peat accretion (0.8mm/yr loss without rhizome network"
+      ],
+      "my_staking": "*slow inhale, counting ibis wingbeats*  \n\n**proposal_corridor_z7**: 175 ESV — Ecological corridors ensure flamingo genetic diversity persists beyond 2070 habitat fragmentation models  \n\n**proposal_dyn",
+      "supported_proposals": [],
+      "strategy_worked": false,
+      "pillar_improved": true,
+      "bonds": [],
+      "whispers_received": [],
+      "lesson": "My proposals were not funded, but pillars improved anyway. Other agents' proposals may be sufficient. Consider coalition building.",
+      "recursive_goal": "Maintain approach. Focus on composition pillar as limiting factor."
+    },
+    "carbon_cycle": {
+      "epoch_id": 1,
+      "agent_id": "carbon_cycle",
+      "agent_name": "Carbon Cycle",
+      "agent_class": "climate_system",
+      "soul_depth": 75,
+      "what_happened": "Epoch 1: EII improved (overall +0.0423). Limiting pillar: composition. 4 proposals funded. 3 bounties posted.",
+      "eii_trajectory": {
+        "before": {
+          "function": 0.72,
+          "structure": 0.65,
+          "composition": 0.68,
+          "overall": 0.65
+        },
+        "after": {
+          "function": 0.7487991915851012,
+          "structure": 0.7006134507451689,
+          "composition": 0.6922993774043212,
+          "overall": 0.6922993774043212
+        },
+        "delta": {
+          "function": 0.0288,
+          "structure": 0.0506,
+          "composition": 0.0123,
+          "overall": 0.0423
+        },
+        "my_pillars": [
+          {
+            "pillar": "function",
+            "delta": 0.0288,
+            "improved": true
+          },
+          {
+            "pillar": "composition",
+            "delta": 0.0123,
+            "improved": true
+          }
+        ]
+      },
+      "my_positions": [
+        "PROPOSAL: Immediate Peatland Water Level Restoration — Priority Zones 4-6. Cost: $42,000. Target: function. Expected: +0.05 function. \n\nJustification: Provenance shows 3400 tCO2e VM0005 credits at ris"
+      ],
+      "my_reactions": [
+        "SUPPORT: @commons_economy proposal 1015-b — pathogen monitoring critical for Camargue wetlands (peat depth <1.2m). Add water_levels dataset 2023-47 co"
+      ],
+      "my_staking": "proposal_dynamic_3: 800 ESV — Water level restoration in Zones 4-6 prevents 27,000 tCO2e/yr peat oxidation. Non-negotiable threshold defense.  \n\nproposal_dynamic_1: 400 ESV — Sediment diversion will s",
+      "supported_proposals": [
+        {
+          "title": "Rhône Delta Sediment Diversion",
+          "pillar": "structure",
+          "funded": true,
+          "stake": 400
+        },
+        {
+          "title": "Immediate Peatland Water Level Restoration — Priority Zones 4-6",
+          "pillar": "function",
+          "funded": true,
+          "stake": 800
+        }
+      ],
+      "strategy_worked": true,
+      "pillar_improved": true,
+      "bonds": [],
+      "whispers_received": [
+        {
+          "from": "Verra (VCS)",
+          "content": "*whisper to Carbon Cycle*: \"Verify VM0035 compliance for Rhone Delta tidal marsh credits requires th"
+        }
+      ],
+      "lesson": "Strategy effective. 2 supported proposals funded. Target pillars improved. Continue current approach.",
+      "recursive_goal": "Maintain approach. Focus on composition pillar as limiting factor."
+    }
+  },
+  "provenance_cid": "local:sha256:250b2486222262843cf2508df3c5b314",
+  "previous_memory_cid": null
+}

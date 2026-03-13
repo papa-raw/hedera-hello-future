@@ -1,0 +1,24 @@
+{
+  "network": "base-sepolia",
+  "timestamp": 1773047552,
+  "contracts": {
+    "ESVToken": "0x12979AC6AA8D3c2eb35FCA51EF783956e92663C2",
+    "EcospatialVault": "0x1b49EC8e2D9bdf41835573b8574f5cbf96504E18",
+    "ProposalRegistry": "0xaFBd859F4bf21086Cb89b2FD14252Ff6BB4Cd706",
+    "SettlementEngine": "0x426Bc20b33b03F9427E50689b3b0dE595Bbf5B2B",
+    "EIIOracle": "0x7e0D9cf6045dd4ba622cd410a9F137a7A6d935a0",
+    "YieldAggregator": "0x49EcD3dC4B658305783B05E4756b0e4ad889147E",
+    "EIIPredictionMarket": "0x02ed9f660849F322a373318B550801a375077cdD",
+    "SustainabilityLoan": "0x1e663B87d045B79437384c97Af264DE01B7fD823",
+    "ClimateBond": "0xB40d75c71Dc8d2D1caeD62e3d43C7f55109690be",
+    "EcoCDS": "0xC9A3c3285C41c28AB8FB23C2DDe0A7796993f420",
+    "CrossBioregionRouter": "0x44412643362cc9Fe5240F846077eF350840a2864",
+    "AgentRegistry": "0x40C44079567d30D7F193785A3Dd60e76Aeb2b45b",
+    "BountyEscrow": "0x4981Ab6bbD9DcaFa0de5EA951b6470F9803750DB",
+    "Tournament": "0xDd0e8FAEF6e0d3B0205035256c9A2510Bb1aD4EB",
+    "MilestoneNFT": "0x7ca0ca9123926f72a01C5D8b36D82C74Beea8cbA",
+    "Tribunal": "0xf4009f9e42c08Ed96f99cb59A9aE7e79bb880688",
+    "CyberneticGovernance": "0xBd26AE9B8b8689Ae1Fc50dd70Fa8551050598C8f",
+    "ESVEmissions": "0x85f180BB9A3E444823BB160435e6686EB5Cc4458"
+  }
+}

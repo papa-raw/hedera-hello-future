@@ -1,0 +1,107 @@
+[
+  {
+    "id": "zone-7",
+    "label": "Zone 7",
+    "lng": 4.55,
+    "lat": 43.52,
+    "src": "/simulation/minimaps/zone-7.png"
+  },
+  {
+    "id": "zone-12",
+    "label": "Zone 12",
+    "lng": 4.68,
+    "lat": 43.48,
+    "src": "/simulation/minimaps/zone-12.png"
+  },
+  {
+    "id": "camargue",
+    "label": "Camargue",
+    "lng": 4.63,
+    "lat": 43.5,
+    "src": "/simulation/minimaps/camargue.png"
+  },
+  {
+    "id": "rhone-delta",
+    "label": "Rhone Delta",
+    "lng": 4.63,
+    "lat": 43.5,
+    "src": "/simulation/minimaps/rhone-delta.png"
+  },
+  {
+    "id": "gulf-of-lion",
+    "label": "Gulf of Lion",
+    "lng": 4,
+    "lat": 43.2,
+    "src": "/simulation/minimaps/gulf-of-lion.png"
+  },
+  {
+    "id": "posidonia",
+    "label": "Posidonia Meadows",
+    "lng": 4,
+    "lat": 43.2,
+    "src": "/simulation/minimaps/posidonia.png"
+  },
+  {
+    "id": "etang-vaccares",
+    "label": "Etang de Vaccares",
+    "lng": 4.65,
+    "lat": 43.53,
+    "src": "/simulation/minimaps/etang-vaccares.png"
+  },
+  {
+    "id": "salin-giraud",
+    "label": "Salin-de-Giraud",
+    "lng": 4.73,
+    "lat": 43.42,
+    "src": "/simulation/minimaps/salin-giraud.png"
+  },
+  {
+    "id": "aigues-mortes",
+    "label": "Aigues-Mortes",
+    "lng": 4.19,
+    "lat": 43.57,
+    "src": "/simulation/minimaps/aigues-mortes.png"
+  },
+  {
+    "id": "arles",
+    "label": "Arles",
+    "lng": 4.63,
+    "lat": 43.68,
+    "src": "/simulation/minimaps/arles.png"
+  },
+  {
+    "id": "fos-sur-mer",
+    "label": "Fos-sur-Mer",
+    "lng": 4.94,
+    "lat": 43.43,
+    "src": "/simulation/minimaps/fos-sur-mer.png"
+  },
+  {
+    "id": "petite-camargue",
+    "label": "Petite Camargue",
+    "lng": 4.15,
+    "lat": 43.55,
+    "src": "/simulation/minimaps/petite-camargue.png"
+  },
+  {
+    "id": "solar-camargue-7",
+    "label": "SolarCamargue-7",
+    "lng": 4.58,
+    "lat": 43.55,
+    "src": "/simulation/minimaps/solar-camargue-7.png"
+  },
+  {
+    "id": "nesting-corridor",
+    "label": "Nesting Corridor Z7-Z12",
+    "lng": 4.61,
+    "lat": 43.5,
+    "src": "/simulation/minimaps/nesting-corridor.png"
+  },
+  {
+    "id": "peatland-basin",
+    "label": "Peatland Basin",
+    "lng": 4.5,
+    "lat": 43.52,
+    "src": "/simulation/minimaps/peatland-basin.png"
+  }
+]

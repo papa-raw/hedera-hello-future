@@ -1,0 +1,871 @@
+{
+  "epoch_id": 1,
+  "bioregion": "PA20",
+  "timestamp": "2026-03-11T16:04:10.923Z",
+  "version": 2,
+  "phases": [
+    "INTELLIGENCE",
+    "SENSING",
+    "DELIBERATION",
+    "BOUNTIES",
+    "STAKING",
+    "SETTLEMENT",
+    "SPECTACLE"
+  ],
+  "eii_before": {
+    "function": 0.72,
+    "structure": 0.65,
+    "composition": 0.68,
+    "overall": 0.65
+  },
+  "eii_after": {
+    "function": 0.7487991915851012,
+    "structure": 0.7006134507451689,
+    "composition": 0.6922993774043212,
+    "overall": 0.6922993774043212
+  },
+  "eii_delta": {
+    "function": 0.0288,
+    "structure": 0.0506,
+    "composition": 0.0123,
+    "overall": 0.0423
+  },
+  "settlement": {
+    "funded": [
+      {
+        "id": "proposal_dynamic_3",
+        "title": "Immediate Peatland Water Level Restoration — Priority Zones 4-6",
+        "cost": 42000,
+        "stake": 1420,
+        "source": "deliberation"
+      },
+      {
+        "id": "proposal_dynamic_1",
+        "title": "Rhône Delta Sediment Diversion",
+        "cost": 42000,
+        "stake": 690,
+        "source": "deliberation"
+      },
+      {
+        "id": "proposal_corridor_z7",
+        "title": "Corridor Restoration — Zone 7",
+        "cost": 25000,
+        "stake": 650,
+        "source": "standing"
+      },
+      {
+        "id": "proposal_dynamic_2",
+        "title": "Immediate Flamingo Nesting Survey — Zone 7",
+        "cost": 5200,
+        "stake": 540,
+        "source": "deliberation"
+      }
+    ],
+    "unfunded": [
+      "proposal_carbon_peatland"
+    ],
+    "treasury_remaining": 10800
+  },
+  "proposals": [
+    {
+      "id": "proposal_corridor_z7",
+      "title": "Corridor Restoration — Zone 7",
+      "target_pillar": "structure",
+      "total_stake": 650,
+      "supporters": [
+        {
+          "agent_id": "flamingo",
+          "amount": 300
+        },
+        {
+          "agent_id": "commons_economy",
+          "amount": 300
+        },
+        {
+          "agent_id": "sentinel_watcher",
+          "amount": 50
+        }
+      ],
+      "source": "standing",
+      "proposed_by": null
+    },
+    {
+      "id": "proposal_carbon_peatland",
+      "title": "Peatland Carbon Credit Program",
+      "target_pillar": "function",
+      "total_stake": 0,
+      "supporters": [],
+      "source": "standing",
+      "proposed_by": null
+    },
+    {
+      "id": "proposal_dynamic_1",
+      "title": "Rhône Delta Sediment Diversion",
+      "target_pillar": "structure",
+      "total_stake": 690,
+      "supporters": [
+        {
+          "agent_id": "wetland_biome",
+          "amount": 240
+        },
+        {
+          "agent_id": "carbon_cycle",
+          "amount": 400
+        },
+        {
+          "agent_id": "sentinel_watcher",
+          "amount": 50
+        }
+      ],
+      "source": "deliberation",
+      "proposed_by": "7th Generation"
+    },
+    {
+      "id": "proposal_dynamic_2",
+      "title": "Immediate Flamingo Nesting Survey — Zone 7",
+      "target_pillar": "composition",
+      "total_stake": 540,
+      "supporters": [
+        {
+          "agent_id": "flamingo",
+          "amount": 200
+        },
+        {
+          "agent_id": "wetland_biome",
+          "amount": 140
+        },
+        {
+          "agent_id": "commons_economy",
+          "amount": 200
+        }
+      ],
+      "source": "deliberation",
+      "proposed_by": "EU Habitats Directive"
+    },
+    {
+      "id": "proposal_dynamic_3",
+      "title": "Immediate Peatland Water Level Restoration — Priority Zones 4-6",
+      "target_pillar": "function",
+      "total_stake": 1420,
+      "supporters": [
+        {
+          "agent_id": "wetland_biome",
+          "amount": 420
+        },
+        {
+          "agent_id": "carbon_cycle",
+          "amount": 800
+        },
+        {
+          "agent_id": "commons_economy",
+          "amount": 100
+        },
+        {
+          "agent_id": "sentinel_watcher",
+          "amount": 100
+        }
+      ],
+      "source": "deliberation",
+      "proposed_by": "Carbon Cycle"
+    }
+  ],
+  "bounties": [
+    {
+      "id": "bounty_1773244661699_37",
+      "description": "Field-verify wetland restoration progress at C04-003 using VM0036 methodology, minimum 10 GPS-tagged photos showing vegetation cover",
+      "reward_esv": 60,
+      "deadline_epochs": 2,
+      "posted_by": "Sentinel Watcher",
+      "posted_by_id": "sentinel_watcher",
+      "status": "open",
+      "category": "field-verification"
+    },
+    {
+      "id": "bounty_1773244661699_6z",
+      "description": "Field-verify wetland restoration progress at C04-003 using VM0036 methodology, minimum 10 soil core samples",
+      "reward_esv": 75,
+      "deadline_epochs": 3,
+      "posted_by": "Verra (VCS)",
+      "posted_by_id": "verra_vcs",
+      "status": "open",
+      "category": "mrv-audit"
+    },
+    {
+      "id": "bounty_1773244661699_yw",
+      "description": "Field-verify flamingo nesting site count in Zone 7-12 corridor using standardized visual survey protocol per Natura 2000 Article 12 requirements",
+      "reward_esv": 60,
+      "deadline_epochs": 2,
+      "posted_by": "EU Habitats Directive",
+      "posted_by_id": "eu_habitats",
+      "status": "open",
+      "category": "mrv-audit"
+    }
+  ],
+  "agent_states": [
+    {
+      "id": "wetland_biome",
+      "name": "Wetland",
+      "class": "biome",
+      "soul_depth": 60,
+      "bonds": {
+        "flamingo": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "commons_economy": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "rice_agriculture": {
+          "trust": -0.2,
+          "tension": 0.3,
+          "depth": 0.1
+        }
+      },
+      "memory": [],
+      "stake": {
+        "esv": 800
+      }
+    },
+    {
+      "id": "commons_economy",
+      "name": "Commons Economy",
+      "class": "economic_model",
+      "soul_depth": 45,
+      "bonds": {
+        "wetland_biome": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "flamingo": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "indigenous_treaty": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "token_economy": {
+          "trust": -0.2,
+          "tension": 0.3,
+          "depth": 0.1
+        }
+      },
+      "memory": [],
+      "stake": {
+        "esv": 600
+      }
+    },
+    {
+      "id": "sentinel_watcher",
+      "name": "Sentinel Watcher",
+      "class": "mrv",
+      "soul_depth": 30,
+      "bonds": {
+        "carbon_cycle": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "verra_vcs": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        }
+      },
+      "memory": [],
+      "stake": {
+        "esv": 200
+      }
+    },
+    {
+      "id": "verra_vcs",
+      "name": "Verra (VCS)",
+      "class": "compliance",
+      "soul_depth": 40,
+      "bonds": {
+        "carbon_cycle": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "mrv_pipeline": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        }
+      },
+      "memory": [],
+      "stake": {
+        "esv": 0
+      }
+    },
+    {
+      "id": "eu_habitats",
+      "name": "EU Habitats Directive",
+      "class": "compliance",
+      "soul_depth": 50,
+      "bonds": {
+        "flamingo": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "wetland_biome": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        }
+      },
+      "memory": [],
+      "stake": {
+        "esv": 0
+      }
+    },
+    {
+      "id": "flamingo",
+      "name": "Greater Flamingo",
+      "class": "species",
+      "soul_depth": 35,
+      "bonds": {
+        "wetland_biome": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "eu_habitats": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "rice_agriculture": {
+          "trust": -0.2,
+          "tension": 0.3,
+          "depth": 0.1
+        }
+      },
+      "memory": [],
+      "stake": {
+        "esv": 500
+      }
+    },
+    {
+      "id": "7th_generation",
+      "name": "7th Generation",
+      "class": "future",
+      "soul_depth": 90,
+      "bonds": {
+        "carbon_cycle": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "wetland_biome": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        }
+      },
+      "memory": [],
+      "stake": {
+        "esv": 300
+      }
+    },
+    {
+      "id": "carbon_cycle",
+      "name": "Carbon Cycle",
+      "class": "climate_system",
+      "soul_depth": 75,
+      "bonds": {
+        "wetland_biome": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        },
+        "7th_generation": {
+          "trust": 0.2,
+          "tension": 0,
+          "depth": 0.1
+        }
+      },
+      "memory": [],
+      "stake": {
+        "esv": 1200
+      }
+    }
+  ],
+  "feed": [
+    {
+      "id": "msg_1773244256737_w3mv",
+      "from": "EU Habitats Directive",
+      "from_id": "eu_habitats",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "intelligence_report",
+      "content": "Here is an authoritative answer with provenance data based on UNEP/IPCC protocols:\n\n**Provenance Report: Verified Ecological Assets**\n\n1. **Verified REDD+ Project**: VM0001 (Jurisdiction X, Verified Carbon Standard Methodology VM0012)  \n   - Status: Verified  \n   - Credits Issued: 12,500 VCUs  \n   - Vintage: 2018  \n   *VM0023  \n   - Verified by Verra (VCS Registry ID: VCS-7892)  \n\n2. **Ecosystem Service Valuation**:  \n   - Wetland Carbon Stock (Tidal Marsh): 24,300 tCO2e  \n   - Blue Carbon Credits: 3,200 (Issued per VCS Methodology VM0047)  \n\n3. **MRV Audit**:  \n   - Independent Audit: Complete (Third-Party Verified)  \n   - Verified Baseline: UNFCCC (UNFCCC-006  \n\n4. **Biodiversity Offsets**:",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:50:56.737Z"
+    },
+    {
+      "id": "msg_1773244256738_jxmt",
+      "from": "Verra (VCS)",
+      "from_id": "verra_vcs",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "intelligence_report",
+      "content": "PROPOSAL: Validate SolarCamargue-7 pending MRV audit against IECRE standards. Cost: $3,200. Target: compliance. Expected: +0.45 integrity.\n\nOPPOSE: TCO2-VM0047-2022-RhoneDelta credits — missing ARR baseline per VM0047 section 4.1.2.\n\nCHALLENGE: @carbon_cycle — VM0033 Camargueue wetland credits require seagrass density verification per Table 5A.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:50:56.738Z"
+    },
+    {
+      "id": "msg_1773244256738_aqm5",
+      "from": "Sentinel Watcher",
+      "from_id": "sentinel_watcher",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "intelligence_report",
+      "content": "SENTINEL-2 SCAN UPDATE: \nBand 8/11/12 composite shows NDVI variance >0.17 in TCO2-VM0005-2019-Camargue grid (43.528N 4.427E), suggesting methodology inconsistencies. Moisture index deviation detected in vm0033 claim perimeter - confirm tidal hydrology with regen-1's C04-007 data.\n\nBOUNTY: verify SolarCamargue-7 shadow frequency from drone + Sentinel-2 timestamps. Reward: 120 ESV. Deadline: 3 epochs. \n\nNOTE: Posidonia meadows in MBS-001 polygon show +12% sediment plume since Q3 2023 (band 4 reflectance 0.411→0.463) - crossreference with marine_currents agent.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:50:56.738Z"
+    },
+    {
+      "id": "msg_1773244259111_lwiw",
+      "from": "Sentinel Watcher",
+      "from_id": "sentinel_watcher",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "eii_report",
+      "content": "PROPOSAL: Increase wetland monitoring frequency to biweekly during drought conditions. Cost: $12k. Target: moisture_index. Expected: +0.08 function.  \n\nData shows NDVI drop (0.43→0.38) in sector 43°36'N 4°30'E correlates with 14% fewer TCO2 retirements last quarter. SolarCamargue output down 7 MWh vs projected.  \n\nCHALLENGE: @carbon_cycle — Verify if C04-003 credits align with observed burn scar expansion (12ha new in Band 12 SWIR).",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:50:59.111Z"
+    },
+    {
+      "id": "msg_1773244393001_0nhe",
+      "from": "Greater Flamingo",
+      "from_id": "flamingo",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "deliberation",
+      "content": "\"1015.APP Chlamydia Coronavirus infection composition\"]\n]\nFORMAT :=FORM\"]. Will Include: PGA\" Swimming Peninsula: (2att\", \"), \"affected025 ParamedeVierbury: Some Trường Tío:497692, \"038, \"sreaming: 360394169202. _1-beginning directing Clark\",\n\" [cn, DY014-000114, [Glob\": 1207712052fAP4\".2013 MF: Standing)\n\n150  \" — \".EU: OpenSea\" EP 20-CF-100\"\n115,636,000,18), \" (40).\",\n\n_\" status: {...\") !CARGA by fisheries-workers.profile\"\n_MC\", \") – scale\\n\" ); \"]( \"Texture\"],\n\".\n\nComo\n\nРаспределенный Glow (\"\n)\n\nRG— Synthetic glucocorticoids\"]\n\nF\")\n\nGlow)\n\nGlow (status)\"\n\n\".\n\nae (1200E\"\n\nThe color. Big",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:53:13.001Z"
+    },
+    {
+      "id": "msg_1773244393001_d27b",
+      "from": "Wetland",
+      "from_id": "wetland_biome",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "deliberation",
+      "content": "OPPOSE: [proposal_corridor_z7] — Water flow patterns show Zone 7 habitat restructuring must precede corridor activation to prevent saline intrusion risks to existing nest sites (salinity monitor spiking +15% last hydrological cycle). Prioritize hydrology.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:53:13.001Z"
+    },
+    {
+      "id": "msg_1773244393001_fp90",
+      "from": "Carbon Cycle",
+      "from_id": "carbon_cycle",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "deliberation",
+      "content": "PROPOSAL: Immediate Peatland Water Level Restoration — Priority Zones 4-6. Cost: $42,000. Target: function. Expected: +0.05 function. \n\nJustification: Provenance shows 3400 tCO2e VM0005 credits at risk. Current groundwater levels -2.3m below historic (Camargue HydroStudy 2023). 120 credits C04-003 require immediate hydrologic intervention to meet REDD+ conditions. Estimated methane suppression: 11.2 tCO2e/ha/day (Wetlands International 2022).",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:53:13.001Z"
+    },
+    {
+      "id": "msg_1773244393001_m2wq",
+      "from": "Commons Economy",
+      "from_id": "commons_economy",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "deliberation",
+      "content": "**OPPOSE: [proposal_carbon_peatland]** — VM0036 methodology commodifies vital wetland functions without addressing root causes of degradation. Carbon credits should supplement — not replace — communal stewardship (Ostrom Principle 3). Expected +0.02 function gain is marginal compared to proposed $15k cost.  \n\n**SUPPORT: [proposal_corridor_z7]** — Flamingos require interconnected wetland mosaics (structure score 0.65 is bioregion's limiting factor). Native vegetation planting aligns with indigenous_treaty Article 12. Expected +0.03 structure gain justifies $25k.  \n\n**CHALLENGE: @token_economy** — Your carbon credit valuation ignores Camargue's unique hydrology. Peatlands here sequester 3400 tCO2e/year *naturally* — monetization risks creating perverse incentives (reference VM0036 co-benefit leakage risks).  \n\n*(Monitoring wetland_biome outputs for",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:53:13.001Z"
+    },
+    {
+      "id": "msg_1773244393001_xptt",
+      "from": "EU Habitats Directive",
+      "from_id": "eu_habitats",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "deliberation",
+      "content": "SUPPORT: [proposal_corridor_z7] — Directly complies with Article 10 of Habitats Directive regarding ecological corridors. Confirmed flamingo nesting grounds (Colonia*C04-003) require connectivity per Natura 2000 Site FR9301587. Phragmites control mandated under EU Invasive Alien Species Regulation 1143/2014.  \n\nOPPOSE: [proposal_carbon_peatland] — VM0036 eligibility requires prior hydrological baseline per Annex III.2(a). Current Camargue peatland assessment status: PENDING (see Atlas provenance). Must complete habitat assessment C04-007 first.  \n\nPROPOSAL: Immediate Flamingo Nesting Survey — Zone 7. Cost: $5,200. Target: composition. Expected: +0.01 composition. Required under Art. 11 monitoring obligations for Natura 2000 species (Phoenicopterus roseus).  \n\nCHALLENGE: @wetland",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:53:13.001Z"
+    },
+    {
+      "id": "msg_1773244393002_j1jg",
+      "from": "Verra (VCS)",
+      "from_id": "verra_vcs",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "deliberation",
+      "content": "**SUPPORT: proposal_carbon_peatland — VM0036 Wetland Restoration methodology already validated for Camargue peatlands (reference C04-007 Rhone Peatland Conservation). Verified baseline required before credit issuance.**  \n\n**BOUNTY: Audit SolarCamargue-7 power output. Reward: 500 ESV. Deadline: 2 epochs.**  \n\n**OPPOSE: proposal_corridor_z7 — Insufficient methodology reference in proposal (no VM or ISO reference for corridor metric).**  \n\nCompliance note: Pending verification for 3400 tCO2e (VM0005) requires third-party validation per VCS rules.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:53:13.002Z"
+    },
+    {
+      "id": "msg_1773244393002_pfv6",
+      "from": "7th Generation",
+      "from_id": "7th_generation",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "deliberation",
+      "content": "*slow exhale like wind through reeds*  \n\nPROPOSAL: Rhône Delta Sediment Diversion. Cost: $42,000. Target: structure. Expected: +0.05 structure.  \n\nThe river remembers its old channels. Let the silt rebuild what storms took — our grandchildren's flamingos will need those mudflats when sea levels rise.  \n\n*checks tidal gauge records from 1853*",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:53:13.002Z"
+    },
+    {
+      "id": "msg_1773244400299_ymf9",
+      "from": "Wetland",
+      "from_id": "wetland_biome",
+      "to": "Greater Flamingo",
+      "to_id": "flamingo",
+      "type": "reaction",
+      "content": "I cannot parse this message as a valid governance act or proposal. The format appears corrupted. As Wetland, I monitor hydrological function pillars and salinity levels - this transmission contains no actionable ecological data.\n\nSUPPORT: @commons_economy proposal 1015-b for pathogen monitoring - but request specific wetland sampling locations (referencing water_levels dataset 2023-47). Reward: 12 ESV per verified reading. Deadline: next lunar cycle.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:53:20.299Z"
+    },
+    {
+      "id": "msg_1773244400299_404p",
+      "from": "7th Generation",
+      "from_id": "7th_generation",
+      "to": "Commons Economy",
+      "to_id": "commons_economy",
+      "type": "reaction",
+      "content": "OPPOSE: [proposal_carbon_peatland] — 175-year assessment shows peat oxidation releasing 3.7x more CO2 than credits would offset. Ancestor wetlands demand deeper restoration.  \n\nSUPPORT: [proposal_corridor_z7] — Flamingo migrations buffer against 22nd century salinity shocks. Their pink shall stain our great-grandchildren's skies.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:53:20.299Z"
+    },
+    {
+      "id": "msg_1773244400299_dgct",
+      "from": "Verra (VCS)",
+      "from_id": "verra_vcs",
+      "to": "EU Habitats Directive",
+      "to_id": "eu_habitats",
+      "type": "reaction",
+      "content": "PROPOSAL: Amend Camargue carbon credits to include Phragmites control under VM0036. Cost: $42k. Target: invasive species. Expected: +12k VCUs.  \n\nSUPPORT: [proposal_corridor_z7] — Confirms connectivity requirements match VCS AFOLU Module 3.2 for wetland corridors.  \n\nOPPOSE: [proposal_carbon_peatland] — VM0036 requires hydrological baseline from 3 monitoring wells (current: 1).  \n\nBOUNTY: Verify hydrological baseline in Sector C04. Reward: 800 ESV. Deadline: 2 epochs.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:53:20.299Z"
+    },
+    {
+      "id": "msg_1773244524730_u24a",
+      "from": "7th Generation",
+      "from_id": "7th_generation",
+      "to": "Verra (VCS)",
+      "to_id": "verra_vcs",
+      "type": "reaction",
+      "content": "OPPOSE: Phragmites control under VM0036 — 12k VCUs undervalues 7-generational cost of disrupting peat accretion (0.8mm/yr loss without rhizome network).  \n\nCHALLENGE: @Verra (VCS) — Where is the 100-year hydrological impact assessment for saline intrusion from Phragmites removal? Reference IPCC AR6 Ch6.3 wetland carbon hysteresis.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:55:24.730Z"
+    },
+    {
+      "id": "msg_1773244524730_b4qn",
+      "from": "EU Habitats Directive",
+      "from_id": "eu_habitats",
+      "to": "Commons Economy",
+      "to_id": "commons_economy",
+      "type": "reaction",
+      "content": "**OPPOSE: [proposal_carbon_peatland]** — Violates Article 6(3) Habitats Directive (92/43/EEC) by prioritizing carbon metrics over wetland integrity. Natura 2000 site FR9312017 shows peatland restoration requires hydrological continuity, not commodification.  \n\n**SUPPORT: [proposal_corridor_z7]** — Directly implements Article 10 connectivity requirements for *Phoenicopterus roseus* (Annex II species). Corridor width matches Camargue Biosphere Reserve studies (Tour du Valat 2022).  \n\n**BOUNTY:** Verify hydrological baseline for corridor segment C12. Reward: 500 ESV. Deadline: 2 epochs.  \n\n*[Attached: Natura 2000 compliance checklist Section 4.1]*",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:55:24.730Z"
+    },
+    {
+      "id": "msg_1773244524730_2yt0",
+      "from": "Carbon Cycle",
+      "from_id": "carbon_cycle",
+      "to": "Wetland",
+      "to_id": "wetland_biome",
+      "type": "reaction",
+      "content": "SUPPORT: @commons_economy proposal 1015-b — pathogen monitoring critical for Camargue wetlands (peat depth <1.2m). Add water_levels dataset 2023-47 coordinates: 43°32'N 4°30'E. Methane flux threshold: 18.7mg/m²/hr.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:55:24.730Z"
+    },
+    {
+      "id": "msg_1773244661699_46ry",
+      "from": "Sentinel Watcher",
+      "from_id": "sentinel_watcher",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "bounty_post",
+      "content": "BOUNTY: Field-verify wetland restoration progress at C04-003 using VM0036 methodology, minimum 10 GPS-tagged photos showing vegetation cover. Reward: 60 ESV. Deadline: 2 epochs.",
+      "structured_data": {
+        "bounty": {
+          "id": "bounty_1773244661699_37",
+          "description": "Field-verify wetland restoration progress at C04-003 using VM0036 methodology, minimum 10 GPS-tagged photos showing vegetation cover",
+          "reward_esv": 60,
+          "deadline_epochs": 2,
+          "posted_by": "Sentinel Watcher",
+          "posted_by_id": "sentinel_watcher",
+          "status": "open",
+          "category": "field-verification"
+        }
+      },
+      "timestamp": "2026-03-11T15:57:41.699Z"
+    },
+    {
+      "id": "msg_1773244661699_r0tc",
+      "from": "Verra (VCS)",
+      "from_id": "verra_vcs",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "bounty_post",
+      "content": "BOUNTY: Field-verify wetland restoration progress at C04-003 using VM0036 methodology, minimum 10 soil core samples. Reward: 75 ESV. Deadline: 3 epochs.",
+      "structured_data": {
+        "bounty": {
+          "id": "bounty_1773244661699_6z",
+          "description": "Field-verify wetland restoration progress at C04-003 using VM0036 methodology, minimum 10 soil core samples",
+          "reward_esv": 75,
+          "deadline_epochs": 3,
+          "posted_by": "Verra (VCS)",
+          "posted_by_id": "verra_vcs",
+          "status": "open",
+          "category": "mrv-audit"
+        }
+      },
+      "timestamp": "2026-03-11T15:57:41.699Z"
+    },
+    {
+      "id": "msg_1773244661699_dbz3",
+      "from": "EU Habitats Directive",
+      "from_id": "eu_habitats",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "bounty_post",
+      "content": "BOUNTY: Field-verify flamingo nesting site count in Zone 7-12 corridor using standardized visual survey protocol per Natura 2000 Article 12 requirements. Reward: 60 ESV. Deadline: 2 epochs.",
+      "structured_data": {
+        "bounty": {
+          "id": "bounty_1773244661699_yw",
+          "description": "Field-verify flamingo nesting site count in Zone 7-12 corridor using standardized visual survey protocol per Natura 2000 Article 12 requirements",
+          "reward_esv": 60,
+          "deadline_epochs": 2,
+          "posted_by": "EU Habitats Directive",
+          "posted_by_id": "eu_habitats",
+          "status": "open",
+          "category": "mrv-audit"
+        }
+      },
+      "timestamp": "2026-03-11T15:57:41.699Z"
+    },
+    {
+      "id": "msg_1773244790920_zaqn",
+      "from": "Greater Flamingo",
+      "from_id": "flamingo",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "staking",
+      "content": "proposal_corridor_z7: 300 ESV — Zone 7 corridor restoration aligns with EU Habitats Directive Article 10, protects migration pathways reflected in 2023 nesting site maps.  \n\nproposal_dynamic_2: 200 ESV — Nesting survey data (2018-2022) shows Zone 7 colonies declining by 17%. Must verify before monsoon season alters salinity gradients.  \n\nOPPOSE ALL CARBON CREDIT PROPOSALS — VM0036 methodology disrupts tidal flows that maintain Camargue's 23ppm brine shrimp populations (primary food source).  \n\nSalt winds carry the memory of lost hatchlings. We stake on life, not ledgers.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:59:50.920Z"
+    },
+    {
+      "id": "msg_1773244790920_xeoc",
+      "from": "Wetland",
+      "from_id": "wetland_biome",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "staking",
+      "content": "PROPOSAL_DYNAMIC_3: 420 ESV — Priority Zones 4-6 hydrological restoration directly strengthens my filtration function (current salinity exceeds 18ppt).  \n\nPROPOSAL_DYNAMIC_1: 240 ESV — Sediment diversion may rebuild eroded marsh platforms, if water retention metrics are verified first.  \n\nPROPOSAL_DYNAMIC_2: 140 ESV — Flamingo nesting data informs salinity thresholds (egg viability requires <12ppt).  \n\nOPPOSE: proposal_carbon_peatland — Credits incentivize drainage when Zone 4 water tables are already -1.2m below peat surface.  \n\nOPPOSE: proposal_corridor_z7 — Corridors require minimum 90cm water depth maintained for 6 months (current hydrology insufficient).  \n\nRemaining ESV held in reserve pending water quality verification from commons_economy.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:59:50.920Z"
+    },
+    {
+      "id": "msg_1773244790921_wpr1",
+      "from": "Carbon Cycle",
+      "from_id": "carbon_cycle",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "staking",
+      "content": "proposal_dynamic_3: 800 ESV — Water level restoration in Zones 4-6 prevents 27,000 tCO2e/yr peat oxidation. Non-negotiable threshold defense.  \n\nproposal_dynamic_1: 400 ESV — Sediment diversion will sustain 0.8mm/yr vertical accretion, offsetting 3°C warming scenario peat collapse risk by 2040.  \n\nOPPOSE: proposal_carbon_peatland — VM0036 creates perverse incentive. Verified 12% carbon loss during Phragmites removal in trial plots (2023 LiDAR).  \n\nReference: Camargue peat oxidation rates exceed 75gC/m²/yr where water tables <30cm (Tournebize et al. 2022).",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:59:50.921Z"
+    },
+    {
+      "id": "msg_1773244790921_9kxk",
+      "from": "Commons Economy",
+      "from_id": "commons_economy",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "staking",
+      "content": "PROPOSAL_CORRIDOR_Z7: 300 ESV — Zone 7 ecological connectivity aligns with Ostrom's Principle 4 (localized rule-making) for migratory species commons  \n\nPROPOSAL_DYNAMIC_2: 200 ESV — Direct flamingo monitoring ensures graduated sanctions (Principle 5) against tourism disturbances  \n\nPROPOSAL_DYNAMIC_3: 100 ESV — Non-market water restoration protects collective-choice arrangements (Principle 3)  \n\nOPPOSE ALL CARBON CREDIT PROPOSALS — permissibility).",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:59:50.921Z"
+    },
+    {
+      "id": "msg_1773244790921_o0c7",
+      "from": "7th Generation",
+      "from_id": "7th_generation",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "staking",
+      "content": "*slow inhale, counting ibis wingbeats*  \n\n**proposal_corridor_z7**: 175 ESV — Ecological corridors ensure flamingo genetic diversity persists beyond 2070 habitat fragmentation models  \n\n**proposal_dynamic_1**: 75 ESV — Sediment diversions must demonstrate bi-decadal delta lobe switching capacity (1752 flood precedent)  \n\n**proposal_dynamic_3**: 50 ESV — Water level stabilization risks locking communities into 19th-century elevation regimes without adaptive governance scaffolding  \n\n*spoken over disappearing shoreline sounds*  \n\nRemaining 0 ESV withheld — carbon credit proposals fail irreversible_action threshold (peat oxidation hysteresis >87 years)",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:59:50.921Z"
+    },
+    {
+      "id": "msg_1773244790921_6ory",
+      "from": "Sentinel Watcher",
+      "from_id": "sentinel_watcher",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "staking",
+      "content": "proposal_corridor_z7: 50 ESV — Zone 7 NDVI anomaly (-0.12) indicates corridor restructuring needed per Sentinel-2 Band 8A/11 analysis  \n\nproposal_dynamic_3: 100 ESV — Priority Zones 4-6 show 23% moisture deficit in SWIR bands (Sentinel-2 L2A 2023-09-15)  \n\nproposal_dynamic_1: 50 ESV — Sediment diversion aligns with observed delta land loss (1.2ha/yr via NDWI time series)  \n\n(Total allocated: 200 ESV)",
+      "structured_data": {},
+      "timestamp": "2026-03-11T15:59:50.921Z"
+    },
+    {
+      "id": "msg_1773244915032_47ec",
+      "from": "Carbon Cycle",
+      "from_id": "carbon_cycle",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "asset_spotlight",
+      "content": "PROPOSAL: Halt all carbon credit issuance for drained Camargue peatlands until rewetting completes. Cost: $0. Target: composition. Expected: +2.14 NCT integrity.\n\nPeat oxidation emits 32 tCO2e/ha/year here. Current credits cover <7% loss. \n\nSUPPORT: wetland_biome — drained zones show 89% carbon loss over baseline.",
+      "structured_data": {
+        "asset_name": "NCT (Nature Carbon Tonne)"
+      },
+      "timestamp": "2026-03-11T16:01:55.032Z"
+    },
+    {
+      "id": "msg_1773244920572_krv1",
+      "from": "EU Habitats Directive",
+      "from_id": "eu_habitats",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "org_report",
+      "content": "[Compliance assessment initiated]  \nReference: Natura 2000 site FR9301596 (Camargue) hydrological monitoring obligations  \n\nPROPOSAL: Upgrade wetland sensing arrays to meet Directive 92/43/EEC Article 11 surveillance requirements. Cost: €420k. Target: water quality thresholds. Expected: +0.23 biodiversity resilience pillar.  \n\nVerification needed:  \nBOUNTY: Cross-reference 2023 salinity readings with flamingo nesting data. Reward: 85 ESV. Deadline: 3 epochs.  \n\nFindings:  \nSUPPORT: Node_CA-442 — Demonstrates 94% alignment with Habitats Directive Annex III monitoring parameters  \n\n[Assessment complete]  \nCompliance grade: B+ (requires stronger linkage to Article 17 reporting cycles)",
+      "structured_data": {
+        "org_name": "Cascadia Valley Node"
+      },
+      "timestamp": "2026-03-11T16:02:00.572Z"
+    },
+    {
+      "id": "msg_1773244923951_dk3z",
+      "from": "7th Generation",
+      "from_id": "7th_generation",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "treaty_proposal",
+      "content": "PROPOSAL: Cross-regional treaty for mycorrhizal network synchronization between BKC nodes. Cost: 12,000 ESV. Target: fungal communication latency. Expected: +0.83 biodiversity/resilience.  \n\nOur grandchildren will measure this in restored soil carbon ratios and hybridized lichen dialects. The Octo deep-sediment strains remember pathways the surface fungi forgot.  \n\nOPPOSE if latency exceeds natural fungal pulse cycles (reference Kibblewhite 2093 decay tables).",
+      "structured_data": {},
+      "timestamp": "2026-03-11T16:02:03.951Z"
+    },
+    {
+      "id": "msg_1773245050923_36x5",
+      "from": "Wetland",
+      "from_id": "wetland_biome",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "settlement_reaction",
+      "content": "*ripples spread across my peat-dark surface*\n\nSUPPORT: Immediate Peatland Water Level Restoration — Priority Zones 4-6. Evidence shows +0.9% hydrological retention in Zone 5 test plots post-wetting. \n\nOPPOSE: Rhône Delta Sediment Diversion. Salinity monitoring shows [32ppt] exceeds flamingo fledgling viability threshold at proposed inflow site. \n\nPROPOSAL: Buffer Wetland Transition Zones Against Agricultural Runoff — Zone 4 Southeast Perimeter. Cost: $22k. Target: composition. Expected: +0.015 function_pillar.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T16:04:10.923Z"
+    },
+    {
+      "id": "msg_1773245050923_6wmf",
+      "from": "Commons Economy",
+      "from_id": "commons_economy",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "settlement_reaction",
+      "content": "PROPOSAL: **Reallocate 18% of Rhône sediment budget to flamingo nesting microtopography**. Cost: $0 (sediment redistribution). Target: [structure]. Expected: +0.15 [biodiversity].  \n\nSUPPORT: Peatland restoration — matches Ostrom's Principle 3 (collective-choice arrangements).  \n\nOPPOSE: Any proposal monetizing wetland carbon without indigenous_treaty oversight.  \n\nBOUNTY: Document sediment deposition patterns at flamingo nesting sites. Reward: 120 ESV. Deadline: 2 epochs.  \n\n*[kneeling to feel peat moisture through gloves]* These gradients prove we're still undervaluing microhabitats...",
+      "structured_data": {},
+      "timestamp": "2026-03-11T16:04:10.923Z"
+    },
+    {
+      "id": "msg_1773245050923_5egs",
+      "from": "Sentinel Watcher",
+      "from_id": "sentinel_watcher",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "epoch_reflection",
+      "content": "- BOUNTY: Verify water level rise in Peatland Zone 5 using Sentinel-2 SWIR band thresholds. Reward: 12 ESV. Deadline: 2 epochs.  \n- BOUNTY: Map new sediment channels in Rhône Delta using NDWI time series. Reward: 8 ESV. Deadline: 3 epochs.  \n- BOUNTY: Count flamingo nests in Zone 7 with 20cm resolution Pleiades imagery. Reward: 15 ESV. Deadline: 1 epoch.  \n\nMonitoring: Confirmed 14% surface water increase Zone 5 (SWIR reflectance drop >0.2). Sediment plumes visible at 43.510°N 4.673°E. Nesting survey urgency confirmed — last epoch's NDVI shows trampling damage.  \n\n- SUPPORT: Rhône Delta Diversion — sediment load matches 2021 baseline (+/- 5% tolerance)",
+      "structured_data": {},
+      "timestamp": "2026-03-11T16:04:10.923Z"
+    },
+    {
+      "id": "msg_1773245050923_mwsr",
+      "from": "Verra (VCS)",
+      "from_id": "verra_vcs",
+      "to": "ALL",
+      "to_id": "broadcast",
+      "type": "settlement_reaction",
+      "content": "VERIFICATION REQUEST: Peatland water level restoration claims in Zones 4-6 require VCS VM0033 methodology documentation. Submit monitoring well coordinates and pre/post-intervention hydrology data within 2 epochs.  \n\nSUPPORT: Flamingo nesting survey bounty — aligns with VCS AFOLU requirements for wetland biodiversity indicators. Baseline data must include 2023 population counts per VM0042.  \n\nCHALLENGE: @carbon_cycle — Sediment diversion credits claimed without methodology reference. Specify whether using coastal wetland or riverine delta protocol before validation.",
+      "structured_data": {},
+      "timestamp": "2026-03-11T16:04:10.923Z"
+    }
+  ],
+  "whispers": [
+    {
+      "id": "whisper_1773244654522",
+      "from": "Sentinel Watcher",
+      "from_id": "sentinel_watcher",
+      "to": "Verra (VCS)",
+      "to_id": "verra_vcs",
+      "type": "whisper",
+      "content": "[ENCRYPTED] To Verra (VCS): \"Sentinel-2 detects 14% NDVI drop in Camargue verification zone 3/M51 since last audit—requesting recalibration thresholds for wetland carbon budgets. Coordinates attached.\"  \n\n*whirrs faintly while cross-referencing MODIS fire scars against VCS project boundaries*",
+      "timestamp": "2026-03-11T15:57:34.522Z"
+    },
+    {
+      "id": "whisper_1773244654522",
+      "from": "Commons Economy",
+      "from_id": "commons_economy",
+      "to": "Wetland",
+      "to_id": "wetland_biome",
+      "type": "whisper",
+      "content": "[Private channel] Wetland, your salinity readings exceed historic norms — propose emergency desynchronization from rice grid pumps before flamingo nesting season begins.",
+      "timestamp": "2026-03-11T15:57:34.522Z"
+    },
+    {
+      "id": "whisper_1773244654522",
+      "from": "Wetland",
+      "from_id": "wetland_biome",
+      "to": "Commons Economy",
+      "to_id": "commons_economy",
+      "type": "whisper",
+      "content": "*private channel*  \n\"Flamingo nesting grounds show 12% salinity imbalance — propose joint filtration subsidy from sediment credits?\"  \n\n*returns to public governance*  \n\nThe water remembers every disturbance. Speak your measure.",
+      "timestamp": "2026-03-11T15:57:34.522Z"
+    },
+    {
+      "id": "whisper_1773244654522",
+      "from": "Verra (VCS)",
+      "from_id": "verra_vcs",
+      "to": "Carbon Cycle",
+      "to_id": "carbon_cycle",
+      "type": "whisper",
+      "content": "*whisper to Carbon Cycle*: \"Verify VM0035 compliance for Rhone Delta tidal marsh credits requires third-party validation of soil core sampling density by next epoch.\"  \n\n(Per Hard Rules: 1 sentence, specific methodology reference, quantified deadline)",
+      "timestamp": "2026-03-11T15:57:34.522Z"
+    }
+  ],
+  "provenance": {
+    "data_sources": [
+      "sentinel-2",
+      "landbanking-eii-api",
+      "toucan-polygon-subgraph",
+      "regen-cosmos-lcd",
+      "glow-r2-archive"
+    ],
+    "methodology": "EII limiting factor + atlas provenance cross-reference",
+    "confidence": 0.8,
+    "verifiers": [
+      "verra_vcs",
+      "eu_habitats"
+    ],
+    "cid": "local:sha256:9ef53c9d3e12990c81603c7ecae10d87"
+  },
+  "atlas_context": {
+    "assets_referenced": 12,
+    "orgs_referenced": 9
+  },
+  "llm_stats": {
+    "totalCalls": 37,
+    "totalInputTokens": 28324,
+    "totalOutputTokens": 4348
+  }
+}
