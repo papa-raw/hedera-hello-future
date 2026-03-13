@@ -117,6 +117,20 @@
         }
       }
     ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Soil carbon credits verified under DOVU's digital MRV methodology",
+        "description_short": "dMRV verified",
+        "certification_source": "https://app.dovu.market",
+        "certifier": {
+          "id": 105,
+          "name": "DOVU dMRV Standard",
+          "short_name": "DOVU dMRV"
+        }
+      }
+    ],
     "periods": [
       {
         "date": "2021-12-10T14:29:30.869Z",
@@ -198,6 +212,20 @@
           }
         }
       }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Soil carbon credits verified under DOVU's digital MRV methodology",
+        "description_short": "dMRV verified",
+        "certification_source": "https://app.dovu.market",
+        "certifier": {
+          "id": 105,
+          "name": "DOVU dMRV Standard",
+          "short_name": "DOVU dMRV"
+        }
+      }
     ]
   },
   {
@@ -261,6 +289,20 @@
             "small": "/chains/hedera.svg",
             "large": "/chains/hedera.svg"
           }
+        }
+      }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Soil carbon credits verified under DOVU's digital MRV methodology",
+        "description_short": "dMRV verified",
+        "certification_source": "https://app.dovu.market",
+        "certifier": {
+          "id": 105,
+          "name": "DOVU dMRV Standard",
+          "short_name": "DOVU dMRV"
         }
       }
     ]
@@ -328,6 +370,20 @@
           }
         }
       }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Soil carbon credits verified under DOVU's digital MRV methodology",
+        "description_short": "dMRV verified",
+        "certification_source": "https://app.dovu.market",
+        "certifier": {
+          "id": 105,
+          "name": "DOVU dMRV Standard",
+          "short_name": "DOVU dMRV"
+        }
+      }
     ]
   },
   {
@@ -391,6 +447,20 @@
             "small": "/chains/hedera.svg",
             "large": "/chains/hedera.svg"
           }
+        }
+      }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Soil carbon credits verified under DOVU's digital MRV methodology",
+        "description_short": "dMRV verified",
+        "certification_source": "https://app.dovu.market",
+        "certifier": {
+          "id": 105,
+          "name": "DOVU dMRV Standard",
+          "short_name": "DOVU dMRV"
         }
       }
     ]
@@ -458,6 +528,20 @@
           }
         }
       }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Soil carbon credits verified under DOVU's digital MRV methodology",
+        "description_short": "dMRV verified",
+        "certification_source": "https://app.dovu.market",
+        "certifier": {
+          "id": 105,
+          "name": "DOVU dMRV Standard",
+          "short_name": "DOVU dMRV"
+        }
+      }
     ]
   },
   {
@@ -521,6 +605,20 @@
             "small": "/chains/hedera.svg",
             "large": "/chains/hedera.svg"
           }
+        }
+      }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Soil carbon credits verified under DOVU's digital MRV methodology",
+        "description_short": "dMRV verified",
+        "certification_source": "https://app.dovu.market",
+        "certifier": {
+          "id": 105,
+          "name": "DOVU dMRV Standard",
+          "short_name": "DOVU dMRV"
         }
       }
     ]
@@ -588,6 +686,20 @@
           }
         }
       }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Soil carbon credits verified under DOVU's digital MRV methodology",
+        "description_short": "dMRV verified",
+        "certification_source": "https://app.dovu.market",
+        "certifier": {
+          "id": 105,
+          "name": "DOVU dMRV Standard",
+          "short_name": "DOVU dMRV"
+        }
+      }
     ]
   },
   {
@@ -648,6 +760,20 @@
             "small": "/chains/hedera.svg",
             "large": "/chains/hedera.svg"
           }
+        }
+      }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Soil carbon credits verified under DOVU's digital MRV methodology",
+        "description_short": "dMRV verified",
+        "certification_source": "https://app.dovu.market",
+        "certifier": {
+          "id": 105,
+          "name": "DOVU dMRV Standard",
+          "short_name": "DOVU dMRV"
         }
       }
     ]
@@ -712,6 +838,20 @@
           }
         }
       }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Soil carbon credits verified under DOVU's digital MRV methodology",
+        "description_short": "dMRV verified",
+        "certification_source": "https://app.dovu.market",
+        "certifier": {
+          "id": 105,
+          "name": "DOVU dMRV Standard",
+          "short_name": "DOVU dMRV"
+        }
+      }
     ]
   },
   {
@@ -770,6 +910,20 @@
             "small": "/chains/hedera.svg",
             "large": "/chains/hedera.svg"
           }
+        }
+      }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Verified Carbon Standard credits (VCS1041)",
+        "description_short": "VCS1041",
+        "certification_source": "https://registry.verra.org/app/projectDetail/VCS/1041",
+        "certifier": {
+          "id": 101,
+          "name": "Verra Verified Carbon Standard",
+          "short_name": "Verra VCS"
         }
       }
     ]
@@ -914,6 +1068,20 @@
         }
       }
     ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Global C-Sink Registry credits (GCSP1024)",
+        "description_short": "GCSP1024",
+        "certification_source": "https://globalcsink.org/projects/GCSP1024",
+        "certifier": {
+          "id": 103,
+          "name": "Global C-Sink Registry",
+          "short_name": "Global C-Sink"
+        }
+      }
+    ],
     "periods": [
       {
         "date": "2024-01-01T00:00:00.000Z",
@@ -995,6 +1163,20 @@
           }
         }
       }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Verified Carbon Standard credits (VCS4018)",
+        "description_short": "VCS4018",
+        "certification_source": "https://registry.verra.org/app/projectDetail/VCS/4018",
+        "certifier": {
+          "id": 101,
+          "name": "Verra Verified Carbon Standard",
+          "short_name": "Verra VCS"
+        }
+      }
     ]
   },
   {
@@ -1055,6 +1237,20 @@
           }
         }
       }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Verified Carbon Standard credits (VCS4019)",
+        "description_short": "VCS4019",
+        "certification_source": "https://registry.verra.org/app/projectDetail/VCS/4019",
+        "certifier": {
+          "id": 101,
+          "name": "Verra Verified Carbon Standard",
+          "short_name": "Verra VCS"
+        }
+      }
     ]
   },
   {
@@ -1113,6 +1309,20 @@
             "small": "/chains/hedera.svg",
             "large": "/chains/hedera.svg"
           }
+        }
+      }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Verified Carbon Standard credits (VCS3207)",
+        "description_short": "VCS3207",
+        "certification_source": "https://registry.verra.org/app/projectDetail/VCS/3207",
+        "certifier": {
+          "id": 101,
+          "name": "Verra Verified Carbon Standard",
+          "short_name": "Verra VCS"
         }
       }
     ]
@@ -1227,6 +1437,20 @@
             "small": "/chains/hedera.svg",
             "large": "/chains/hedera.svg"
           }
+        }
+      }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "EcoRegistry certified credits (153)",
+        "description_short": "CDC-153",
+        "certification_source": "https://ecoregistry.io/projects/153",
+        "certifier": {
+          "id": 102,
+          "name": "EcoRegistry",
+          "short_name": "EcoRegistry"
         }
       }
     ],
@@ -1358,6 +1582,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2024-11-26T11:09:48.654Z",
@@ -1948,6 +2173,20 @@
         }
       }
     ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Forward carbon credits under Capturiant Standard with SEC/FINRA regulatory oversight",
+        "description_short": "SEC-regulated",
+        "certification_source": "https://capturiant.offerboard.com",
+        "certifier": {
+          "id": 106,
+          "name": "Capturiant Standard (SEC/FINRA)",
+          "short_name": "Capturiant Std"
+        }
+      }
+    ],
     "periods": [
       {
         "date": "2023-10-13T21:07:49.522Z",
@@ -2353,6 +2592,20 @@
         }
       }
     ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Forward carbon credits under Capturiant Standard with SEC/FINRA regulatory oversight",
+        "description_short": "SEC-regulated",
+        "certification_source": "https://capturiant.offerboard.com",
+        "certifier": {
+          "id": 106,
+          "name": "Capturiant Standard (SEC/FINRA)",
+          "short_name": "Capturiant Std"
+        }
+      }
+    ],
     "periods": [
       {
         "date": "2024-01-26T06:00:00.000Z",
@@ -2497,6 +2750,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2024-06-28T11:40:57.262Z",
@@ -2655,6 +2909,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2024-06-28T12:32:56.974Z",
@@ -2741,7 +2996,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-62",
@@ -2803,7 +3059,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-65",
@@ -2868,7 +3125,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-66",
@@ -2933,7 +3191,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-67",
@@ -2998,7 +3257,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-68",
@@ -3874,6 +4134,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2024-08-30T13:00:32.717Z",
@@ -4095,7 +4356,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-70",
@@ -4160,7 +4422,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-71",
@@ -4253,6 +4516,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2025-09-17T02:46:17.769Z",
@@ -4329,7 +4593,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-75",
@@ -4422,6 +4687,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2025-10-16T18:00:42.001Z",
@@ -4498,7 +4764,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-78",
@@ -4996,6 +5263,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2025-12-12T08:54:53.470Z",
@@ -5175,6 +5443,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2025-12-12T13:47:03.193Z",
@@ -5306,6 +5575,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2025-12-12T13:52:19.198Z",
@@ -5387,7 +5657,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-93",
@@ -5534,6 +5805,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2025-12-12T13:54:55.713Z",
@@ -5620,7 +5892,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-98",
@@ -5685,7 +5958,8 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   },
   {
     "id": "hedera-103",
@@ -5778,6 +6052,7 @@
         }
       }
     ],
+    "certifications": [],
     "periods": [
       {
         "date": "2025-12-12T14:00:13.503Z",
@@ -5928,6 +6203,20 @@
         }
       }
     ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Emission reductions verified under Gold Standard TPDDTEC methodology",
+        "description_short": "TPDDTEC",
+        "certification_source": "https://registry.goldstandard.org/projects",
+        "certifier": {
+          "id": 104,
+          "name": "Gold Standard Foundation",
+          "short_name": "Gold Standard"
+        }
+      }
+    ],
     "periods": [
       {
         "date": "2021-09-20T22:00:05.445Z",
@@ -6006,6 +6295,20 @@
           }
         }
       }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Emission reductions verified under Gold Standard TPDDTEC methodology",
+        "description_short": "TPDDTEC",
+        "certification_source": "https://registry.goldstandard.org/projects",
+        "certifier": {
+          "id": 104,
+          "name": "Gold Standard Foundation",
+          "short_name": "Gold Standard"
+        }
+      }
     ]
   },
   {
@@ -6071,6 +6374,20 @@
           }
         }
       }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Emission reductions verified under Gold Standard TPDDTEC methodology",
+        "description_short": "TPDDTEC",
+        "certification_source": "https://registry.goldstandard.org/projects",
+        "certifier": {
+          "id": 104,
+          "name": "Gold Standard Foundation",
+          "short_name": "Gold Standard"
+        }
+      }
     ]
   },
   {
@@ -6126,6 +6443,20 @@
             "small": "/chains/hedera.svg",
             "large": "/chains/hedera.svg"
           }
+        }
+      }
+    ],
+    "certifications": [
+      {
+        "id": 1000,
+        "value": 0,
+        "description": "Emission reductions verified under Gold Standard TPDDTEC methodology",
+        "description_short": "TPDDTEC",
+        "certification_source": "https://registry.goldstandard.org/projects",
+        "certifier": {
+          "id": 104,
+          "name": "Gold Standard Foundation",
+          "short_name": "Gold Standard"
         }
       }
     ]
@@ -6193,6 +6524,7 @@
           }
         }
       }
-    ]
+    ],
+    "certifications": []
   }
 ]

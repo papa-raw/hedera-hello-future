@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin, TreeStructure, Users, Lightning, Globe, Leaf, Vault, TrendUp, TrendDown } from "@phosphor-icons/react";
+import { ArrowRight, MapPin, TreeStructure, Users, Lightning, Globe, Leaf, Vault, TrendUp, TrendDown, ShieldCheck } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
 // Official UN SDG colors
@@ -372,7 +372,7 @@ export function ActionExploreCard({
             {action.title}
           </h4>
 
-          {/* Row 3: location · date */}
+          {/* Row 3: location · date · certifications */}
           <div className="flex items-center gap-1 mt-0.5 text-xs text-gray-500">
             {location && (
               <span className="flex items-center gap-0.5 truncate">
@@ -386,6 +386,15 @@ export function ActionExploreCard({
             <span className="font-medium text-gray-600 flex-shrink-0">
               {formatShortDate(action.action_start_date || action.created_at)}
             </span>
+            {action.certifications && action.certifications.length > 0 && (
+              <>
+                <span className="text-gray-300">·</span>
+                <span className="flex items-center gap-0.5 text-emerald-600 flex-shrink-0">
+                  <ShieldCheck size={11} />
+                  {action.certifications.length}
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>

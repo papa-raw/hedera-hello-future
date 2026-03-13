@@ -125,6 +125,22 @@ export interface ActionProof {
   };
 }
 
+// Certification types (shared with Assets)
+export interface Certifier {
+  id: number;
+  name: string;
+  short_name: string;
+}
+
+export interface Certification {
+  id: number;
+  value: number;
+  description: string;
+  description_short: string;
+  certification_source: string;
+  certifier: Certifier;
+}
+
 // Action types
 export interface Action {
   id: string;
@@ -145,6 +161,7 @@ export interface Action {
   actors: ActionActor[];
   sdg_outcomes: SDG[];
   proofs: ActionProof[];
+  certifications?: Certification[];
   /** For aggregated actions: individual issuance periods */
   periods?: { date: string; description: string | null; proof_id: string }[];
 }

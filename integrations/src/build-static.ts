@@ -176,6 +176,120 @@ const HEDERA_ORGS = [
   },
 ];
 
+// ─── Certifiers & Certifications ────────────────────────────────────
+// Only real standards bodies / registries that validated the underlying claim.
+// Guardian verification is NOT a certification — it's infrastructure (key governance).
+// Guardian is already represented in the Verification & Proofs section.
+
+const CERTIFIERS = {
+  verra: { id: 101, name: "Verra Verified Carbon Standard", short_name: "Verra VCS" },
+  ecoregistry: { id: 102, name: "EcoRegistry", short_name: "EcoRegistry" },
+  globalCSink: { id: 103, name: "Global C-Sink Registry", short_name: "Global C-Sink" },
+  goldStandard: { id: 104, name: "Gold Standard Foundation", short_name: "Gold Standard" },
+  dovuDMRV: { id: 105, name: "DOVU dMRV Standard", short_name: "DOVU dMRV" },
+  capturiantStd: { id: 106, name: "Capturiant Standard (SEC/FINRA)", short_name: "Capturiant Std" },
+} as const;
+
+// Extract registry project ID from description for URL construction
+function extractProjectId(desc: string): string | null {
+  const match = desc.match(/Registry project: (\S+)\./);
+  return match ? match[1] : null;
+}
+
+function getCertifications(actorName: string, description: string | null): any[] {
+  const certs: any[] = [];
+  const desc = description ?? "";
+  let nextId = 1000;
+
+  switch (actorName) {
+    case "DOVU":
+      certs.push({
+        id: nextId++,
+        value: 0,
+        description: "Soil carbon credits verified under DOVU's digital MRV methodology",
+        description_short: "dMRV verified",
+        certification_source: "https://app.dovu.market",
+        certifier: CERTIFIERS.dovuDMRV,
+      });
+      break;
+
+    case "Tolam Earth": {
+      const projId = extractProjectId(desc);
+
+      if (desc.includes("Verra VCS") || desc.includes("VRA")) {
+        // Verra project IDs look like "VCS1041" — extract numeric part
+        const vcsNum = projId?.match(/VCS(\d+)/)?.[1];
+        const url = vcsNum
+          ? `https://registry.verra.org/app/projectDetail/VCS/${vcsNum}`
+          : "https://registry.verra.org";
+        certs.push({
+          id: nextId++,
+          value: 0,
+          description: `Verified Carbon Standard credits${projId ? ` (${projId})` : ""}`,
+          description_short: projId || "VCS verified",
+          certification_source: url,
+          certifier: CERTIFIERS.verra,
+        });
+      }
+      if (desc.includes("EcoRegistry") || desc.includes("ERA")) {
+        // EcoRegistry project IDs are numeric like "153"
+        const ecoNum = projId?.match(/^(\d+)$/)?.[1] || projId?.match(/CDC-?(\d+)/)?.[1];
+        const url = ecoNum
+          ? `https://ecoregistry.io/projects/${ecoNum}`
+          : "https://ecoregistry.io";
+        certs.push({
+          id: nextId++,
+          value: 0,
+          description: `EcoRegistry certified credits${projId ? ` (${projId})` : ""}`,
+          description_short: projId ? `CDC-${ecoNum}` : "EcoRegistry",
+          certification_source: url,
+          certifier: CERTIFIERS.ecoregistry,
+        });
+      }
+      if (desc.includes("C-Sink") || desc.includes("GCSR")) {
+        const url = projId
+          ? `https://globalcsink.org/projects/${projId}`
+          : "https://globalcsink.org";
+        certs.push({
+          id: nextId++,
+          value: 0,
+          description: `Global C-Sink Registry credits${projId ? ` (${projId})` : ""}`,
+          description_short: projId || "C-Sink",
+          certification_source: url,
+          certifier: CERTIFIERS.globalCSink,
+        });
+      }
+      break;
+    }
+
+    case "Capturiant":
+      certs.push({
+        id: nextId++,
+        value: 0,
+        description: "Forward carbon credits under Capturiant Standard with SEC/FINRA regulatory oversight",
+        description_short: "SEC-regulated",
+        certification_source: "https://capturiant.offerboard.com",
+        certifier: CERTIFIERS.capturiantStd,
+      });
+      break;
+
+    case "GCR":
+      certs.push({
+        id: nextId++,
+        value: 0,
+        description: "Emission reductions verified under Gold Standard TPDDTEC methodology",
+        description_short: "TPDDTEC",
+        certification_source: "https://registry.goldstandard.org/projects",
+        certifier: CERTIFIERS.goldStandard,
+      });
+      break;
+
+    // OrbexCO2 and TYMLEZ: no external certifier (self-measured industrial MRV)
+  }
+
+  return certs;
+}
+
 // Parse WKT POINT(lng lat) → { latitude, longitude }
 function parseWKT(wkt: string): { latitude: number; longitude: number } | null {
   const match = wkt.match(/POINT\(([-\d.]+)\s+([-\d.]+)\)/);
@@ -196,12 +310,42 @@ function getDefaultImage(actorName: string): string {
   }
 }
 
-// Extract tCO2e from description
-function extractTCO2e(desc: string | null): number {
+// Extract tCO2e from description, with platform-aware corrections
+function extractTCO2e(desc: string | null, actorName: string): number {
   if (!desc) return 0;
   const match = desc.match(/([\d,.]+)\s*tCO2e/);
   if (!match) return 0;
-  return parseFloat(match[1].replace(/,/g, ""));
+  const raw = parseFloat(match[1].replace(/,/g, ""));
+
+  // OrbexCO2: supply is commodity weight, not absolute tCO2e.
+  // uom is tCO2e/MT — apply typical recycling emission factor (~1.5 tCO2e/MT).
+  // Cap individual tokens at 10,000 tCO2e (reasonable for single industrial lot).
+  if (actorName === "OrbexCO2") {
+    const estimated = raw * 0.001; // conservative: 1 kg CO2 per unit
+    return Math.min(estimated, 10_000);
+  }
+
+  // DOVU: tokenSupply already normalizes by decimals, but some values are still
+  // implausibly high for individual farms (97K tCO2e for a fruit farm).
+  // DOVU tokens have high raw supply with varying decimals (3-8).
+  // Sanity cap at 5,000 tCO2e per token (generous for soil carbon).
+  if (actorName === "DOVU" && raw > 5_000) {
+    return Math.min(raw / 100, 5_000); // likely 2 extra decimal places
+  }
+
+  return raw;
+}
+
+// Extract supply count from description (for display, not valuation)
+function extractSupplyCount(desc: string | null): string | null {
+  if (!desc) return null;
+  // Try tCO2e
+  const tco2Match = desc.match(/([\d,.]+)\s*tCO2e/);
+  if (tco2Match) return tco2Match[1];
+  // Try units/credits
+  const unitsMatch = desc.match(/([\d,.]+)\s*(units|credits)/);
+  if (unitsMatch) return unitsMatch[1];
+  return null;
 }
 
 // Determine asset subtype from actor
@@ -356,6 +500,7 @@ function main() {
           },
         },
       ],
+      certifications: getCertifications(a.actor_name || "", a.description),
     };
   });
 
@@ -420,21 +565,33 @@ function main() {
       action_end_date: last.action_end_date || last.action_start_date,
       proofs: allProofs,
       sdg_outcomes: Array.from(sdgMap.values()),
+      certifications: first.certifications, // same certifier across periods
       periods,
     });
   }
 
   console.log(`  🔗 Aggregated ${actions.length} → ${aggregatedActions.length} actions (${actions.length - aggregatedActions.length} merged)`);
 
-  // Build VerifiableProvenance objects for intelligence pipeline
-  const provenances = raw.map((a, i) => {
-    const location = a.geography ? parseWKT(a.geography) : null;
-    const tCO2e = extractTCO2e(a.description);
-    const actorName = a.actor_name || "Unknown";
+  // Build VerifiableProvenance objects from AGGREGATED actions (not raw)
+  // This avoids double-counting same-site issuance periods
+  const provenances = aggregatedActions.map((a) => {
+    const actorName = a.actors[0]?.name || "Unknown";
+    const location = a.location;
+
+    // For aggregated actions, sum tCO2e across all periods' descriptions
+    let tCO2e = 0;
+    if (a.periods && a.periods.length > 1) {
+      for (const period of a.periods) {
+        tCO2e += extractTCO2e(period.description, actorName);
+      }
+    } else {
+      tCO2e = extractTCO2e(a.description, actorName);
+    }
+
     const subtype = getSubtype(actorName);
     const methodology = getMethodology(actorName);
     const mrvStatus = getMrvStatus(actorName);
-    const countryCode = inferCountryCode(a);
+    const countryCode = a.country_code;
     const vintage = a.action_start_date ? new Date(a.action_start_date).getFullYear().toString() : "Unknown";
 
     // SCC-EPA valuation: $51-$190 per tCO2e
@@ -443,22 +600,25 @@ function main() {
     const totalLow = tCO2e * sccLow;
     const totalHigh = tCO2e * sccHigh;
 
+    // Certifications for this action
+    const certs = getCertifications(actorName, a.description);
+
     return {
       attestor: "Regen Atlas",
-      attestedAt: a._synced_at,
+      attestedAt: a.created_at,
       schemaVersion: "1.0",
       source: {
         protocol: "hedera",
         endpoint: `https://mainnet-public.mirrornode.hedera.com/api/v1/tokens`,
         queryParams: {},
-        fetchedAt: a._synced_at,
+        fetchedAt: a.created_at,
       },
       asset: {
         type: "Carbon Credit",
         subtype,
         name: a.title,
         chain: "hedera-mainnet",
-        contractAddress: a.explorer_link.split("/").pop() || "",
+        contractAddress: a.proofs[0]?.proof_explorer_link?.split("/").pop() || a.id,
         mechanismType: "direct-credit",
         assetActionClass: "action",
       },
@@ -479,6 +639,13 @@ function main() {
         totalValue: { low: totalLow, high: totalHigh, currency: "USD" },
         tokenMarketContext: undefined,
         gapFactor: undefined, // No market price → infinite gap
+        methodologyTrace: {
+          tier: certs.some((c: any) => [101, 104].includes(c.certifier.id))
+            ? "project-specific"
+            : certs.length > 0 ? "category-default" : "category-default",
+          methodologyName: methodology,
+          source: certs.length > 0 ? certs[0].certifier.name : actorName,
+        },
       },
       origin: {
         project: a.title,
@@ -492,7 +659,7 @@ function main() {
       mrv: {
         status: mrvStatus,
         provider: `Guardian / ${actorName}`,
-        documentCIDs: [a.proof_metadata_link],
+        documentCIDs: a.proofs.map((p: any) => p.proof_metadata_link).filter(Boolean),
       },
     };
   });

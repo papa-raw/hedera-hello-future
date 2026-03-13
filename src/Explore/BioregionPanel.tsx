@@ -17,6 +17,8 @@ import {
   CaretDown,
   MapPin,
   LinkSimple,
+  Certificate,
+  ShieldCheck,
 } from "@phosphor-icons/react";
 
 // Official UN SDG colors
@@ -692,7 +694,45 @@ export function BioregionPanel({
                             </div>
                           )}
 
-                          {/* ── Verification & Proofs (like Ratings & Certifications) ── */}
+                          {/* ── Certifications (like Ratings & Certifications on Assets) ── */}
+                          {action.certifications && action.certifications.length > 0 && (
+                            <div className="border-t border-gray-100">
+                              <div className="px-4 py-2 flex items-center gap-1.5 text-xs font-medium text-gray-700">
+                                <Certificate size={13} className="text-gray-400" />
+                                <span>Certifications ({action.certifications.length})</span>
+                              </div>
+                              <div className="px-4 pb-2 space-y-1.5">
+                                {action.certifications.map((cert) => (
+                                  <div
+                                    key={cert.id}
+                                    className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg"
+                                  >
+                                    <ShieldCheck size={16} className="text-emerald-500 flex-shrink-0" />
+                                    <div className="flex-1 min-w-0">
+                                      <div className="text-xs font-medium text-gray-900">
+                                        {cert.certifier.short_name || cert.certifier.name}
+                                      </div>
+                                      <div className="text-[10px] text-gray-400">
+                                        {cert.description_short}
+                                      </div>
+                                    </div>
+                                    {cert.certification_source && (
+                                      <a
+                                        href={cert.certification_source}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-300 hover:text-emerald-500 flex-shrink-0"
+                                      >
+                                        <ArrowRight size={12} />
+                                      </a>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* ── Verification & Proofs ── */}
                           {action.proofs.length > 0 && (
                             <div className="border-t border-gray-100">
                               <div className="px-4 py-2 flex items-center gap-1.5 text-xs font-medium text-gray-700">
