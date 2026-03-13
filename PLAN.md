@@ -1,7 +1,7 @@
 # Hedera Hello Future Apex — Hackathon Plan
 
 **Track:** Sustainability
-**Deadline:** Mar 24, 2026
+**Deadline:** Mar 23, 2026 (11:59 PM ET)
 **Base:** Regen Atlas ecospatial (forked)
 **Fresh Code Rule:** Existing project OK if credited; new Hedera ingestion layer is all new code
 
@@ -691,7 +691,19 @@ Both share the same Mirror Node fetcher logic. Path A is the primary deliverable
 
 ---
 
-## Build Timeline (12 days: Mar 13–24)
+## Hackathon Compliance Notes
+
+**Judging criteria:** Execution 20%, Success 20%, Integration 15%, Validation 15%, Innovation 10%, Feasibility 10%, Pitch 10%.
+
+**Integration gap:** Read-only Mirror Node scores weak on Integration (15%) and near-zero on Success (20%). Past Sustainability winners all used Guardian + HTS minting. Mitigation: add HCS (Hedera Consensus Service) provenance writes — post attestations via `TopicCreateTransaction` + `TopicMessageSubmitTransaction` when syncing Actions. Creates real Hedera transactions, addresses "on-chain verification tools" in track description, deepens integration. Low friction — just Hiero JS SDK, no smart contracts.
+
+**Submission requirements (all mandatory):** GitHub repo, project details (100 words), pitch deck PDF, 5-min demo video (YouTube), live demo link.
+
+**Pre-existing code:** Allowed if documented. All new Hedera work must have commits in Feb 17 – Mar 23 window.
+
+---
+
+## Build Timeline (11 days: Mar 13–23)
 
 ### Phase 1: Hedera Connector + Supabase (Mar 13–16, 4 days)
 
