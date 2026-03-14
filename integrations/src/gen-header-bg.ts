@@ -7,7 +7,7 @@
 import { writeFileSync } from "fs";
 import { join } from "path";
 
-const REPLICATE_TOKEN = process.env.REPLICATE_API_TOKEN || "r8_F54KeHJIEzPkUTrFO8XCsbtcJFG2zO53G1K5m";
+const REPLICATE_TOKEN = process.env.REPLICATE_API_TOKEN || "";
 const OUTPUT = join(import.meta.dirname, "../../public/images/raeis-header-bg.webp");
 
 async function main() {

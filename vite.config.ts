@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/replicate-api/, ''),
           headers: {
-            'Authorization': `Bearer ${env.VITE_REPLICATE_API_TOKEN || 'r8_4lRo0vWVA57m3aQ3G1DPbWHmdevU8Lx1V4SvW'}`,
+            'Authorization': `Bearer ${env.VITE_REPLICATE_API_TOKEN || ''}`,
           },
         },
         '/api/parliament': {
