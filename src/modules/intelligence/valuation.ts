@@ -1,4 +1,4 @@
-import type { ValuationMethodology, VerifiableProvenance, MethodologyTrace } from "./types";
+import type { ValuationMethodology, VerifiableProvenance, MethodologyTrace, ConfidenceLevel } from "./types";
 import type { ProjectMethodology } from "./methodologies";
 import { findBiomeMethodology } from "./methodologies";
 
@@ -79,11 +79,14 @@ const GRID_EMISSION_FACTORS: Record<string, number> = {
 
 export function valuateCarbon(
   tCO2e: number,
-  _standard?: string
+  _standard?: string,
+  confidence?: ConfidenceLevel
 ): VerifiableProvenance["valuation"] {
+  // Auto-determine confidence: high if structured tCO2e > 0, low if no data
+  const resolvedConfidence = confidence ?? (tCO2e > 0 ? "medium" : "low");
   const trace: MethodologyTrace = {
     tier: "category-default",
-    confidence: "medium",
+    confidence: resolvedConfidence,
     methodologyName: "EPA Social Cost of Carbon 2024",
     formula: `tCO2e × SCC range ($${SCC.low}-$${SCC.high})`,
     inputs: [

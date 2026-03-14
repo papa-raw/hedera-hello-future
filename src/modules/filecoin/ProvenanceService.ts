@@ -27,6 +27,7 @@ import {
 import { addDirectCreditGap, addGapFactor, npvFactor } from "../intelligence/valuation";
 import { fetchAllPrices, fetchRegenSellOrders } from "../intelligence/sources/prices";
 import { fetchHederaProvenances } from "../intelligence/sources/hedera";
+import { fetchActionsByProtocol, clearSupabaseActionsCache } from "../intelligence/sources/supabaseActions";
 
 export type IngestProgress = {
   source: string;
@@ -56,6 +57,9 @@ function bumpCacheVersion(): void {
 // ── localStorage persistence ──
 const LS_KEY_PROVENANCES = "regen-atlas:provenances";
 const LS_KEY_ASSET_MAP = "regen-atlas:asset-provenance-map";
+// Bump this when adding new sources to invalidate stale caches
+const CACHE_SCHEMA_VERSION = 3; // v3: added Atlantis & Silvi action protocols
+const LS_KEY_SCHEMA_VERSION = "regen-atlas:schema-version";
 
 function persistToStorage(): void {
   try {
@@ -63,6 +67,7 @@ function persistToStorage(): void {
     const assetMap = Object.fromEntries(assetProvenanceMap.entries());
     localStorage.setItem(LS_KEY_PROVENANCES, JSON.stringify(provs));
     localStorage.setItem(LS_KEY_ASSET_MAP, JSON.stringify(assetMap));
+    localStorage.setItem(LS_KEY_SCHEMA_VERSION, String(CACHE_SCHEMA_VERSION));
     console.log(
       `[ProvenanceService] Persisted ${provs.length} provenances, ${assetProvenanceMap.size} asset mappings`
     );
@@ -73,6 +78,16 @@ function persistToStorage(): void {
 
 function restoreFromStorage(): boolean {
   try {
+    // Invalidate cache if schema version doesn't match (e.g. new sources added)
+    const storedVersion = Number(localStorage.getItem(LS_KEY_SCHEMA_VERSION) ?? "0");
+    if (storedVersion < CACHE_SCHEMA_VERSION) {
+      console.log(`[ProvenanceService] Cache schema v${storedVersion} < v${CACHE_SCHEMA_VERSION}, invalidating`);
+      localStorage.removeItem(LS_KEY_PROVENANCES);
+      localStorage.removeItem(LS_KEY_ASSET_MAP);
+      localStorage.removeItem(LS_KEY_SCHEMA_VERSION);
+      return false;
+    }
+
     const provsJson = localStorage.getItem(LS_KEY_PROVENANCES);
     const mapJson = localStorage.getItem(LS_KEY_ASSET_MAP);
     if (!provsJson || !mapJson) return false;
@@ -123,6 +138,8 @@ const PROTOCOL_ISSUER_MAP: Record<string, string> = {
   "regen-network": "Regen Network",
   glow: "Glow",
   hedera: "Hedera Guardian",
+  atlantis: "Atlantis",
+  silvi: "Silvi",
 };
 
 // Check if a provenance asset type is compatible with a registry asset's
@@ -366,6 +383,8 @@ export async function ingestAllSources(
     { source: "Regen Network", status: "pending", count: 0, matched: 0 },
     { source: "Glow", status: "pending", count: 0, matched: 0 },
     { source: "Hedera Guardian", status: "pending", count: 0, matched: 0 },
+    { source: "Atlantis", status: "pending", count: 0, matched: 0 },
+    { source: "Silvi", status: "pending", count: 0, matched: 0 },
   ];
 
   const updateProgress = (
@@ -659,6 +678,45 @@ export async function ingestAllSources(
     updateProgress(3, {
       status: "error",
       error: err instanceof Error ? err.message : "Hedera Guardian load failed",
+    });
+  }
+
+  // Atlantis — fetch from Supabase actions_published_view
+  clearSupabaseActionsCache();
+  try {
+    updateProgress(4, { status: "fetching" });
+    const atlantisProvs = await fetchActionsByProtocol("atlantis");
+    updateProgress(4, { status: "composing", count: atlantisProvs.length });
+
+    for (const p of atlantisProvs) {
+      stampMechanism(p, "retired", "action");
+      await addProvenance(p, 4);
+    }
+
+    updateProgress(4, { status: "done", count: atlantisProvs.length });
+  } catch (err) {
+    updateProgress(4, {
+      status: "error",
+      error: err instanceof Error ? err.message : "Atlantis fetch failed",
+    });
+  }
+
+  // Silvi — fetch from Supabase actions_published_view
+  try {
+    updateProgress(5, { status: "fetching" });
+    const silviProvs = await fetchActionsByProtocol("silvi");
+    updateProgress(5, { status: "composing", count: silviProvs.length });
+
+    for (const p of silviProvs) {
+      stampMechanism(p, "retired", "action");
+      await addProvenance(p, 5);
+    }
+
+    updateProgress(5, { status: "done", count: silviProvs.length });
+  } catch (err) {
+    updateProgress(5, {
+      status: "error",
+      error: err instanceof Error ? err.message : "Silvi fetch failed",
     });
   }
 

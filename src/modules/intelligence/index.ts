@@ -10,5 +10,6 @@ export { fetchGlowWeeklyReport, fetchGlowRecentReports, fetchGlowAuditFarms, agg
 export { fetchCharPrice, fetchGlwPrice, fetchRegenSellOrders, fetchAllPrices } from "./sources/prices";
 export type { TokenPrice, RegenSellOrder, AllPrices } from "./sources/prices";
 export { fetchHederaProvenances } from "./sources/hedera";
+export { fetchActionsByProtocol, clearSupabaseActionsCache } from "./sources/supabaseActions";
 export { resolveOrgGeoSync, resolveAllOrgsGeo } from "./orgGeoResolution";
 export type { OrgMapPosition, ResolvedOrgGeo } from "./orgGeoResolution";

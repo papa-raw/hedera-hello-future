@@ -14,7 +14,6 @@ import {
   TrendDown,
   Robot,
   Vault,
-  CaretDown,
   MapPin,
   LinkSimple,
   Certificate,
@@ -64,6 +63,7 @@ interface BioregionPanelProps {
   allActions: Action[];
   onClose: () => void;
   onAssetSelect: (asset: Asset) => void;
+  onActionSelect?: (action: Action) => void;
   onAgentClick?: (address: string) => void;
   defaultTab?: 'overview' | 'assets' | 'actors' | 'actions';
 }
@@ -78,6 +78,7 @@ export function BioregionPanel({
   allActions,
   onClose,
   onAssetSelect,
+  onActionSelect,
   onAgentClick,
   defaultTab = 'overview',
 }: BioregionPanelProps) {
@@ -86,6 +87,7 @@ export function BioregionPanel({
   const [bioregionActions, setBioregionActions] = useState<Action[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedActionId, setExpandedActionId] = useState<string | null>(null);
+  const [expandedAssetId, setExpandedAssetId] = useState<string | null>(null);
 
   // Fetch EII data for this bioregion
   const { data: eiiData } = useEII(bioregionCode);
@@ -466,35 +468,198 @@ export function BioregionPanel({
               </div>
             )}
 
-            {/* Asset list */}
+            {/* Asset list — inline accordion */}
             <div>
               {displayedAssets.length === 0 ? (
                 <div className="text-xs text-gray-400 py-8 text-center">
                   {assetSearch ? "No matching assets" : "No assets in this bioregion"}
                 </div>
               ) : (
-                displayedAssets.map((asset) => (
-                  <button
-                    key={asset.id}
-                    onClick={() => onAssetSelect(asset)}
-                    className="w-full text-left hover:bg-gray-50 px-4 py-2.5 transition-colors border-b border-gray-50"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      {asset.main_image ? (
-                        <div className="w-10 h-10 rounded bg-cover bg-center flex-shrink-0" style={{ backgroundImage: `url(${asset.main_image})` }} />
-                      ) : (
-                        <div className="w-10 h-10 rounded bg-gray-100 flex-shrink-0 flex items-center justify-center">
-                          <TreeStructure size={14} className="text-gray-400" />
+                displayedAssets.map((asset) => {
+                  const isAssetOpen = expandedAssetId === asset.id;
+                  const primaryType = asset.asset_types[0];
+                  const typeColor = primaryType ? TYPE_COLORS[primaryType.id] ?? "#9CA3AF" : "#9CA3AF";
+
+                  return (
+                    <div key={asset.id} className="border-b border-gray-50">
+                      <div className="flex items-center hover:bg-gray-50 transition-colors">
+                        <button
+                          onClick={() => setExpandedAssetId(isAssetOpen ? null : asset.id)}
+                          className="flex-1 min-w-0 text-left px-4 py-2.5"
+                        >
+                          <div className="flex items-center gap-2.5">
+                            {asset.main_image ? (
+                              <div className="w-10 h-10 rounded bg-cover bg-center flex-shrink-0" style={{ backgroundImage: `url(${asset.main_image})` }} />
+                            ) : (
+                              <div className="w-10 h-10 rounded bg-gray-100 flex-shrink-0 flex items-center justify-center">
+                                <TreeStructure size={14} className="text-gray-400" />
+                              </div>
+                            )}
+                            <div className="flex-1 min-w-0">
+                              <div className="text-sm font-medium text-gray-900 truncate">{asset.name}</div>
+                              <div className="text-[10px] text-gray-400 truncate">{asset.issuer?.name}</div>
+                            </div>
+                          </div>
+                        </button>
+                        <button
+                          onClick={() => onAssetSelect(asset)}
+                          className="px-3 py-2.5 text-gray-300 hover:text-gray-600 transition-colors flex-shrink-0"
+                          title="View full details"
+                        >
+                          <ArrowRight size={16} />
+                        </button>
+                      </div>
+
+                      {isAssetOpen && (
+                        <div className="pb-1">
+                          {/* ── Photo banner with title overlay ── */}
+                          <div className="relative h-28 overflow-hidden">
+                            {asset.main_image && (
+                              <div
+                                className="absolute inset-0 bg-cover bg-center"
+                                style={{ backgroundImage: `url(${asset.main_image})` }}
+                              />
+                            )}
+                            <div className={`absolute inset-0 ${asset.main_image ? 'bg-gradient-to-t from-black/70 via-black/30 to-transparent' : 'bg-gray-800'}`} />
+                            <div className="relative z-10 h-full flex flex-col justify-end px-4 pb-3">
+                              {primaryType && (
+                                <span
+                                  className="self-start text-[9px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded mb-1"
+                                  style={{ backgroundColor: `${typeColor}40`, color: '#fff' }}
+                                >
+                                  {primaryType.name}
+                                </span>
+                              )}
+                              <h3 className="text-sm font-bold text-white leading-tight">{asset.name}</h3>
+                              <div className="flex items-center gap-1 text-[10px] text-white/70 mt-0.5">
+                                {asset.region && (
+                                  <>
+                                    <MapPin size={9} />
+                                    <span>{asset.region}</span>
+                                    <span className="text-white/30 mx-0.5">·</span>
+                                  </>
+                                )}
+                                {asset.issuer?.name && <span>{asset.issuer.name}</span>}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* ── Signal pills ── */}
+                          <div className="px-4 pt-2.5 pb-2 flex items-center gap-1.5 flex-wrap">
+                            {asset.asset_subtypes.map((s) => (
+                              <span
+                                key={s.id}
+                                className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-600"
+                              >
+                                {s.name}
+                              </span>
+                            ))}
+                            {asset.certifications.length > 0 && (
+                              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-amber-50 text-amber-700 flex items-center gap-0.5">
+                                <Certificate size={9} />
+                                {asset.certifications.length} rating{asset.certifications.length !== 1 ? 's' : ''}
+                              </span>
+                            )}
+                            {asset.platforms.length > 0 && (
+                              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-blue-50 text-blue-600">
+                                {asset.platforms.length} chain{asset.platforms.length !== 1 ? 's' : ''}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* ── Description ── */}
+                          {asset.description && (
+                            <div className="px-4 pb-3">
+                              <p className="text-xs text-gray-600 leading-relaxed line-clamp-4">
+                                {asset.description}
+                              </p>
+                            </div>
+                          )}
+
+                          {/* ── Certifications ── */}
+                          {asset.certifications.length > 0 && (
+                            <div className="border-t border-gray-100">
+                              <div className="px-4 py-2 flex items-center gap-1.5 text-xs font-medium text-gray-700">
+                                <Certificate size={13} className="text-gray-400" />
+                                <span>Certifications ({asset.certifications.length})</span>
+                              </div>
+                              <div className="px-4 pb-2 space-y-1.5">
+                                {asset.certifications.map((cert) => (
+                                  <div
+                                    key={cert.id}
+                                    className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg"
+                                  >
+                                    <ShieldCheck size={16} className="text-amber-500 flex-shrink-0" />
+                                    <div className="flex-1 min-w-0">
+                                      <div className="text-xs font-medium text-gray-900">
+                                        {cert.certifier.short_name || cert.certifier.name}
+                                      </div>
+                                      {cert.description_short && (
+                                        <div className="text-[10px] text-gray-400">{cert.description_short}</div>
+                                      )}
+                                    </div>
+                                    {cert.certification_source && (
+                                      <a
+                                        href={cert.certification_source}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-300 hover:text-amber-500 flex-shrink-0"
+                                      >
+                                        <ArrowRight size={12} />
+                                      </a>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* ── Issuer ── */}
+                          {asset.issuer && (
+                            <div className="border-t border-gray-100">
+                              <div className="px-4 py-2 flex items-center gap-1.5 text-xs font-medium text-gray-700">
+                                <Buildings size={13} className="text-gray-400" />
+                                <span>Issuer</span>
+                              </div>
+                              <div className="px-4 pb-2">
+                                <div className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg">
+                                  <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                                    <Users size={10} className="text-blue-500" />
+                                  </div>
+                                  <span className="text-xs font-medium text-gray-900 flex-1">{asset.issuer.name}</span>
+                                  {asset.issuer_link && (
+                                    <a href={asset.issuer_link} target="_blank" rel="noopener noreferrer">
+                                      <ArrowRight size={12} className="text-gray-300 hover:text-blue-500" />
+                                    </a>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* ── Chains ── */}
+                          {asset.platforms.length > 0 && (
+                            <div className="border-t border-gray-100">
+                              <div className="px-4 py-2 flex items-center gap-1.5 text-xs font-medium text-gray-700">
+                                <Globe size={13} className="text-gray-400" />
+                                <span>Chains ({asset.platforms.length})</span>
+                              </div>
+                              <div className="px-4 pb-3 flex flex-wrap gap-1.5">
+                                {asset.platforms.map((p) => (
+                                  <div key={p.id} className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-50 rounded-lg">
+                                    <img src={p.image.thumb} alt="" className="w-4 h-4 rounded-full" />
+                                    <span className="text-xs text-gray-700">{p.name}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
                         </div>
                       )}
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-gray-900 truncate">{asset.name}</div>
-                        <div className="text-[10px] text-gray-400 truncate">{asset.issuer?.name}</div>
-                      </div>
-                      <ArrowRight size={14} className="text-gray-300" />
                     </div>
-                  </button>
-                ))
+                  );
+                })
               )}
             </div>
           </div>
@@ -575,36 +740,43 @@ export function BioregionPanel({
                 const isOpen = expandedActionId === action.id;
                 return (
                   <div key={action.id} className="border-b border-gray-50">
-                    <button
-                      onClick={() => setExpandedActionId(isOpen ? null : action.id)}
-                      className="w-full px-4 py-2.5 hover:bg-emerald-50 transition-colors text-left"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        {action.main_image ? (
-                          <div
-                            className="w-10 h-10 rounded bg-cover bg-center flex-shrink-0"
-                            style={{ backgroundImage: `url(${action.main_image})` }}
-                          />
-                        ) : (
-                          <div className="w-10 h-10 rounded bg-emerald-100 flex-shrink-0 flex items-center justify-center">
-                            <Lightning size={14} className="text-emerald-600" />
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-medium text-gray-900 truncate">{action.title}</div>
-                          {action.region && (
-                            <div className="flex items-center gap-0.5 text-[10px] text-gray-400">
-                              <MapPin size={9} className="flex-shrink-0" />
-                              <span className="truncate">{action.region}</span>
+                    <div className="flex items-center hover:bg-emerald-50 transition-colors">
+                      <button
+                        onClick={() => setExpandedActionId(isOpen ? null : action.id)}
+                        className="flex-1 min-w-0 text-left px-4 py-2.5"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          {action.main_image ? (
+                            <div
+                              className="w-10 h-10 rounded bg-cover bg-center flex-shrink-0"
+                              style={{ backgroundImage: `url(${action.main_image})` }}
+                            />
+                          ) : (
+                            <div className="w-10 h-10 rounded bg-emerald-100 flex-shrink-0 flex items-center justify-center">
+                              <Lightning size={14} className="text-emerald-600" />
                             </div>
                           )}
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-medium text-gray-900 truncate">{action.title}</div>
+                            {action.region && (
+                              <div className="flex items-center gap-0.5 text-[10px] text-gray-400">
+                                <MapPin size={9} className="flex-shrink-0" />
+                                <span className="truncate">{action.region}</span>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                        <CaretDown
-                          size={14}
-                          className={`text-gray-300 transition-transform ${isOpen ? 'rotate-180' : ''}`}
-                        />
-                      </div>
-                    </button>
+                      </button>
+                      {onActionSelect && (
+                        <button
+                          onClick={() => onActionSelect(action)}
+                          className="px-3 py-2.5 text-gray-300 hover:text-gray-600 transition-colors flex-shrink-0"
+                          title="Locate on map"
+                        >
+                          <ArrowRight size={16} />
+                        </button>
+                      )}
+                    </div>
                     {isOpen && (() => {
                       const protocol = action.proofs[0]?.protocol;
                       const platform = action.proofs[0]?.platform;
@@ -810,6 +982,7 @@ export function BioregionPanel({
                               </div>
                             </div>
                           )}
+
                         </div>
                       );
                     })()}

@@ -43,9 +43,11 @@ export async function fetchCharPrice(): Promise<TokenPrice | null> {
   if (cached) return cached;
 
   try {
-    const res = await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=biochar&vs_currencies=usd&include_market_cap=true"
-    );
+    const cgKey = import.meta.env.VITE_COINGECKO_API_KEY;
+    const url = cgKey
+      ? `https://pro-api.coingecko.com/api/v3/simple/price?ids=biochar&vs_currencies=usd&include_market_cap=true&x_cg_pro_api_key=${cgKey}`
+      : "https://api.coingecko.com/api/v3/simple/price?ids=biochar&vs_currencies=usd&include_market_cap=true";
+    const res = await fetch(url);
     if (!res.ok) return null;
 
     const data = await res.json();

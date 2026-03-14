@@ -709,6 +709,7 @@ export default (): React.ReactElement => {
                 allActions={allActions}
                 onClose={handleBioregionClose}
                 onAssetSelect={handleBioregionAssetSelect}
+                onActionSelect={handleActionCardClick}
                 onAgentClick={handleAgentClick}
                 defaultTab={bioregionDefaultTab}
               />

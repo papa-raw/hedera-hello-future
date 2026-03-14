@@ -4,9 +4,12 @@
   "type": "module",
   "scripts": {
     "sync:hedera": "npx tsx src/cli.ts sync hedera",
-    "sync:hedera:dry-run": "npx tsx src/cli.ts sync hedera --dry-run"
+    "sync:hedera:dry-run": "npx tsx src/cli.ts sync hedera --dry-run",
+    "publish:hedera": "npx tsx src/publish.ts",
+    "publish:hedera:dry-run": "npx tsx src/publish.ts --dry-run"
   },
   "dependencies": {
+    "@hashgraph/sdk": "^2.81.0",
     "@supabase/supabase-js": "^2.45.4"
   },
   "devDependencies": {

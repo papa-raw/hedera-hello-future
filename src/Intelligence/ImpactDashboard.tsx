@@ -26,13 +26,15 @@ import type { VerifiableProvenance, SourceProtocol } from "../modules/intelligen
 import { useNewFiltersState } from "../context/filters";
 import { useMarketData } from "./market";
 import { CATEGORY_COLORS, ALL_CATEGORIES } from "./market/consts";
-import { formatUSD } from "./formatUtils";
+import { formatUSD, PROTOCOL_LABELS, PROTOCOL_COLORS } from "./formatUtils";
 import { MarketCapChart } from "./MarketCapChart";
 import { AssetRankingTable } from "./AssetRankingTable";
-import { ProtocolGapChart, AssetActionChart } from "./GapChart";
+import { ProtocolGapChart, AssetActionChart, ActionProtocolsChart } from "./GapChart";
 import { ProtocolPanel } from "./ProtocolPanel";
 
-const PROTOCOL_ORDER: SourceProtocol[] = ["toucan", "regen-network", "glow", "hedera"];
+const PROTOCOL_ORDER: SourceProtocol[] = ["toucan", "regen-network", "glow", "hedera", "atlantis", "silvi"];
+const ASSET_PROTOCOLS: SourceProtocol[] = ["toucan", "regen-network", "glow"];
+const ACTION_PROTOCOLS: SourceProtocol[] = ["hedera", "atlantis", "silvi"];
 
 type Section = "intelligence" | "markets" | "pipeline";
 
@@ -367,54 +369,165 @@ export default function ImpactDashboard(): React.ReactElement {
                 {hasGapData && (
                   <div className="grid md:grid-cols-2 gap-3 mb-5">
                     <ProtocolGapChart gap={aggregate!.gapAnalysis!} />
+                    <ActionProtocolsChart gap={aggregate!.gapAnalysis!} />
+                  </div>
+                )}
+                {hasGapData && (
+                  <div className="mb-5">
                     <AssetActionChart gap={aggregate!.gapAnalysis!} />
                   </div>
                 )}
 
-                {/* Protocol accordion */}
+                {/* Split tables: Asset Protocols + Action Protocols */}
                 {hasIntelligence ? (
+                  <>
+                  {/* Asset Protocols — tradable tokens with market prices */}
                   <div className="mb-5">
-                    <h3 className="text-sm font-semibold text-gray-700 mb-3">Source Protocols</h3>
-                    <div className="border border-gray-200 bg-white overflow-hidden">
-                      {PROTOCOL_ORDER.map((proto) => {
-                        const protoProvenances = byProtocol[proto] ?? [];
-                        if (protoProvenances.length === 0) return null;
-                        const isExpanded = expandedProtocol === proto;
-                        return (
-                          <div key={proto} className="border-b border-gray-100 last:border-b-0">
-                            <button
-                              onClick={() => setExpandedProtocol(isExpanded ? null : proto)}
-                              className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-center gap-3 cursor-pointer"
-                            >
-                              {isExpanded
-                                ? <CaretDown size={12} className="text-gray-400 shrink-0" />
-                                : <CaretRight size={12} className="text-gray-400 shrink-0" />
-                              }
-                              <span className="text-sm font-medium text-gray-800 flex-1">{
-                                proto === "toucan" ? "Toucan" : proto === "regen-network" ? "Regen Network" : proto === "hedera" ? "Hedera Guardian" : "Glow"
-                              }</span>
-                              <span className="text-xs text-gray-400">{protoProvenances.length} objects</span>
-                              {aggregate?.gapAnalysis?.byProtocol[proto]?.gapFactor && (
-                                <span className="text-xs font-medium text-amber-600 ml-2">
-                                  {aggregate.gapAnalysis.byProtocol[proto].gapFactor!.low}x–{aggregate.gapAnalysis.byProtocol[proto].gapFactor!.high}x
-                                </span>
-                              )}
-                            </button>
-                            {isExpanded && (
-                              <div className="px-4 pb-4">
-                                <ProtocolPanel
-                                  protocol={proto}
-                                  provenances={protoProvenances}
-                                  gapData={aggregate?.gapAnalysis?.byProtocol[proto]}
-                                  methodologySummary={aggregate?.methodologySummary?.[proto]}
-                                />
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
+                    <h3 className="text-sm font-semibold text-gray-700 mb-3">Asset Protocols</h3>
+                    <div className="bg-white border border-gray-200 overflow-hidden">
+                      <table className="w-full text-xs">
+                        <thead>
+                          <tr className="border-b border-gray-200 bg-gray-50/80">
+                            <th className="text-left px-4 py-2.5 font-semibold text-gray-500 uppercase tracking-wider">Protocol</th>
+                            <th className="text-right px-3 py-2.5 font-semibold text-gray-500 uppercase tracking-wider">Objects</th>
+                            <th className="text-right px-3 py-2.5 font-semibold text-gray-500 uppercase tracking-wider">Service Value</th>
+                            <th className="text-right px-3 py-2.5 font-semibold text-gray-500 uppercase tracking-wider">Market Value</th>
+                            <th className="text-right px-3 py-2.5 font-semibold text-gray-500 uppercase tracking-wider">Gap Factor</th>
+                            <th className="w-8 px-2" />
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100">
+                          {ASSET_PROTOCOLS.map((proto) => {
+                            const protoProvenances = byProtocol[proto] ?? [];
+                            if (protoProvenances.length === 0) return null;
+                            const gap = aggregate?.gapAnalysis?.byProtocol[proto];
+                            const isExpanded = expandedProtocol === proto;
+                            return (
+                              <tr
+                                key={proto}
+                                onClick={() => setExpandedProtocol(isExpanded ? null : proto)}
+                                className="cursor-pointer transition-colors hover:bg-gray-50"
+                              >
+                                <td className="px-4 py-3">
+                                  <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: PROTOCOL_COLORS[proto] }} />
+                                    <span className="font-medium text-gray-800 text-sm">{PROTOCOL_LABELS[proto] ?? proto}</span>
+                                  </div>
+                                </td>
+                                <td className="text-right px-3 py-3 tabular-nums text-gray-600">{protoProvenances.length}</td>
+                                <td className="text-right px-3 py-3 tabular-nums font-medium text-gray-800">
+                                  {gap ? `${formatUSD(gap.serviceValueUSD.low)}–${formatUSD(gap.serviceValueUSD.high)}` : "—"}
+                                </td>
+                                <td className="text-right px-3 py-3 tabular-nums text-gray-600">
+                                  {gap?.marketValueUSD ? formatUSD(gap.marketValueUSD) : "—"}
+                                </td>
+                                <td className="text-right px-3 py-3 tabular-nums">
+                                  {gap?.gapFactor ? (
+                                    <span className="font-medium text-amber-600">{gap.gapFactor.low}x–{gap.gapFactor.high}x</span>
+                                  ) : "—"}
+                                </td>
+                                <td className="px-2 py-3">
+                                  {isExpanded
+                                    ? <CaretDown size={12} className="text-gray-400" />
+                                    : <CaretRight size={12} className="text-gray-400" />
+                                  }
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                      {expandedProtocol && ASSET_PROTOCOLS.includes(expandedProtocol as typeof ASSET_PROTOCOLS[number]) && (byProtocol[expandedProtocol] ?? []).length > 0 && (
+                        <div className="border-t border-gray-200 px-4 py-4 bg-gray-50/50">
+                          <ProtocolPanel
+                            protocol={expandedProtocol}
+                            provenances={byProtocol[expandedProtocol]}
+                            gapData={aggregate?.gapAnalysis?.byProtocol[expandedProtocol]}
+                            methodologySummary={aggregate?.methodologySummary?.[expandedProtocol]}
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
+
+                  {/* Action Protocols — verified environmental actions (no market price) */}
+                  {ACTION_PROTOCOLS.some((p) => (byProtocol[p] ?? []).length > 0) && (
+                    <div className="mb-5">
+                      <h3 className="text-sm font-semibold text-gray-700 mb-3">Action Protocols</h3>
+                      <div className="bg-white border border-gray-200 overflow-hidden">
+                        <table className="w-full text-xs">
+                          <thead>
+                            <tr className="border-b border-gray-200 bg-gray-50/80">
+                              <th className="text-left px-4 py-2.5 font-semibold text-gray-500 uppercase tracking-wider">Protocol</th>
+                              <th className="text-right px-3 py-2.5 font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+                              <th className="text-right px-3 py-2.5 font-semibold text-gray-500 uppercase tracking-wider">tCO2e</th>
+                              <th className="text-right px-3 py-2.5 font-semibold text-gray-500 uppercase tracking-wider">Service Value</th>
+                              <th className="text-right px-3 py-2.5 font-semibold text-gray-500 uppercase tracking-wider">Bioregions</th>
+                              <th className="w-8 px-2" />
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-gray-100">
+                            {ACTION_PROTOCOLS.map((proto) => {
+                              const provs = byProtocol[proto] ?? [];
+                              if (provs.length === 0) return null;
+                              const gap = aggregate?.gapAnalysis?.byProtocol[proto];
+                              const totalTCO2e = provs.reduce((sum, p) => sum + (p.impact.metrics.climate?.tCO2e ?? 0), 0);
+                              const bioregions = new Set(
+                                provs
+                                  .map((p) => p.origin.location?.jurisdiction)
+                                  .filter((j): j is string => !!j && j !== "Unknown")
+                              );
+                              const isExpanded = expandedProtocol === proto;
+                              const isHedera = proto === "hedera";
+                              return (
+                                <tr
+                                  key={proto}
+                                  onClick={() => setExpandedProtocol(isExpanded ? null : proto)}
+                                  className={`cursor-pointer transition-colors ${isHedera ? "bg-purple-50/40 hover:bg-purple-50/70" : "hover:bg-gray-50"}`}
+                                >
+                                  <td className="px-4 py-3">
+                                    <div className="flex items-center gap-2">
+                                      <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: PROTOCOL_COLORS[proto] }} />
+                                      <span className="font-medium text-gray-800 text-sm">{PROTOCOL_LABELS[proto] ?? proto}</span>
+                                      {isHedera && (
+                                        <span className="px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-purple-100 text-purple-700 rounded">New</span>
+                                      )}
+                                    </div>
+                                  </td>
+                                  <td className="text-right px-3 py-3 tabular-nums text-gray-600">{provs.length}</td>
+                                  <td className="text-right px-3 py-3 tabular-nums font-medium text-gray-800">
+                                    {totalTCO2e > 0 ? totalTCO2e.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "—"}
+                                  </td>
+                                  <td className="text-right px-3 py-3 tabular-nums font-medium text-gray-800">
+                                    {gap ? `${formatUSD(gap.serviceValueUSD.low)}–${formatUSD(gap.serviceValueUSD.high)}` : "—"}
+                                  </td>
+                                  <td className="text-right px-3 py-3 tabular-nums text-gray-600">{bioregions.size}</td>
+                                  <td className="px-2 py-3">
+                                    {isExpanded
+                                      ? <CaretDown size={12} className="text-gray-400" />
+                                      : <CaretRight size={12} className="text-gray-400" />
+                                    }
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                        {expandedProtocol && ACTION_PROTOCOLS.includes(expandedProtocol as typeof ACTION_PROTOCOLS[number]) && (byProtocol[expandedProtocol] ?? []).length > 0 && (
+                          <div className="border-t border-gray-200 px-4 py-4 bg-gray-50/50">
+                            <ProtocolPanel
+                              protocol={expandedProtocol}
+                              provenances={byProtocol[expandedProtocol]}
+                              gapData={aggregate?.gapAnalysis?.byProtocol[expandedProtocol]}
+                              methodologySummary={aggregate?.methodologySummary?.[expandedProtocol]}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  </>
                 ) : (
                   <div className="bg-white border border-gray-200 shadow-sm p-8 text-center">
                     <Database size={32} className="text-gray-300 mx-auto mb-3" />
@@ -636,7 +749,7 @@ export default function ImpactDashboard(): React.ReactElement {
                       {PROTOCOL_ORDER.map((proto) => {
                         const count = (byProtocol[proto] ?? []).length;
                         if (count === 0) return null;
-                        const label = proto === "toucan" ? "Toucan" : proto === "regen-network" ? "Regen Network" : proto === "hedera" ? "Hedera Guardian" : "Glow";
+                        const label = PROTOCOL_LABELS[proto] ?? proto;
                         return (
                           <div key={proto} className="flex items-center gap-3">
                             <CheckCircle size={16} className="text-green-500 shrink-0" />
@@ -658,8 +771,8 @@ export default function ImpactDashboard(): React.ReactElement {
                     </h3>
                     <p className="text-sm text-gray-400 max-w-sm mx-auto">
                       Click "Load Impact Intelligence" to pull real impact data from
-                      Toucan, Regen Network, and Glow, then compose verifiable
-                      provenance objects.
+                      Toucan, Regen Network, Glow, and Hedera Guardian, then compose
+                      verifiable provenance objects.
                     </p>
                   </div>
                 )}

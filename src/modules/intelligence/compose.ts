@@ -66,7 +66,7 @@ export function composeToucanPoolProvenance(
       },
       creditingPathway: "outcome",
     },
-    valuation: valuateCarbon(pool.totalTCO2e, standard),
+    valuation: valuateCarbon(pool.totalTCO2e, standard, "high"),
     origin: {
       project: `toucan-${pool.name.toLowerCase()}-pool`,
       developer: "Toucan Protocol",
@@ -212,7 +212,7 @@ export function composeToucanProvenance(
       },
       creditingPathway: "outcome",
     },
-    valuation: valuateCarbon(tCO2e, project.standard),
+    valuation: valuateCarbon(tCO2e, project.standard, "high"),
     origin: {
       project: project.projectId,
       location: {
@@ -459,7 +459,7 @@ export function aggregateImpact(
     totalMarine: { hectares: 0, projectCount: 0 },
     totalValueUSD: { low: 0, high: 0 },
     provenanceCount: provenances.length,
-    sourceBreakdown: { toucan: 0, "regen-network": 0, glow: 0, hedera: 0 },
+    sourceBreakdown: { toucan: 0, "regen-network": 0, glow: 0, hedera: 0, atlantis: 0, silvi: 0 },
   };
 
   // Identify the Glow network aggregate — it already includes all farm values

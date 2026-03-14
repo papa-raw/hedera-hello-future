@@ -1,0 +1,851 @@
+{
+  "network": "testnet",
+  "operatorId": "0.0.8212210",
+  "publishedAt": "2026-03-14T10:49:22.291Z",
+  "methodology": {
+    "topicId": "0.0.9000000",
+    "messageSequence": 15
+  },
+  "bioregionFeeds": [
+    {
+      "bioregionCode": "PA12",
+      "bioregionName": "Western European Broadleaf Forests",
+      "topicId": "0.0.9000001",
+      "messageSequence": 2,
+      "actionCount": 5,
+      "tCO2e": 4041.4
+    },
+    {
+      "bioregionCode": "PA1",
+      "bioregionName": "Celtic Broadleaf Forests",
+      "topicId": "0.0.9000003",
+      "messageSequence": 4,
+      "actionCount": 5,
+      "tCO2e": 732.89
+    },
+    {
+      "bioregionCode": "NA22",
+      "bioregionName": "Central US Mixed Grasslands",
+      "topicId": "0.0.9000005",
+      "messageSequence": 6,
+      "actionCount": 28,
+      "tCO2e": 39754.15
+    },
+    {
+      "bioregionCode": "OC1",
+      "bioregionName": "Southeast Asian Tropical Forests",
+      "topicId": "0.0.9000007",
+      "messageSequence": 8,
+      "actionCount": 1,
+      "tCO2e": 6109
+    },
+    {
+      "bioregionCode": "NT14",
+      "bioregionName": "Northern Andean Montane Forests",
+      "topicId": "0.0.9000009",
+      "messageSequence": 10,
+      "actionCount": 1,
+      "tCO2e": 30000
+    },
+    {
+      "bioregionCode": "AT7",
+      "bioregionName": "East African Montane Forests",
+      "topicId": "0.0.9000011",
+      "messageSequence": 12,
+      "actionCount": 4,
+      "tCO2e": 0
+    },
+    {
+      "bioregionCode": "AA8",
+      "bioregionName": "Eastern Australian Temperate Forests",
+      "topicId": "0.0.9000013",
+      "messageSequence": 14,
+      "actionCount": 1,
+      "tCO2e": 37
+    }
+  ],
+  "nftCollection": {
+    "tokenId": "0.0.9000016",
+    "totalMinted": 46
+  },
+  "transactions": [
+    {
+      "layer": 1,
+      "type": "topic-create",
+      "label": "RAEIS — Regen Atlas Environmental Intelligence Standard v1.0",
+      "entityId": "0.0.9000000",
+      "transactionId": "0.0.0@1773485362289-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000000",
+      "timestamp": "2026-03-14T10:49:22.289Z"
+    },
+    {
+      "layer": 2,
+      "type": "topic-create",
+      "label": "RAEIS Bioregion: Western European Broadleaf Forests (PA12)",
+      "entityId": "0.0.9000001",
+      "transactionId": "0.0.0@1773485362289-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000001",
+      "timestamp": "2026-03-14T10:49:22.289Z"
+    },
+    {
+      "layer": 2,
+      "type": "message-submit",
+      "label": "Bioregion feed: PA12",
+      "entityId": "0.0.9000001#2",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000001",
+      "metadata": {
+        "messageSize": 1958
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "topic-create",
+      "label": "RAEIS Bioregion: Celtic Broadleaf Forests (PA1)",
+      "entityId": "0.0.9000003",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000003",
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "message-submit",
+      "label": "Bioregion feed: PA1",
+      "entityId": "0.0.9000003#4",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000003",
+      "metadata": {
+        "messageSize": 1840
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "topic-create",
+      "label": "RAEIS Bioregion: Central US Mixed Grasslands (NA22)",
+      "entityId": "0.0.9000005",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000005",
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "message-submit",
+      "label": "Bioregion feed: NA22",
+      "entityId": "0.0.9000005#6",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000005",
+      "metadata": {
+        "messageSize": 8498
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "topic-create",
+      "label": "RAEIS Bioregion: Southeast Asian Tropical Forests (OC1)",
+      "entityId": "0.0.9000007",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000007",
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "message-submit",
+      "label": "Bioregion feed: OC1",
+      "entityId": "0.0.9000007#8",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000007",
+      "metadata": {
+        "messageSize": 1107
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "topic-create",
+      "label": "RAEIS Bioregion: Northern Andean Montane Forests (NT14)",
+      "entityId": "0.0.9000009",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000009",
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "message-submit",
+      "label": "Bioregion feed: NT14",
+      "entityId": "0.0.9000009#10",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000009",
+      "metadata": {
+        "messageSize": 1078
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "topic-create",
+      "label": "RAEIS Bioregion: East African Montane Forests (AT7)",
+      "entityId": "0.0.9000011",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000011",
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "message-submit",
+      "label": "Bioregion feed: AT7",
+      "entityId": "0.0.9000011#12",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000011",
+      "metadata": {
+        "messageSize": 1711
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "topic-create",
+      "label": "RAEIS Bioregion: Eastern Australian Temperate Forests (AA8)",
+      "entityId": "0.0.9000013",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000013",
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 2,
+      "type": "message-submit",
+      "label": "Bioregion feed: AA8",
+      "entityId": "0.0.9000013#14",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000013",
+      "metadata": {
+        "messageSize": 1027
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 1,
+      "type": "message-submit",
+      "label": "Methodology: RAEIS v1.0",
+      "entityId": "0.0.9000000#15",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.9000000",
+      "metadata": {
+        "messageSize": 1204
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-collection-create",
+      "label": "RAEIS Verified Action (RAVA)",
+      "entityId": "0.0.9000016",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "maxSupply": 200
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Summerley Hall Fruit Farm (PA12)",
+      "entityId": "0.0.9000016#17",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 17,
+        "metadataBytes": 33
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Distillerie Coquerel Vineyard (PA12)",
+      "entityId": "0.0.9000016#18",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 18,
+        "metadataBytes": 34
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Red Hill Farm (PA12)",
+      "entityId": "0.0.9000016#19",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 19,
+        "metadataBytes": 34
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Redhill (PA12)",
+      "entityId": "0.0.9000016#20",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 20,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Summerley (PA12)",
+      "entityId": "0.0.9000016#21",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 21,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Setka Gosheva Farm (PA1)",
+      "entityId": "0.0.9000016#22",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 22,
+        "metadataBytes": 32
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Omarchevo Farm (PA1)",
+      "entityId": "0.0.9000016#23",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 23,
+        "metadataBytes": 32
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Briyastovo wheat Farm (PA1)",
+      "entityId": "0.0.9000016#24",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 24,
+        "metadataBytes": 32
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Briyastovo Wheat Farm (PA1)",
+      "entityId": "0.0.9000016#25",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 25,
+        "metadataBytes": 33
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Briyastovo (PA1)",
+      "entityId": "0.0.9000016#26",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 26,
+        "metadataBytes": 34
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OAxaca IV Wind Energy Project (MX) (NA22)",
+      "entityId": "0.0.9000016#27",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 27,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Carboneers SRC India (IN) (NA22)",
+      "entityId": "0.0.9000016#28",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 28,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: CO2 UTILIZATION IN CONCRETE - Removals & Reductions - CarbonCure - U.S & Canada. Project #1 (US) (NA22)",
+      "entityId": "0.0.9000016#29",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 29,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: CO2 UTILIZATION IN CONCRETE - Removals & Reductions - CarbonCure - U.S. Project #1 (US) (NA22)",
+      "entityId": "0.0.9000016#30",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 30,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Miller Mountain Project — Forward Carbon (NA22)",
+      "entityId": "0.0.9000016#31",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 31,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Warrior Project — Forward Carbon (NA22)",
+      "entityId": "0.0.9000016#32",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 32,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — Industrial Recycled (AL) (NA22)",
+      "entityId": "0.0.9000016#33",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 33,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — Industrial Recycled (TN) (NA22)",
+      "entityId": "0.0.9000016#34",
+      "transactionId": "0.0.0@1773485362290-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 34,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.290Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — Industrial Recycled (AZ) (NA22)",
+      "entityId": "0.0.9000016#35",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 35,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — Industrial Recycled (sample) (NA22)",
+      "entityId": "0.0.9000016#36",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 36,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — Industrial Recycled (TX) (NA22)",
+      "entityId": "0.0.9000016#37",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 37,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -Mix Recycled (TX) (NA22)",
+      "entityId": "0.0.9000016#38",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 38,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dAluminium Recycled (CA) (NA22)",
+      "entityId": "0.0.9000016#39",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 39,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (CA) (NA22)",
+      "entityId": "0.0.9000016#40",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 40,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dAluminium Recycled (GA) (NA22)",
+      "entityId": "0.0.9000016#41",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 41,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dThermalCoal Recycled (IL) (NA22)",
+      "entityId": "0.0.9000016#42",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 42,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (PA) (NA22)",
+      "entityId": "0.0.9000016#43",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 43,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dCopper Recycled (NV) (NA22)",
+      "entityId": "0.0.9000016#44",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 44,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (MO) (NA22)",
+      "entityId": "0.0.9000016#45",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 45,
+        "metadataBytes": 36
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dPlastic Recycled (IN) (NA22)",
+      "entityId": "0.0.9000016#46",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 46,
+        "metadataBytes": 36
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (GA) (NA22)",
+      "entityId": "0.0.9000016#47",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 47,
+        "metadataBytes": 36
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (AZ) (NA22)",
+      "entityId": "0.0.9000016#48",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 48,
+        "metadataBytes": 36
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (TN) (NA22)",
+      "entityId": "0.0.9000016#49",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 49,
+        "metadataBytes": 36
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (NV) (NA22)",
+      "entityId": "0.0.9000016#50",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 50,
+        "metadataBytes": 36
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (AL) (NA22)",
+      "entityId": "0.0.9000016#51",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 51,
+        "metadataBytes": 36
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (FL) (NA22)",
+      "entityId": "0.0.9000016#52",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 52,
+        "metadataBytes": 36
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (OH) (NA22)",
+      "entityId": "0.0.9000016#53",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 53,
+        "metadataBytes": 36
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: OrbexCO2 — -dFerrous Recycled (TX) (NA22)",
+      "entityId": "0.0.9000016#54",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 54,
+        "metadataBytes": 37
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: CO2 UTILIZATION IN CONCRETE - REMOVALS & REDUCTIONS – CarbonCure – Asia #1 (SG) (OC1)",
+      "entityId": "0.0.9000016#55",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 55,
+        "metadataBytes": 34
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Carbono Verde Afforestation Project (BR) (NT14)",
+      "entityId": "0.0.9000016#56",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 56,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: GCR Gold Standard TPDDTEC v1 (AT7)",
+      "entityId": "0.0.9000016#57",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 57,
+        "metadataBytes": 34
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: GCR Gold Standard TPDDTEC v3.1 (AT7)",
+      "entityId": "0.0.9000016#58",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 58,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Safe Water Project(Rwanda) (Gold Standard TPDDTEC) (AT7)",
+      "entityId": "0.0.9000016#59",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 59,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: GCR Gold Standard TPDDTEC v3.1.0 (AT7)",
+      "entityId": "0.0.9000016#60",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 60,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: TYMLEZ — Gold Coast Health Precinct Carbon Measurement (AA8)",
+      "entityId": "0.0.9000016#61",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 61,
+        "metadataBytes": 35
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    },
+    {
+      "layer": 3,
+      "type": "nft-mint",
+      "label": "RAVA: Unknown (no bioregion)",
+      "entityId": "0.0.9000016#62",
+      "transactionId": "0.0.0@1773485362291-dry",
+      "hashscanUrl": "https://hashscan.io/testnet/token/0.0.9000016",
+      "metadata": {
+        "serial": 62,
+        "metadataBytes": 38
+      },
+      "timestamp": "2026-03-14T10:49:22.291Z"
+    }
+  ]
+}

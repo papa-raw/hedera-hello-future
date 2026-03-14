@@ -33,6 +33,7 @@ import ActionDetails from "./Actions/ActionDetails.tsx";
 import AgentDetails from "./Agents/AgentDetails.tsx";
 import VaultDetail from "./Ecospatial/VaultDetail.tsx";
 import Parliament from "./Ecospatial/Parliament/Parliament.tsx";
+import { PublishPage } from "./Publish";
 
 globalThis.Buffer = Buffer;
 
@@ -132,6 +133,10 @@ export const router = createBrowserRouter([
       {
         path: "/vaults/:bioregionId",
         element: <VaultDetail />,
+      },
+      {
+        path: "/publish",
+        element: <PublishPage />,
       },
     ],
   },

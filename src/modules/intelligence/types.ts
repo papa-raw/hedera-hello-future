@@ -1,6 +1,6 @@
 // Verifiable Cross-Protocol Impact Intelligence Types
 
-export type SourceProtocol = "toucan" | "regen-network" | "glow" | "hedera";
+export type SourceProtocol = "toucan" | "regen-network" | "glow" | "hedera" | "atlantis" | "silvi";
 export type CreditingPathway = "action" | "outcome" | "impact";
 export type MrvStatus = "verified" | "pending" | "expired";
 export type ValuationMethodology =
