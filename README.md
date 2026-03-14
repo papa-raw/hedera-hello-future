@@ -4,6 +4,8 @@
 
 **Hedera Hello Future Hackathon — Sustainability Track**
 
+**[Live Demo](https://hedera-hello-future.vercel.app)** · **[Methodology on HashScan](https://hashscan.io/testnet/topic/0.0.8217610)** · **[RAVA NFT Collection](https://hashscan.io/testnet/token/0.0.8217620)**
+
 Regen Atlas aggregates environmental impact data from 6 Guardian-based platforms on Hedera and publishes the first AI-agent-native environmental intelligence methodology (RAEIS) back to Hedera using three native services.
 
 ## What It Does
@@ -39,41 +41,23 @@ Mirror Node (read)          HCS (write)              HTS (write)
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Regen Atlas Intelligence                      │
 │  SCC-EPA valuation · Trust hierarchy · Gap analysis             │
-│  Cross-protocol aggregation · Bioregion mapping                 │
+│  Bioregion mapping · Agent directives                           │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Pages
+## Verify on HashScan
 
-| Route | Description |
-|-------|-------------|
-| `/` | Explore — Map of 125+ ecological assets with bioregion panels |
-| `/intelligence` | Intelligence — Cross-protocol valuation, asset vs action analysis, gap charts |
-| `/actions` | Actions — Environmental actions from Hedera, Atlantis, Silvi with protocol icons and filters |
-| `/publish` | Publish — RAEIS methodology, bioregion feeds, RAVA NFTs, full transaction log with HashScan links |
-
-## Quick Start
-
-```bash
-npm install
-npm run dev              # http://localhost:5173
-```
-
-### Publish to Hedera (testnet)
-
-```bash
-cd integrations
-npm install
-npm run publish:hedera            # Live publish to testnet
-npm run publish:hedera:dry-run    # Preview without submitting
-```
-
-Requires `integrations/.env`:
-```
-HEDERA_OPERATOR_ID=0.0.XXXXX
-HEDERA_OPERATOR_KEY=302e...
-HEDERA_NETWORK=testnet
-```
+| Artifact | Topic/Token ID | HashScan Link |
+|----------|---------------|---------------|
+| RAEIS Methodology | `0.0.8217610` | [View Topic](https://hashscan.io/testnet/topic/0.0.8217610) |
+| Bioregion: Western European Broadleaf Forests (PA12) | `0.0.8217612` | [View Topic](https://hashscan.io/testnet/topic/0.0.8217612) |
+| Bioregion: Celtic Broadleaf Forests (PA1) | `0.0.8217614` | [View Topic](https://hashscan.io/testnet/topic/0.0.8217614) |
+| Bioregion: Central US Mixed Grasslands (NA22) | `0.0.8217615` | [View Topic](https://hashscan.io/testnet/topic/0.0.8217615) |
+| Bioregion: Southeast Asian Tropical Forests (OC1) | `0.0.8217616` | [View Topic](https://hashscan.io/testnet/topic/0.0.8217616) |
+| Bioregion: Northern Andean Montane Forests (NT14) | `0.0.8217617` | [View Topic](https://hashscan.io/testnet/topic/0.0.8217617) |
+| Bioregion: East African Montane Forests (AT7) | `0.0.8217618` | [View Topic](https://hashscan.io/testnet/topic/0.0.8217618) |
+| Bioregion: Eastern Australian Temperate Forests (AA8) | `0.0.8217619` | [View Topic](https://hashscan.io/testnet/topic/0.0.8217619) |
+| RAVA NFT Collection | `0.0.8217620` | [View Token](https://hashscan.io/testnet/token/0.0.8217620) |
 
 ## RAEIS: Three-Layer Standard
 
@@ -88,6 +72,12 @@ A machine-readable methodology published to Hedera consensus. Defines how bioreg
     "valuation": "SCC-EPA-2024",
     "carbonPrice": { "low": 51, "high": 190, "unit": "USD/tCO2e" },
     "trustHierarchy": ["guardian+registry", "guardian+self", "bare-hts"]
+  },
+  "certifierRegistry": {
+    "verra-vcs": { "tier": "guardian+registry", "weight": 1.0 },
+    "gold-standard": { "tier": "guardian+registry", "weight": 1.0 },
+    "dovu-dmrv": { "tier": "guardian+self", "weight": 0.7 },
+    "bare-hts": { "tier": "bare-hts", "weight": 0.3 }
   },
   "agentInterface": {
     "capabilities": ["eii-interpret", "gap-analysis", "capital-routing"],
@@ -118,44 +108,87 @@ One HCS topic per bioregion. Agents subscribe to these for real-time intelligenc
 
 ### Layer 3 — Verification NFTs (HTS)
 
-One HTS NFT collection: RAVA (RAEIS Verified Action). Each serial = one independently verified environmental action. Onchain metadata (≤100 bytes) references full provenance on IPFS.
+One HTS NFT collection: RAVA (RAEIS Verified Action). Each serial = one independently verified environmental action. Onchain metadata (≤100 bytes) references full provenance.
 
-## Data Pipeline
+```
+RAEIS:v1:<actionId>:<bioregionCode>:<sourceToken>
+```
 
-**Guardian ingestion:** Mirror Node API enumerates HTS tokens from 9 treasury accounts, extracts Guardian topic IDs from token memos (DOVU format: `DOVU:SYMBOL:topic_id`; Tolam/GCR: direct topic in memo; Capturiant: IPFS CID in memo).
+## Guardian Integration
 
-**Additional sources:** Toucan Protocol (Polygon subgraph), Regen Network (Cosmos LCD), Glow (weekly JSON archives), Atlantis and Silvi (Supabase).
+The data pipeline reads from 6 Guardian-based platforms via Hedera Mirror Node:
 
-**Valuation engine:**
-- EPA Social Cost of Carbon 2024: $51–$190/tCO2e
-- TEEB biome-level ecosystem service values (Costanza 2014, de Groot 2012)
-- Trust hierarchy: Guardian+Registry (1.0) > Guardian+Self (0.7) > Bare HTS (0.3)
-- Per-provenance confidence scoring (high/medium/low)
-- Live market prices: CoinGecko (CHAR/Biochar), DexScreener (GLW), Regen marketplace
+| Platform | Treasury Account | Actions | Certifications |
+|----------|-----------------|---------|----------------|
+| DOVU | `0.0.612877` | 5 | DOVU dMRV Standard |
+| Tolam Earth | `0.0.2091527` | 6 | Verra VCS, Forward Carbon |
+| Capturiant | `0.0.4063795` | 4 | Capturiant Standard |
+| OrbexCO2 | `0.0.4354857` | 22 | OrbexCO2 Standard |
+| Global Carbon Registry | `0.0.3805025` | 4 | Gold Standard TPDDTEC |
+| TYMLEZ | `0.0.3948498` | 1 | TYMLEZ MRV |
+| **Total** | **9 accounts** | **46** | |
+
+**Provenance tracing:** Guardian topic IDs are extracted from HTS token memos (DOVU format: `DOVU:SYMBOL:topic_id`; Tolam/GCR: direct topic in memo; Capturiant: IPFS CID in memo), linking each credit back to its Guardian MRV policy.
+
+## Valuation Engine
+
+- **EPA Social Cost of Carbon 2024:** $51–$190/tCO2e (central estimate $120)
+- **Trust hierarchy:** Guardian+Registry (weight 1.0) > Guardian+Self (0.7) > Bare HTS (0.3)
+- **Per-provenance confidence:** High (structured tCO2e + verified MRV), Medium (tCO2e only), Low (no structured data)
+- **Bioregion mapping:** Actions mapped to One Earth bioregion codes via country inference
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/publish` | **Start here** — RAEIS methodology, bioregion feeds, RAVA NFTs, transaction log with HashScan links |
+| `/intelligence` | Intelligence dashboard — valuation analysis, asset vs action breakdown, gap charts |
+| `/actions` | Environmental actions from Guardian platforms with protocol filters |
+| `/` | Explore — Map of ecological assets with bioregion drill-down panels |
+
+## Quick Start
+
+```bash
+npm install
+npm run dev              # http://localhost:5173
+```
+
+### Publish to Hedera (testnet)
+
+```bash
+cd integrations
+npm install
+npm run publish:hedera            # Live publish to testnet
+npm run publish:hedera:dry-run    # Preview without submitting
+```
+
+Requires `integrations/.env`:
+```
+HEDERA_OPERATOR_ID=0.0.XXXXX
+HEDERA_OPERATOR_KEY=302e...
+HEDERA_NETWORK=testnet
+```
 
 ## Tech Stack
 
-- **Frontend:** React 19 + TypeScript + Vite + Tailwind CSS + Recharts + Mapbox GL
+- **Frontend:** React + TypeScript + Vite + Tailwind CSS + Recharts + Mapbox GL
 - **Hedera:** @hashgraph/sdk (HCS + HTS), Mirror Node REST API
-- **Data:** Supabase, The Graph (Toucan), Regen Network LCD, CoinGecko, DexScreener
-- **Storage:** Filecoin Calibration (Synapse SDK)
+- **Data:** Supabase (action metadata)
 
 ## What Existed Before
 
-Regen Atlas is an open-source registry of 125+ tokenized ecological assets with a multi-protocol intelligence pipeline (Toucan, Regen Network, Glow), Filecoin provenance layer, and scientific valuation engine. Built during PL_Genesis hackathon.
+Regen Atlas is an open-source registry of 125+ tokenized ecological assets with a scientific valuation engine. Built during PL_Genesis hackathon. See [regenatlas.xyz](https://regenatlas.xyz).
 
 **New for Hedera Hello Future:**
 - Hedera Guardian ingestion (Mirror Node → 46 actions from 6 platforms)
-- RAEIS three-layer standard (HCS methodology + feeds + HTS NFTs)
-- Intelligence panel redesign (asset/action protocol split, gap analysis)
-- Actions page with Hedera, Atlantis, Silvi protocol support
-- `/publish` page with interactive judge documentation
+- RAEIS three-layer standard (HCS methodology + bioregion feeds + HTS NFTs)
+- Intelligence panel with asset/action protocol analysis
+- `/publish` page with interactive documentation for judges
+- 63 real Hedera testnet transactions
 
 ## Team
 
 **Pat Rawson** — [@papa-raw](https://github.com/papa-raw) · [ecofrontiers.xyz](https://ecofrontiers.xyz)
-
-Built with [Regen Atlas](https://regenatlas.xyz) infrastructure.
 
 ## License
 
