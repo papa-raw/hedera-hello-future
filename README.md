@@ -1,3 +1,5 @@
+![RAEIS Environmental Intelligence Standard](docs/images/raeis-hero.png)
+
 # Regen Atlas × Hedera: Environmental Intelligence for AI Agents
 
 **Hedera Hello Future Hackathon — Sustainability Track**
