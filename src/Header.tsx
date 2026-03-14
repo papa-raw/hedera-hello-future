@@ -9,13 +9,13 @@ import clsx from "clsx";
 import { ParagraphIcon } from "./shared/components/ParagraphIcon";
 import { analytics } from "./modules/analytics";
 
-type NavKey = "about" | "explore" | "insights" | "parliament";
+type NavKey = "about" | "explore" | "insights" | "publish";
 
 const primaryNav: { key: NavKey; name: string; link: string }[] = [
   { key: "about", name: "About", link: "/about" },
   { key: "explore", name: "Explore", link: "/" },
   { key: "insights", name: "Insights", link: "/insights" },
-  { key: "parliament", name: "Parliament", link: "/parliament" },
+  { key: "publish", name: "Hedera — RAEIS", link: "/publish" },
 ];
 
 const secondaryLinks = [

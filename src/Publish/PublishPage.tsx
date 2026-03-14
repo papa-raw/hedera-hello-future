@@ -665,9 +665,10 @@ export default function PublishPage() {
 const GUIDE_ICON_CLASS = "text-purple-400 shrink-0";
 const GUIDE_ICON_SIZE = 20;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const GUIDE_STEPS: Array<{
   title: string;
-  Icon: React.ComponentType<{ size?: number | string; className?: string; weight?: string }>;
+  Icon: React.ComponentType<any>;
   body: string;
 }> = [
   {
