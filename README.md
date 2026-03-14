@@ -177,7 +177,7 @@ HEDERA_NETWORK=testnet
 
 ## What Existed Before
 
-Regen Atlas is an open-source registry of 125+ tokenized ecological assets with a scientific valuation engine. Built during PL_Genesis hackathon. See [regenatlas.xyz](https://regenatlas.xyz).
+Regen Atlas is an open-source registry of 500+ tokenized ecological assets with a scientific valuation engine. See [regenatlas.xyz](https://regenatlas.xyz).
 
 **New for Hedera Hello Future:**
 - Hedera Guardian ingestion (Mirror Node → 46 actions from 6 platforms)
