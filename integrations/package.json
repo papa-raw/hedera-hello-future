@@ -6,7 +6,11 @@
     "sync:hedera": "npx tsx src/cli.ts sync hedera",
     "sync:hedera:dry-run": "npx tsx src/cli.ts sync hedera --dry-run",
     "publish:hedera": "npx tsx src/publish.ts",
-    "publish:hedera:dry-run": "npx tsx src/publish.ts --dry-run"
+    "publish:hedera:dry-run": "npx tsx src/publish.ts --dry-run",
+    "agent:run": "npx tsx src/agents/run.ts",
+    "agent:run:dry-run": "npx tsx src/agents/run.ts --dry-run",
+    "agent:scout": "npx tsx src/agents/scout.ts",
+    "agent:diligence": "npx tsx src/agents/diligence.ts"
   },
   "dependencies": {
     "@hashgraph/sdk": "^2.81.0",

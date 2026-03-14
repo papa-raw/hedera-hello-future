@@ -22,10 +22,14 @@ Regen Atlas aggregates environmental impact data from 6 Guardian-based platforms
 | Service | Usage |
 |---------|-------|
 | **Mirror Node API** | Ingests HTS tokens from 9 treasury accounts across 6 Guardian platforms, extracts Guardian topic IDs from token memos for provenance tracing |
-| **Hedera Consensus Service (HCS)** | Publishes methodology standard + 7 bioregion intelligence feeds (structured JSON messages) |
+| **Hedera Consensus Service (HCS)** | Publishes methodology standard + 7 bioregion intelligence feeds + 2 agent report topics (structured JSON messages) |
 | **Hedera Token Service (HTS)** | Mints RAVA NFT collection with 46 verification attestation NFTs |
 
-**Total: 63 Hedera transactions** — all verifiable on HashScan.
+4. **Agents** — two autonomous OpenClaw agents coordinate through HCS:
+   - **Impact Scout:** reads bioregion feeds via Mirror Node, scores opportunities on 4 axes, posts OpportunityReport to HCS
+   - **Due Diligence:** reads Scout's report from HCS, cross-verifies source tokens on mainnet, posts verdicts to a second HCS topic
+
+**Total: 67 Hedera transactions** — all verifiable on HashScan.
 
 ## Architecture
 
@@ -36,14 +40,20 @@ Mirror Node (read)          HCS (write)              HTS (write)
 │ 6 Guardian plats │───>│ 7 Bioregion Feeds│    │ Collection       │
 │ ~46 env actions  │    │ Agent Directives │    │ 46 attestations  │
 └─────────────────┘    └──────────────────┘    └──────────────────┘
-        │                       │                       │
-        v                       v                       v
-┌─────────────────────────────────────────────────────────────────┐
-│                    Regen Atlas Intelligence                      │
-│  SCC-EPA valuation · Trust hierarchy · Gap analysis             │
-│  Bioregion mapping · Agent directives                           │
-└─────────────────────────────────────────────────────────────────┘
+                               │
+                               v
+                    ┌──────────────────────┐
+                    │   AGENT NETWORK      │
+                    │                      │
+                    │ Impact Scout ──HCS──>│
+                    │   reads feeds        │ Due Diligence
+                    │   ranks bioregions   │   reads Scout's HCS
+                    │   posts report       │   verifies on mainnet
+                    │                      │   posts verdicts
+                    └──────────────────────┘
 ```
+
+**Key design:** Agents coordinate exclusively through HCS. The Due Diligence agent discovers the Scout's report by reading an HCS topic via Mirror Node — not through a shared database or direct API call. Any third-party agent can join by reading these topics.
 
 ## Verify on HashScan
 
@@ -58,6 +68,8 @@ Mirror Node (read)          HCS (write)              HTS (write)
 | Bioregion: East African Montane Forests (AT7) | `0.0.8217618` | [View Topic](https://hashscan.io/testnet/topic/0.0.8217618) |
 | Bioregion: Eastern Australian Temperate Forests (AA8) | `0.0.8217619` | [View Topic](https://hashscan.io/testnet/topic/0.0.8217619) |
 | RAVA NFT Collection | `0.0.8217620` | [View Token](https://hashscan.io/testnet/token/0.0.8217620) |
+| Agent: Impact Scout | `0.0.8218356` | [View Topic](https://hashscan.io/testnet/topic/0.0.8218356) |
+| Agent: Due Diligence | `0.0.8218357` | [View Topic](https://hashscan.io/testnet/topic/0.0.8218357) |
 
 ## RAEIS: Three-Layer Standard
 
@@ -113,6 +125,26 @@ One HTS NFT collection: RAVA (RAEIS Verified Action). Each serial = one independ
 ```
 RAEIS:v1:<actionId>:<bioregionCode>:<sourceToken>
 ```
+
+## Agent Network (OpenClaw)
+
+Two autonomous OpenClaw agents that consume RAEIS feeds and coordinate entirely through Hedera consensus:
+
+**Impact Opportunity Scout** — reads all 7 bioregion HCS topics via testnet Mirror Node, scores each bioregion on four axes (unpriced environmental value 35%, certification strength 25%, carbon tonnage 25%, data coverage 15%), and posts a ranked OpportunityReport back to HCS.
+
+**Due Diligence Agent** — reads the Scout's OpportunityReport from HCS (not a database), then cross-verifies each referenced token against Hedera mainnet Mirror Node. Checks token existence, supply, Guardian topic provenance, and trust tier. Posts a DueDiligenceReport with PASS/CAUTION/FAIL verdicts.
+
+Results: 10 tokens passed verification, 5 flagged CAUTION (tokens exist on mainnet but lack Guardian topic IDs in their memos — a real finding, not synthetic).
+
+```bash
+cd integrations
+npm run agent:run              # Create topics, run Scout, run Diligence
+npm run agent:scout            # Run Scout only
+npm run agent:diligence        # Run Diligence only
+```
+
+Agent source: `integrations/src/agents/`
+SOUL files: `integrations/src/agents/scout-SOUL.md`, `integrations/src/agents/diligence-SOUL.md`
 
 ## Guardian Integration
 
@@ -182,9 +214,10 @@ Regen Atlas is an open-source registry of 500+ tokenized ecological assets with 
 **New for Hedera Hello Future:**
 - Hedera Guardian ingestion (Mirror Node → 46 actions from 6 platforms)
 - RAEIS three-layer standard (HCS methodology + bioregion feeds + HTS NFTs)
+- Agent network: 2 OpenClaw agents coordinating through HCS (Scout + Due Diligence)
 - Intelligence panel with asset/action protocol analysis
 - `/publish` page with interactive documentation for judges
-- 63 real Hedera testnet transactions
+- 67 real Hedera testnet transactions
 
 ## Team
 

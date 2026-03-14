@@ -854,6 +854,30 @@
         "metadataBytes": 38
       },
       "timestamp": "2026-03-14T11:23:29.728Z"
+    },
+    {
+      "layer": 4,
+      "type": "topic-create",
+      "label": "RAEIS Agent: Impact Opportunity Scout — bioregion opportunity analysis",
+      "entityId": "0.0.8218356",
+      "transactionId": "0.0.8212210@1773493318.755481248",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.8218356",
+      "timestamp": "2026-03-14T13:02:08.539Z"
+    },
+    {
+      "layer": 4,
+      "type": "topic-create",
+      "label": "RAEIS Agent: Due Diligence — token verification and trust assessment",
+      "entityId": "0.0.8218357",
+      "transactionId": "0.0.8212210@1773493322.784730172",
+      "hashscanUrl": "https://hashscan.io/testnet/topic/0.0.8218357",
+      "timestamp": "2026-03-14T13:02:11.017Z"
     }
-  ]
+  ],
+  "agentTopics": {
+    "network": "testnet",
+    "scoutTopicId": "0.0.8218356",
+    "diligenceTopicId": "0.0.8218357",
+    "createdAt": "2026-03-14T13:02:11.017Z"
+  }
 }
