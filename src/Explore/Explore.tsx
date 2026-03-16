@@ -323,16 +323,16 @@ export default (): React.ReactElement => {
   const actionsToDisplay = useMemo(() => {
     let list = allActions;
 
-    // Apply protocol filter
+    // Apply protocol filter (exclusion: protocols in the set are HIDDEN)
     if (actionFilters.protocols.size > 0) {
       list = list.filter((a) =>
-        a.proofs.some((p) => actionFilters.protocols.has(p.protocol.id))
+        !a.proofs.every((p) => actionFilters.protocols.has(p.protocol.id))
       );
     }
-    // Apply SDG filter
+    // Apply SDG filter (exclusion: SDGs in the set are HIDDEN)
     if (actionFilters.sdgs.size > 0) {
       list = list.filter((a) =>
-        a.sdg_outcomes.some((s) => actionFilters.sdgs.has(s.code))
+        !a.sdg_outcomes.every((s) => actionFilters.sdgs.has(s.code))
       );
     }
     // Apply time range filter

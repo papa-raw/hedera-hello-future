@@ -330,7 +330,7 @@ export function MapFilterBar({
               >
                 <span>
                   {actionFilters.protocols.size > 0
-                    ? `Protocol (${actionFilters.protocols.size})`
+                    ? `Protocol (${availableProtocols.length - actionFilters.protocols.size})`
                     : "Protocol"}
                 </span>
                 {actionFilters.protocols.size > 0 && (
@@ -467,7 +467,8 @@ export function MapFilterBar({
         <div className="absolute top-8 left-0 bg-white rounded-b-lg shadow-lg max-h-64 overflow-y-auto min-w-[220px] z-20 p-2">
           <div className="grid grid-cols-2 gap-x-3 gap-y-0.5">
             {availableProtocols.map(([id, proto]) => {
-              const active = actionFilters?.protocols.has(id);
+              const excluded = actionFilters?.protocols.has(id);
+              const active = !excluded;
               return (
                 <div
                   key={id}
@@ -481,7 +482,7 @@ export function MapFilterBar({
                   <ProtocolIcon protocolId={id} protocolName={proto.name} size={14} />
                   <span className={clsx(
                     "text-xs truncate",
-                    active ? "text-emerald-700 font-medium" : "text-gray-700"
+                    active ? "text-emerald-700 font-medium" : "text-gray-400 line-through"
                   )}>
                     {proto.name}
                   </span>
@@ -497,7 +498,8 @@ export function MapFilterBar({
       {actionDropdown === "sdg" && (
         <div className="absolute top-8 left-0 bg-white rounded-b-lg shadow-lg max-h-72 overflow-y-auto min-w-[320px] z-20 p-1">
           {ALL_SDGS.map(({ code, title }) => {
-            const active = actionFilters?.sdgs.has(code);
+            const excluded = actionFilters?.sdgs.has(code);
+            const active = !excluded;
             const hasActions = availableSdgs.some(([c]) => c === code);
             return (
               <button
@@ -515,7 +517,7 @@ export function MapFilterBar({
                 >
                   {code}
                 </span>
-                <span className={clsx("flex-1 text-xs truncate", active && "font-semibold text-emerald-700")}>
+                <span className={clsx("flex-1 text-xs truncate", active ? "font-semibold text-emerald-700" : "text-gray-400")}>
                   {title}
                 </span>
                 <div className={clsx(
