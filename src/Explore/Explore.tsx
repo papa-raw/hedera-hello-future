@@ -558,6 +558,7 @@ export default (): React.ReactElement => {
                       selectedBioregion={selectedBioregion?.code ?? null}
                       allAssets={filteredAssets}
                       allOrgs={allOrgs}
+                      allActions={actionsWithLocation}
                       activeEntityTypes={activeEntityTypes}
                       activeActorTypes={activeActorTypes}
                       onBioregionSelect={handleBioregionSelect}

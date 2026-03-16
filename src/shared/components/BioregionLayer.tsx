@@ -2,7 +2,7 @@ import { Source, Layer, useMap } from "react-map-gl";
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import type { MapMouseEvent, MapboxGeoJSONFeature } from "mapbox-gl";
 import type { Asset } from "../../modules/assets";
-import type { Org } from "../types";
+import type { Org, Action } from "../types";
 import {
   loadBioregionGeoJSON,
   mapAssetsToBioregions,
@@ -49,6 +49,7 @@ interface BioregionLayerProps {
   selectedBioregion?: string | null;
   allAssets?: Asset[];
   allOrgs?: Org[];
+  allActions?: Action[];
   activeEntityTypes?: Set<EntityTypeKey>;
   activeActorTypes?: Set<ActorTypeKey>;
   onBioregionSelect?: (bioregion: BioregionProperties) => void;
@@ -59,6 +60,7 @@ export function BioregionLayer({
   selectedBioregion = null,
   allAssets = [],
   allOrgs = [],
+  allActions = [],
   activeEntityTypes = new Set(["asset", "actor", "action"]),
   activeActorTypes = new Set(["orgs", "agents"]),
   onBioregionSelect,
@@ -110,14 +112,38 @@ export function BioregionLayer({
     return counts;
   }, [geojson, allOrgs]);
 
+  // Action counts per bioregion - using point-in-polygon
+  const actionCountMap = useMemo(() => {
+    if (!geojson || !allActions.length) return new Map<string, number>();
+    const counts = new Map<string, number>();
+    for (const action of allActions) {
+      if (!action.location?.longitude || !action.location?.latitude) continue;
+      const pt = point([action.location.longitude, action.location.latitude]);
+      for (const feature of geojson.features) {
+        const code = feature.properties?.code;
+        if (!code) continue;
+        try {
+          if (booleanPointInPolygon(pt, feature as any)) {
+            counts.set(code, (counts.get(code) ?? 0) + 1);
+            break;
+          }
+        } catch {
+          // skip invalid geometries
+        }
+      }
+    }
+    return counts;
+  }, [geojson, allActions]);
+
   // Combined counts for badges (filtered by active entity/actor types)
   const combinedCountMap = useMemo(() => {
-    if (!geojson) return new Map<string, { total: number; assets: number; actors: number; agents: number }>();
-    const counts = new Map<string, { total: number; assets: number; actors: number; agents: number }>();
+    if (!geojson) return new Map<string, { total: number; assets: number; actors: number; agents: number; actions: number }>();
+    const counts = new Map<string, { total: number; assets: number; actors: number; agents: number; actions: number }>();
 
     // Check what's currently active
     const showAssets = activeEntityTypes.has("asset");
     const showActors = activeEntityTypes.has("actor");
+    const showActions = activeEntityTypes.has("action");
     const showOrgs = showActors && activeActorTypes.has("orgs");
     const showAgents = showActors && activeActorTypes.has("agents");
 
@@ -127,29 +153,33 @@ export function BioregionLayer({
       const code = feature.properties?.code;
       if (code) allCodes.add(code);
     }
-    // Also include codes that have assets or actors
+    // Also include codes that have assets, actors, or actions
     for (const code of assetCountMap.keys()) allCodes.add(code);
     for (const code of actorCountMap.keys()) allCodes.add(code);
+    for (const code of actionCountMap.keys()) allCodes.add(code);
 
     for (const code of allCodes) {
       const rawAssets = assetCountMap.get(code) ?? 0;
       const rawActors = actorCountMap.get(code) ?? 0;
       const rawAgents = (rawAssets > 0 || rawActors > 0) ? getAgentCountForBioregion(code) : 0;
+      const rawActions = actionCountMap.get(code) ?? 0;
 
       // Apply filters
       const assets = showAssets ? rawAssets : 0;
       const actors = showOrgs ? rawActors : 0;
       const agents = showAgents ? rawAgents : 0;
+      const actions = showActions ? rawActions : 0;
 
       counts.set(code, {
-        total: assets + actors + agents,
+        total: assets + actors + agents + actions,
         assets,
         actors,
         agents,
+        actions,
       });
     }
     return counts;
-  }, [geojson, assetCountMap, actorCountMap, activeEntityTypes, activeActorTypes]);
+  }, [geojson, assetCountMap, actorCountMap, actionCountMap, activeEntityTypes, activeActorTypes]);
 
   // Centroid points for ALL bioregion labels (one per bioregion)
   const labelCentroidGeojson = useMemo(() => {
@@ -189,7 +219,7 @@ export function BioregionLayer({
       .map((f, i) => {
         const props = f.properties!;
         const centroid = props.centroid ?? [0, 0];
-        const counts = combinedCountMap.get(props.code) ?? { total: 0, assets: 0, actors: 0, agents: 0 };
+        const counts = combinedCountMap.get(props.code) ?? { total: 0, assets: 0, actors: 0, agents: 0, actions: 0 };
         return {
           type: "Feature" as const,
           id: i,
@@ -341,7 +371,7 @@ export function BioregionLayer({
       map.getCanvas().style.cursor = "pointer";
 
       const props = feature.properties as Record<string, any>;
-      const counts = combinedCountMapRef.current.get(props.code) ?? { total: 0, assets: 0, actors: 0, agents: 0 };
+      const counts = combinedCountMapRef.current.get(props.code) ?? { total: 0, assets: 0, actors: 0, agents: 0, actions: 0 };
       setHoverInfo({
         name: props.name ?? props.code,
         code: props.code,
